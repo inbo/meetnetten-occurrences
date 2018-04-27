@@ -1,0 +1,451 @@
+meetnet_id;id_sg;naam_lat;naam_nl;id_vogel;vervaging
+411;0;Chloephaga picta;Magelhaengans;2314;0
+274;0;Orchis morio;Orchis morio;2653;5
+439;0;Callonetta leucophrys;Ringtaling;18575;0
+196;0;Somatochlora arctica;Hoogveenglanslibel;622;5
+495;0;Numenius arquata;Wulp;203;0
+415;0;Turdus merula;Merel;150;0
+402;0;Netta rufina;Krooneend;10;0
+496;0;Turdus philomelos;Zanglijster;204;0
+483;0;Gallinula chloropus;Waterhoen;195;0
+474;0;Streptopelia turtur;Zomertortel;342;0
+51;0;Colias alfacariensis;Zuidelijke luzernevlinder;754;5
+7;0;Ichthyosaura alpestris;Alpenwatersalamander;438;0
+9;0;Lissotriton vulgaris;Kleine watersalamander;448;0
+13;0;Pelophylax lessonae;Poelkikker;453;0
+138;0;Aeshna affinis;Zuidelijke glazenmaker;609;0
+171;0;Anax ephippiger;Zadellibel;618;0
+139;0;Aeshna cyanea;Blauwe glazenmaker;610;0
+8;0;Lissotriton helveticus;Vinpootsalamander;456;0
+4;0;Bufo bufo;Gewone pad;442;0
+140;0;Aeshna grandis;Bruine glazenmaker;611;0
+166;0;Erythromma viridulum;Kleine roodoogjuffer;599;0
+165;0;Erythromma najas;Grote roodoogjuffer;598;0
+75;0;Issoria lathonia;Kleine parelmoervlinder;689;0
+463;0;Columba livia;Stadsduif;80199;0
+14;0;Pelophylax ridibundus;Meerkikker;451;0
+26;0;Aporia crataegi;Groot geaderd witje;651;0
+98;0;Nymphalis antiopa;Rouwmantel;659;0
+29;0;Argynnis adippe;Bosrandparelmoervlinder;718;0
+114;0;Polyommatus coridon;Bleek blauwtje;728;0
+55;0;Cupido argiades;Staartblauwtje;745;5
+198;0;Somatochlora metallica;Metaalglanslibel;624;0
+69;0;Hesperia comma;Kommavlinder;691;0
+33;0;Aricia agestis;Bruin blauwtje;683;0
+88;0;Lycaena tityrus;Bruine vuurvlinder;684;5
+42;0;Carcharodus alceae;Kaasjeskruiddikkopje;721;0
+127;0;Satyrium ilicis;Bruine eikenpage;685;0
+130;0;Satyrium w-album;Iepenpage;668;0
+38;0;Boloria selene;Zilveren maan;682;0
+107;0;Pieris napi;Klein geaderd witje;709;0
+44;0;Celastrina argiolus;Boomblauwtje;697;0
+160;0;Cordulia aenea;Smaragdlibel;621;0
+30;0;Argynnis aglaja;Grote parelmoervlinder;678;0
+132;0;Thecla betulae;Sleedoornpage;679;0
+108;0;Pieris rapae;Klein koolwitje;710;0
+87;0;Lycaena phlaeas;Kleine vuurvlinder;712;0
+52;0;Colias croceus;Oranje luzernevlinder;726;0
+90;0;Maniola jurtina;Bruin zandoogje;698;0
+80;0;Leptidea sinapis;Boswitje;719;0
+91;0;Melanargia galathea;Dambordje;720;0
+77;0;Lasiommata maera;Rotsvlinder;743;5
+128;0;Satyrium pruni;Pruimenpage;731;0
+147;0;Anax parthenope;Zuidelijke keizerlibel;617;0
+37;0;Boloria euphrosyne;Zilvervlek;664;5
+184;0;Libellula depressa;Platbuik;627;0
+183;0;Leucorrhinia rubicunda;Noordse witsnuitlibel;646;0
+181;0;Leucorrhinia dubia;Venwitsnuitlibel;644;0
+296;0;Sylvia cantillans;Baardgrasmus;1144;0
+515;0;Pieris spec.;Witje spec.;1430;0
+457;0;Anser unox;Soepgans;1413;0
+456;0;Anas unox;Soepeend;1412;0
+317;0;Sylvia conspicillata;Brilgrasmus;1572;0
+228;0;Gryllotalpa gryllotalpa;Gryllotalpa gryllotalpa;1678;0
+214;0;Chorthippus brunneus;Chorthippus brunneus;1707;0
+233;0;Meconema thalassinum;Meconema thalassinum;1817;0
+220;0;Chrysochraon dispar;Chrysochraon dispar;1818;0
+240;0;Oedipoda caerulescens;Oedipoda caerulescens;1763;0
+10;0;Lithobates catesbeianus;Amerikaanse brulkikker;1724;0
+216;0;Chorthippus mollis;Chorthippus mollis;1907;0
+245;0;Pholidoptera griseoaptera;Pholidoptera griseoaptera;1914;0
+258;0;Tettigonia cantans;Tettigonia cantans;1918;0
+257;0;Tetrix undulata;Tetrix undulata;1919;0
+256;0;Tetrix tenuicornis;Tetrix tenuicornis;1920;0
+255;0;Tetrix subulata;Tetrix subulata;1921;0
+243;0;Omocestus viridulus;Omocestus viridulus;1916;0
+229;0;Gryllus campestris;Gryllus campestris;1933;0
+227;0;Gomphocerripus rufus;Gomphocerripus rufus;1935;0
+217;0;Pseudochorthippus montanus;Chorthippus montanus;1906;0
+213;0;Chorthippus biguttulus;Chorthippus biguttulus;1941;0
+253;0;Tetrix bipunctata;Tetrix bipunctata;1923;0
+250;0;Stenobothrus lineatus;Stenobothrus lineatus;1910;0
+242;0;Omocestus rufipes;Omocestus rufipes;1917;0
+252;0;Stethophyma grossum;Stethophyma grossum;1925;0
+251;0;Stenobothrus stigmaticus;Stenobothrus stigmaticus;1909;0
+244;0;Phaneroptera falcata;Phaneroptera falcata;1915;0
+209;0;Acheta domesticus;Acheta domesticus;1902;0
+237;0;Myrmeleotettix maculatus;Myrmeleotettix maculatus;1927;0
+223;0;Decticus verrucivorus;Decticus verrucivorus;2286;0
+239;0;Oecanthus pellucens;Oecanthus pellucens;2304;0
+234;0;Bicolorana bicolor;Metrioptera bicolor;2297;0
+212;0;Chorthippus albomarginatus;Chorthippus albomarginatus;2276;0
+238;0;Nemobius sylvestris;Nemobius sylvestris;2303;0
+246;0;Platycleis albopunctata;Platycleis albopunctata;2309;0
+190;0;Orthetrum brunneum;Zuidelijke oeverlibel;630;0
+404;0;Aythya fuligula;Kuifeend;144;0
+458;0;Accipiter nisus;Sperwer;178;0
+53;0;Colias hyale;Gele luzernevlinder;725;0
+236;0;Roeseliana roeselii;Metrioptera roeselii;1928;0
+103;0;Phengaris alcon;Gentiaanblauwtje;1715;5
+298;0;Carduelis flammea flammea;Common Redpoll;254;0
+492;0;Motacilla alba;Witte kwikstaart;202;0
+370;0;Scolopax rusticola;Houtsnip;121;0
+435;0;Asio otus;Ransuil;310;0
+294;0;Phalacrocorax carbo;Aalscholver;58;0
+76;0;Lampides boeticus;Tijgerblauwtje;748;0
+180;0;Leucorrhinia caudalis;Sierlijke witsnuitlibel;643;5
+516;0;Anisus vorticulus;Platte schijfhoren;19854;0
+517;0;Unio crassus;Bataafse stroommossel;20082;0
+513;0;Vertigo moulinsiana;Zeggekorfslak;20090;0
+514;0;Vertigo angustior;Nauwe korfslak;20088;0
+426;0;Ciconia ciconia;Ooievaar;7;0
+511;0;Elater ferrugineus;Rusty click beetle;22852;0
+494;0;Ixobrychus minutus;Woudaap;4;0
+312;0;Falco subbuteo;Boomvalk;74;0
+224;0;Ephippiger ephippiger;Ephippiger ephippiger;2287;0
+437;0;Acrocephalus schoenobaenus;Rietzanger;48;0
+377;0;Philomachus pugnax;Kemphaan;24;0
+505;0;Chlidonias niger;Zwarte stern;32;0
+444;0;Saxicola torquata;Roodborsttapuit;45;0
+32;0;Argynnis paphia;Keizersmantel;653;0
+357;0;Dendrocopus major;Grote bonte specht;109;0
+308;0;Sitta europaea;Boomklever;70;0
+309;0;Certhia brachydactyla;Boomkruiper;71;0
+429;0;Saxicola rubetra;Paapje;44;0
+204;0;Sympetrum meridionale;Zuidelijke heidelibel;638;0
+188;0;Onychogomphus forcipatus;Kleine tanglibel;606;0
+205;0;Sympetrum pedemontanum;Bandheidelibel;639;0
+284;0;Orchis purpurea;Orchis purpurea;2654;5
+318;0;Circus aeruginosus;Bruine kiekendief;81;0
+235;0;Metrioptera brachyptera;Metrioptera brachyptera;2298;0
+265;0;Cricetus cricetus;Cricetus cricetus;402;5
+249;0;Sphingonotus caerulans;Sphingonotus caerulans;70080;1
+11;0;Pelobates fuscus;Knoflookpad;449;5
+56;0;Cupido minimus;Dwergblauwtje;649;5
+133;0;Thymelicus acteon;Dwergdikkopje;650;5
+159;0;Cordulegaster boltonii;Gewone bronlibel;619;0
+40;0;Brenthis ino;Purperstreepparelmoervlinder;657;5
+266;0;Muscardinus avellanarius;Muscardinus avellanarius;403;5
+18;0;Salamandra salamandra;Vuursalamander;458;5
+510;0;Lucanus cervus;Stag beetle;1660;5
+6;0;Hyla arborea;Boomkikker;439;9
+92;0;Melitaea athalia;Bosparelmoervlinder;674;5
+16;0;Rana dalmatina;Agile frog;70122;5
+499;0;Anser cygnoides;Zwaangans;1393;0
+39;0;Brenthis daphne;Braamparelmoervlinder;79840;5
+486;0;Cinclus cinclus;Waterspreeuw;84884;0
+254;0;Tetrix ceperoi;Tetrix ceperoi;1922;0
+12;0;Pelophylax bedriagae;Egeïsche meerkikker;84597;0
+79;0;Leptidea reali;Verborgen boswitje;80999;5
+221;0;Conocephalus discolor;Conocephalus discolor;1904;0
+471;0;Amandava amandava;Tijgervink;78152;0
+99;0;Nymphalis polychloros;Grote vos;677;0
+260;0;Ruspolia nitidula;Ruspolia nitidula;88330;0
+46;0;Coenonympha arcania;Tweekleurig hooibeestje;669;5
+35;0;Boloria dia;Paarse parelmoervlinder;727;0
+157;0;Coenagrion scitulum;Gaffelwaterjuffer;596;0
+141;0;Aeshna isoceles;Vroege glazenmaker;615;0
+267;0;Eresus sandaliatus;Eresus sandaliatus;10106;5
+518;0;Dolomedes plantarius;Grote oeverspin;18706;1
+65;0;Favonius quercus;Eikenpage;186101;0
+203;0;Sympetrum fonscolombii;Zwervende heidelibel;637;0
+293;0;Ophiogomphus cecilia;Gaffellibel;1366;0
+208;0;Sympetrum vulgatum;Steenrode heidelibel;642;0
+5;0;Bufo calamita;Rugstreeppad;80687;5
+512;0;Dolomedes fimbriatus;Raft Spider;8415;1
+197;0;Somatochlora flavomaculata;Gevlekte glanslibel;623;0
+163;0;Epitheca bimaculata;Tweevlek;626;0
+78;0;Lasiommata megera;Argusvlinder;695;0
+152;0;Coenagrion hastulatum;Speerwaterjuffer;591;5
+28;0;Arethusana arethusa;Oranje steppevlinder;741;0
+70;0;Heteropterus morpheus;Spiegeldikkopje;692;5
+232;0;Meconema meridionale;Meconema meridionale;1930;0
+22;0;Anthocharis cardamines;Oranjetipje;716;0
+123;0;Pyrgus malvae;Aardbeivlinder;672;5
+81;0;Limenitis camilla;Kleine ijsvogelvlinder;690;0
+135;0;Thymelicus sylvestris;Geelsprietdikkopje;702;0
+200;0;Sympetrum danae;Zwarte heidelibel;634;0
+202;0;Sympetrum flaveolum;Geelvlekheidelibel;636;5
+372;0;Delichon urbica;Huiszwaluw;123;0
+470;0;Oenanthe oenanthe;Tapuit;46;0
+307;0;Ficedula hypoleuca;Bonte vliegenvanger;69;0
+207;0;Sympetrum striolatum;Bruinrode heidelibel;641;0
+332;0;Phasianus colchicus;Fazant;88;0
+361;0;Turdus viscivorus;Grote lijster;111;0
+301;0;Luscinia svecica;Blauwborst;62;0
+378;0;Tyto alba;Kerkuil;33;0
+344;0;Regulus regulus;Goudhaan;99;0
+348;0;Anthus pratensis;Graspieper;103;0
+468;0;Aythya ferina;Tafeleend;184;0
+508;0;Sylvia atricapilla;Zwartkop;213;0
+391;0;Carduelis cannabina;Kneu;135;0
+386;0;Charadrius dubius;Kleine plevier;761;0
+375;0;Corvus monedula;Kauw;126;0
+460;0;Sturnus vulgaris;Spreeuw;180;0
+443;0;Erithacus rubecula;Roodborst;168;0
+418;0;Cairina moschata;Muskuseend;151;0
+446;0;Lanius senator;Roodkopklauwier;53;0
+394;0;Bubulcus ibis;Koereiger;360;0
+174;0;Lestes barbarus;Zwervende pantserjuffer;581;0
+450;0;Haematopus ostralegus;Scholekster;173;0
+388;0;Egretta garzetta;Kleine zilverreiger;132;0
+477;0;Streptopelia decaocto;Turkse tortel;191;0
+342;0;Apus apus;Gierzwaluw;97;0
+383;0;Dendrocopus minor;Kleine bonte specht;271;0
+503;0;Phoenicurus ochruros;Zwarte roodstaart;356;0
+305;0;Charadrius hiaticula;Bontbekplevier;22;0
+478;0;Alauda arvensis;Veldleeuwerik;192;0
+49;0;Coenonympha pamphilus;Hooibeestje;707;0
+17;0;Rana temporaria;Bruine kikker;440;0
+15;0;Rana arvalis;Heikikker;446;5
+222;0;Conocephalus dorsalis;Conocephalus dorsalis;1694;0
+164;0;Erythromma lindenii;Kanaaljuffer;597;0
+397;0;Parus major;Koolmees;140;0
+24;0;Apatura iris;Grote weerschijnvlinder;676;5
+27;0;Araschnia levana;Landkaartje;714;0
+143;0;Aeshna mixta;Paardenbijter;613;0
+146;0;Anax imperator;Grote keizerlibel;616;0
+176;0;Lestes sponsa;Gewone pantserjuffer;583;0
+151;0;Ceriagrion tenellum;Koraaljuffer;600;0
+175;0;Lestes dryas;Tangpantserjuffer;582;0
+177;0;Lestes virens;Tengere pantserjuffer;584;0
+186;0;Libellula quadrimaculata;Viervlek;629;0
+153;0;Coenagrion lunulatum;Maanwaterjuffer;592;5
+41;0;Callophrys rubi;Groentje;704;0
+136;0;Vanessa atalanta;Atalanta;723;0
+327;0;Anthus campestris;Duinpieper;43;0
+504;0;Dryocopus martius;Zwarte specht;759;0
+167;0;Gomphus flavipes;Rivierrombout;602;0
+192;0;Orthetrum coerulescens;Beekoeverlibel;632;0
+170;0;Gomphus vulgatissimus;Beekrombout;603;0
+161;0;Crocothemis erythraea;Vuurlibel;633;0
+185;0;Libellula fulva;Bruine korenbout;628;0
+182;0;Leucorrhinia pectoralis;Gevlekte witsnuitlibel;645;5
+72;0;Hipparchia semele;Heivlinder;693;0
+25;0;Aphantopus hyperantus;Koevinkje;713;0
+109;0;Plebejus argus;Heideblauwtje;686;0
+179;0;Chalcolestes viridis;Houtpantserjuffer;585;0
+168;0;Gomphus pulchellus;Plasrombout;604;0
+173;0;Ischnura pumilio;Tengere grasjuffer;588;0
+142;0;Aeshna juncea;Venglazenmaker;612;0
+43;0;Carterocephalus palaemon;Bont dikkopje;673;0
+134;0;Thymelicus lineola;Zwartsprietdikkopje;717;0
+102;0;Pararge aegeria;Bont zandoogje;696;0
+519;0;Lutra lutra;Otter;417;5
+206;0;Sympetrum sanguineum;Bloedrode heidelibel;640;0
+194;0;Platycnemis pennipes;Blauwe breedscheenjuffer;1524;0
+150;0;Calopteryx virgo;Bosbeekjuffer;579;0
+259;0;Tettigonia viridissima;Tettigonia viridissima;1708;0
+218;0;Pseudochorthippus parallelus;Chorthippus parallelus;1717;0
+230;0;Leptophyes punctatissima;Leptophyes punctatissima;1932;0
+487;0;Pernis apivorus;Wespendief;349;0
+493;0;Chlidonias hybridus;Witwangstern;762;0
+148;0;Brachytron pratense;Glassnijder;608;0
+156;0;Coenagrion pulchellum;Variabele waterjuffer;595;0
+210;0;Barbitistes serricauda;Barbitistes serricauda;1943;0
+21;0;Aglais urticae;Kleine vos;711;0
+112;0;Polygonia c-album;Gehakkelde aurelia;703;0
+67;0;Gonepteryx rhamni;Citroenvlinder;699;0
+101;0;Papilio machaon;Koninginnenpage;694;0
+125;0;Pyronia tithonus;Oranje zandoogje;715;0
+116;0;Polyommatus icarus;Icarusblauwtje;708;0
+137;0;Vanessa cardui;Distelvlinder;724;0
+100;0;Ochlodes sylvanus;Groot dikkopje;706;0
+106;0;Pieris brassicae;Groot koolwitje;705;0
+61;0;Erynnis tages;Bruin dikkopje;665;5
+269;0;Scirpus triqueter;Scirpus triqueter;2739;0
+464;0;Athena noctua;Steenuil;34;0
+442;0;Botaurus stellaris;Roerdomp;1;0
+475;0;Sylvia borin;Tuinfluiter;189;0
+355;0;Picus viridis;Groene specht;40;0
+340;0;Motacilla flava;Gele kwikstaart;95;0
+436;0;Emberiza schoeniclus;Rietgors;164;0
+333;0;Phylloscopus trochilus;Fitis;89;0
+354;0;Muscicapa striata;Grauwe vliegenvanger;105;0
+506;0;Milvus migrans;Zwarte wouw;364;0
+20;0;Aglais io;Dagpauwoog;700;0
+283;0;Mentha pulegium;Mentha pulegium;2624;0
+385;0;Larus fuscus;Kleine mantelmeeuw;131;0
+330;0;Motacilla flava flavissima;Engelse gele kwikstaart;365;0
+295;0;Coccothraustes coccothraustes;Appelvink;59;0
+331;0;Serinus serinus;Europese kanarie;248;0
+405;0;Galerida cristata;Kuifleeuwerik;41;0
+358;0;Motacilla cinerea;Grote gele kwikstaart;756;0
+445;0;Branta ruficollis;Roodhalsgans;313;0
+335;0;Podiceps cristatus;Fuut;91;0
+406;0;Parus cristatus;Kuifmees;145;0
+201;0;Sympetrum depressiusculum;Kempense heidelibel;635;5
+311;0;Anthus trivialis;Boompieper;73;0
+322;0;Aix sponsa;Carolina-eend;797;0
+278;0;Wahlenbergia hederacea;Wahlenbergia hederacea;2812;5
+428;0;Emberiza hortulana;Ortolaan;56;0
+272;0;Halimione pedunculata;Halimione pedunculata;2362;5
+501;0;Parus ater;Zwarte mees;209;0
+349;0;Cisticola juncidis;Graszanger;1111;0
+279;0;Juncus capitatus;Juncus capitatus;2581;5
+199;0;Sympecma fusca;Bruine winterjuffer;580;0
+491;0;Anas crecca;Wintertaling;200;0
+400;0;Turdus pilaris;Kramsvogel;143;0
+324;0;Cettia cetti;Cetti's zanger;237;0
+302;0;Circus cyaneus;Blauwe kiekendief;13;0
+392;0;Cygnus olor;Knobbelzwaan;136;0
+498;0;Anas querquedula;Zomertaling;355;0
+412;0;Aix galericulata;Mandarijneend;147;0
+271;0;Bupleurum tenuissimum;Bupleurum tenuissimum;2378;5
+396;0;Anser albifrons;Kolgans;139;0
+381;0;Porzana parva;Klein waterhoen;276;0
+310;0;Lululla arborea;Boomleeuwerik;72;0
+359;0;Acrocephalus arundinaceu;Grote karekiet;49;0
+328;0;Sterna albifrons;Dwergstern;31;0
+502;0;Ciconia nigra;Zwarte ooievaar;362;0
+290;0;Potamogeton coloratus;Potamogeton coloratus;2689;0
+149;0;Calopteryx splendens;Weidebeekjuffer;578;0
+353;0;Lanius collurio;Grauwe klauwier;51;0
+465;0;Himantopus himantopus;Steltkluut;332;0
+351;0;Miliaria calandra;Grauwe gors;57;0
+481;0;Sterna hirundo;Visdief;29;0
+282;0;Potamogeton compressus;Potamogeton compressus;2690;0
+289;0;Hammarbya paludosa;Hammarbya paludosa;2551;9
+484;0;Rallus aquaticus;Waterral;348;0
+422;0;Sterna paradisaea;Noordse stern;30;0
+399;0;Anas strepera;Krakeend;142;0
+489;0;Anas platyrhynchos;Wilde eend;198;0
+453;0;Anas clypeata;Slobeend;175;0
+325;0;Tachybaptus ruficollis;Dodaars;2;0
+485;0;Gallinago gallinago;Watersnip;25;0
+281;0;Deschampsia setacea;Deschampsia setacea;2472;0
+414;0;Fulica atra;Meerkoet;149;0
+379;0;Vanellus vanellus;Kievit;129;0
+440;0;Milvus milvus;Rode wouw;12;0
+384;0;Acrocephalus scirpaceus;Kleine karekiet;130;0
+432;0;Parus caeruleus;Pimpelmees;161;0
+376;0;Fringilla montifringilla;Keep;127;0
+482;0;Regulus ignicapillus;Vuurgoudhaantje;347;0
+480;0;Fringilla coelebs;Vink;193;0
+356;0;Carduelis chloris;Groenling;261771;0
+434;0;Carduelis carduelis;Putter;162;0
+337;0;Emberiza citrinella;Geelgors;55;0
+268;0;Utricularia ochroleuca;Utricularia ochroleuca;2794;5
+313;0;Acrocephalus palustris;Bosrietzanger;75;0
+329;0;Pica pica;Ekster;87;0
+287;0;Potamogeton acutifolius;Potamogeton acutifolius;2688;0
+280;0;Stratiotes aloides;Stratiotes aloides;2764;0
+288;0;Scirpus pungens;Scirpus pungens;2738;0
+270;0;Gentianella uliginosa;Gentianella uliginosa;148990;5
+277;0;Diphasiastrum tristachyum;Diphasiastrum tristachyum;2477;1
+144;0;Aeshna subarctica;Noordse glazenmaker;614;5
+454;0;Anas penelope;Smient;176;0
+275;0;Herminium monorchis;Herminium monorchis;2556;5
+362;0;Sterna sandvicensis;Grote stern;28;0
+2;0;Alytes obstetricans;Vroedmeesterpad;457;5
+431;0;Anas acuta;Pijlstaart;160;0
+430;0;Perdix perdix;Patrijs;16;0
+424;0;Actitis hypoleucos;Oeverloper;154;0
+368;0;Upupa epops;Hop;38;0
+273;0;Orobanche rapum-genistae;Orobanche rapum-genistae;2662;0
+57;0;Cyaniris semiargus;Klaverblauwtje;654;5
+286;0;Eriophorum gracile;Eriophorum gracile;2496;1
+352;0;Circus pygargus;Grauwe kiekendief;14;0
+276;0;Scorzonera humilis;Scorzonera humilis;2742;0
+433;0;Porzana porzana;Porseleinhoen;17;0
+292;0;Ranunculus ololeucos;Ranunculus ololeucos;2710;0
+285;0;Carex diandra;Carex diandra;2397;5
+19;0;Triturus cristatus;Kamsalamander;447;9
+387;0;Anser brachyrhynchus;Kleine rietgans;1384;0
+473;0;Falco tinnunculus;Torenvalk;188;0
+374;0;Anser indicus;Indische gans;124;0
+389;0;Porzana pusilla;Kleinst waterhoen;277;0
+425;0;Riparia riparia;Oeverzwaluw;155;0
+449;0;Motacilla alba yarelli;Rouwkwikstaart;319;0
+339;0;Phoenicurus phoenicurus;Gekraagde roodstaart;94;0
+314;0;Strix aluco;Bosuil;77;0
+419;0;Luscinia megarhynchos;Nachtegaal;295;0
+488;0;Oriolus oriolus;Wielewaal;350;0
+448;0;Oxyura jamaicensis;Rosse stekelstaart;171;0
+316;0;Branta leucopsis;Brandgans;79;0
+363;0;Limosa limosa;Grutto;26;0
+395;0;Larus ridibundus;Kokmeeuw;138;0
+509;0;Larus melanocephalus;Zwartkopmeeuw;363;0
+479;0;Asio flammeus;Velduil;35;0
+326;0;Jynx torquila;Draaihals;39;0
+300;0;Merops apiaster;Bijeneter;1386;0
+195;0;Pyrrhosoma nymphula;Vuurjuffer;589;0
+408;0;Coturnix coturnix;Kwartel;287;0
+410;0;Platalea leucorodia;Lepelaar;8;0
+461;0;Locustella naevia;Sprinkhaanzanger;330;0
+382;0;Carduelis flammea cabaret;Lesser Redpoll;763;0
+476;0;Tringa totanus;Tureluur;27;0
+306;0;Calidris alpina;Bonte strandloper;68;0
+507;0;Cignus atratus;Zwarte zwaan;212;0
+455;0;Locustella luscinioides;Snor;47;0
+459;0;Hippolais icterina;Spotvogel;179;0
+401;0;Locustella fluviatilis;Krekelzanger;1115;0
+390;0;Recurvirostra avosetta;Kluut;20;0
+451;0;Carduelis spinus;Sijs;174;0
+427;0;Hippolais polyglotta;Orpheusspotvogel;302;0
+319;0;Remiz pendulinus;Buidelmees;1206;0
+393;0;Cuculus canorus;Koekoek;137;0
+299;0;Tadorna tadorna;Bergeend;61;0
+341;0;Podiceps nigricollis;Geoorde fuut;3;0
+407;0;Nycticorax nycticorax;Kwak;5;0
+497;0;Larus argentatus;Zilvermeeuw;205;0
+367;0;Columba oenas;Holenduif;119;0
+409;0;Crex crex;Kwartelkoning;18;5
+373;0;Alcedo atthis;Ijsvogel;37;0
+420;0;Caprimulgus europaeus;Nachtzwaluw;36;0
+320;0;Buteo buteo;Buizerd;82;0
+467;0;Charadrius alexandrinus;Strandplevier;23;0
+500;0;Corvus corone;Zwarte kraai;208;0
+466;0;Larus canus;Stormmeeuw;183;0
+369;0;Columba palumbus;Houtduif;120;0
+304;0;Hirundo rustica;Boerenzwaluw;65;0
+94;0;Melitaea cinxia;Veldparelmoervlinder;671;1
+336;0;Garrulus glandarius;Gaai;92;0
+315;0;Sylvia curruca;Braamsluiper;78;0
+162;0;Enallagma cyathigerum;Watersnuffel;590;0
+191;0;Orthetrum cancellatum;Gewone oeverlibel;631;0
+380;0;Lanius excubitor;Klapekster;52;0
+462;0;Aegithalos caudatus;Staartmees;181;0
+472;0;Phylloscopus collybita;Tjiftjaf;186;0
+347;0;Sylvia communis;Grasmus;102;0
+490;0;Troglodytes troglodytes;Winterkoning;199;0
+371;0;Passer domesticus;Huismus;122;0
+438;0;Passer montanus;Ringmus;166;0
+366;0;Prunella modularis;Heggenmus;118;0
+321;0;Branta canadensis;Canadese gans;110;0
+297;0;Panurus biarmicus;Baardmannetje;50;0
+172;0;Ischnura elegans;Lantaarntje;587;0
+155;0;Coenagrion puella;Azuurwaterjuffer;594;0
+291;0;Platanthera bifolia;Platanthera bifolia;2678;5
+365;0;Accipiter gentilis;Havik;117;0
+452;0;Falco peregrinus;Slechtvalk;325;0
+303;0;Ardeae cinerea;Blauwe reiger;64;0
+441;0;Corvus frugilegus;Roek;167;0
+338;0;Larus michahellis;Geelpootmeeuw;250;0
+413;0;Parus montanus;Matkop;148;0
+403;0;Loxia curvirostra;Kruisbek;284;0
+421;0;Alopochen aegyptiacus;Nijlgans;152;0
+447;0;Carpodacus erythrinus;Roodmus;315;0
+323;0;Tadorna ferruginea;Casarca;236;0
+346;0;Pyrrhula pyrrhula;Goudvink;101;0
+334;0;Phylloscopus sibilatrix;Fluiter;90;0
+416;0;Dendrocopus medius;Middelste Bonte Specht;290;0
+469;0;Certhia familiaris;Taigaboomkruiper;337;0
+360;0;Loxia pytyopsittacus;Grote kruisbek;1272;0
+417;0;Myiopsitta monachus;Monniksparkiet;1681;0
+350;0;Anser anser;Grauwe gans;104;0
+398;0;Tetrao tetrix;Korhoen;15;5
+364;0;Psittacula krameri;Halsbandparkiet;116;0
+343;0;Parus palustris;Glanskop;98;0
+423;0;Bubo bubo;Oehoe;300;5
+345;0;Pluvialis apricaria;Goudplevier;100;0
