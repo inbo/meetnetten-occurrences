@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]    Script Date: 23/08/2019 13:58:33 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]    Script Date: 3/09/2019 15:26:58 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -22,12 +22,12 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
 */
 
 /* generieke query events, test met vuursalamander
-   We creÃ«ren meerdere datasets uit meetnetten op basis van protocol
+   We creëren meerdere datasets uit meetnetten op basis van protocol
    distinct in FROM 23/08/2019
    remove aantal
  */
 
-CREATE VIEW [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -77,12 +77,12 @@ SELECT --fa.*   --unieke kolomnamen
 	, fa.ProjectKey
 	
 
-FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesLifestageID FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
+FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
-	INNER JOIN dbo.DimLocation dL ON dL.locationID = fA.LocationID
-	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolID = fA.ProtocolID
-	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityID = fA.SpeciesActivityID
-	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageID = fA.SpeciesLifestageID
+	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
+	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
+	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
 	
 
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
@@ -99,4 +99,5 @@ AND fa.ProtocolID =  '29'
 
 
 GO
+
 
