@@ -5,5 +5,5 @@ The Flemish government wants to collect high-quality information on a number of 
 This dataset is about Natterjack sighting
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-34-natterjack-sighting/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-34-natterjack-sighting-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

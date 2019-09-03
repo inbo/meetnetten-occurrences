@@ -5,5 +5,5 @@ The Flemish government wants to collect high-quality information on a number of 
 This dataset is about Amphibia fikes
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-31-amfibieën-fuiken/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-31-amfibieën-fuiken-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

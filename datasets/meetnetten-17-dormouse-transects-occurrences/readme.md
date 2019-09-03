@@ -6,5 +6,5 @@ This dataset is about Dormouse transects
 
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-17-dormouse-transects/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-17-dormouse-transects-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

@@ -6,5 +6,5 @@ This dataset is about Butterflies site count
 
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-28-butterflies-sitecount/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-28-butterflies-sitecount-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

@@ -6,5 +6,5 @@ This dataset is about Dolomedes fimbriatus
 
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-27-gerande-oeverspin/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-27-gerande-oeverspin-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

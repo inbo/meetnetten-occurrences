@@ -5,5 +5,5 @@ The Flemish government wants to collect high-quality information on a number of 
 This dataset is about Amphibia larvae and metamorphes
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-32-amfibieën-larven-en-metamorfen/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-32-amfibieën-larven-en-metamorfen-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

@@ -6,5 +6,5 @@ This is a dataset on Dragonflies
 
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/data-publication/labels/abv-events)
-* [Submit an issue](https://github.com/inbo/data-publication/issues/new) (please mention the dataset name)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-3-dragonflies-population-count-per-location-occurrences/)
+* [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

@@ -6,5 +6,5 @@ This dataset is about Dragonflies transects
 
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-8-dragonflies-transects/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-8-dragonflies-transects-occurrences/)
 * [Submit an issue](https://github.com/inbo/data-publication/issues/new) (please mention the dataset name)

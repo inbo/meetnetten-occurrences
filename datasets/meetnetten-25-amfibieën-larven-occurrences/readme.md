@@ -6,5 +6,5 @@ This dataset is about Amphibian larvae
 
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-25-amfibieën-larven/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-25-amfibieën-larven-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

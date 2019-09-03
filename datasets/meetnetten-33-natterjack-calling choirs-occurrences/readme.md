@@ -5,5 +5,5 @@ The Flemish government wants to collect high-quality information on a number of 
 This dataset is about Natterjack calling choirs
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-33-natterjack-calling-choirs/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-33-natterjack-calling-choirs-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

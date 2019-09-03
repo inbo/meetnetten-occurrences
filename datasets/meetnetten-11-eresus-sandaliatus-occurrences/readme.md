@@ -6,5 +6,5 @@ This dataset is about Eresus sandaliatus - Lentevuurspin
 
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-11-eresus sandaliatus/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-11-eresus-sandaliatus-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)

@@ -6,5 +6,5 @@ This dataset is about Grasshoppers area count
 
 ## Data publication process
 
-* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-15-butterflies-egg-counts/)
+* [Known issues](https://github.com/inbo/soortenmeetnetten-events/labels/meetnetten-15-butterflies-egg-counts-occurrences/)
 * [Submit an issue](https://github.com/inbo/soortenmeetnetten-events/issues/new) (please mention the dataset name)
