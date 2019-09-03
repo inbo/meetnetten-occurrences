@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 3/09/2019 15:18:20 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 3/09/2019 15:35:02 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -26,8 +26,8 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
 
  */
 
-/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]
-AS**/
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	

@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Amfibieën - fuiken (v1)_events]    Script Date: 3/09/2019 15:24:06 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Amfibieën - fuiken (v1)_events]    Script Date: 3/09/2019 15:35:24 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -91,6 +92,7 @@ WHERE 1=1
 --AND ProtocolName = 'vuursalamander transecten'
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID =  '2'
+
 
 
 

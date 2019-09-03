@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]    Script Date: 3/09/2019 15:26:58 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]    Script Date: 3/09/2019 15:35:44 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -91,6 +92,7 @@ WHERE 1=1
 --AND ProtocolName = 'Butterfly transects (algemene monitoring)'
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID =  '29'
+
 
 
 
