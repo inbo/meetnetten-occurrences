@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_AmfibieÃ«n - fuiken (v1)_occurrence]    Script Date: 23/08/2019 13:57:58 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Amfibieën - fuiken (v1)_occurrence]    Script Date: 3/09/2019 15:25:09 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -20,7 +20,7 @@ GO
 /* Generieke query inclusief soorten */
 
 
-CREATE VIEW [iptdev].[vwGBIF_INBO_meetnetten_AmfibieÃ«n - fuiken (v1)_occurrence]
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_Amfibieën - fuiken (v1)_occurrence]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -94,10 +94,10 @@ SELECT --fa.*   --unieke kolomnamen
 
 FROM dbo.FactAantal fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
-	INNER JOIN dbo.DimLocation dL ON dL.locationID = fA.LocationID
-	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolID = fA.ProtocolID
-	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityID = fA.SpeciesActivityID
-	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageID = fA.SpeciesLifestageID
+	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
+	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
+	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
 	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
 
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
@@ -114,4 +114,5 @@ AND fa.ProtocolID =  '2'
 
 
 GO
+
 
