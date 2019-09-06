@@ -31,3 +31,6 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+datasets/meetnetten-26-algemene-broedvogelmonitoring-occurrences/data/ABV_events.csv
+*.csv
+datasets/meetnetten-26-algemene-broedvogelmonitoring-occurrences/data/oudeData.txt
