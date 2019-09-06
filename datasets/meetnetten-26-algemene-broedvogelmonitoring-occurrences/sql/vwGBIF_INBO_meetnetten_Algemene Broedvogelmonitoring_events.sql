@@ -1,12 +1,15 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 3/09/2019 15:35:02 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 6/09/2019 10:11:41 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
+
 
 
 
@@ -23,7 +26,8 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
 /* generieke query events, test met vuursalamander
    We creëren meerdere datasets uit meetnetten op basis van protocol
    23/08/2019 Distinct in FROM gebruiken
-
+   05/092019 fix decimalLat & long coalesce
+   06/09/2019 Add eventDate FROM factWerkpakket
  */
 
 ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]
@@ -39,21 +43,21 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'meetnettendatasetDOI'
-	, [datasetName] = N'Meetnetten - Generiek Vuursalamander, Belgium'
+	, [datasetName] = N'Meetnetten - Algemene broedvogelmonitoring, Belgium'
 	, [institutionCode] = N'INBO'
 	
 	 ---EVENT---	
 	
-	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) ,(fA.FieldworkSampleID)),6)  
+	, [eventID] = N'INBO:MEETNET:AB:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) ,(fA.FieldworkSampleID)),6)  
 	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] = Protocolname
+	, [samplingEffort] = '6 times 5 minutes count/UMT1km'
 	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
---	, [individualCount] = Aantal
---	, [samplingEffort] =
-						
---	,[eventDate] = SampleDate
---	,[dynamicProperties] = 
+	, [eventDate] = fwp.VisitStartDate
+	, [recordedBy] = 'meetnetten'
+--	, [eventDate2] = FCo.VisitStartDate
+--	, [dynamicProperties] = 
 	
 
 	--, CONVERT(decimal(10,5), dL.LocationGeom.STCentroid().STY) as decimalLatitude
@@ -65,13 +69,18 @@ SELECT --fa.*   --unieke kolomnamen
 --	, [waterbody] = dL.Location
 	, [countryCode] = N'BE'
 	, [locality] = locationName
-	, [georeferenceRemarks] = N'coordinates are centroid of location' 
+	, [locality2] = ParentLocationName
+	, COALESCE (SUBSTRING(parentLocationName,5,6),SUBSTRING( locationName,5,6)) as locality3
 	
-	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STY) as decimalLatitude
-	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX) as decimalLongitude
+	,[georeferenceRemarks] = 'coordinates are centroid of 1x1km UTM square' 
+	
+	, COALESCE (CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STY),CONVERT(decimal(10,5), dL.ParentLocationGeom.MakeValid().STCentroid().STY)) as decimalLatitude
+	, COALESCE (CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX), CONVERT(decimal(10,5), dL.ParentLocationGeom.MakeValid().STCentroid().STX)) as decimalLongitude
+	
+	--, CONVERT(decimal(10,5), dL.ParentLocationGeom.MakeValid().STCentroid().STY) as decimalLatitude2
+	--, CONVERT(decimal(10,5), dL.ParentLocationGeom.MakeValid().STCentroid().STX) as decimalLongitude2
 	, [geodeticDatum] = N'WGS84'
-
-	
+	,[coordinateUncertaintyInMeters] = '707'
 	
 	, fa.ProjectKey
 	
@@ -82,14 +91,16 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
 	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
 	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
-	
-
-	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
+--	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
+	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 WHERE 1=1
 --AND ProjectName = 'Vuursalamander'
 --AND ProtocolName = 'vuursalamander transecten'
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID =  '26'
+
+
+
 
 
 
