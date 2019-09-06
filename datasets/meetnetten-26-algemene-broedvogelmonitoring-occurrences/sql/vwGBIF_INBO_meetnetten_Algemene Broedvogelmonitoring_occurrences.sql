@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_occurrences]    Script Date: 3/09/2019 15:21:20 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_occurrences]    Script Date: 6/09/2019 13:11:32 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -25,7 +26,7 @@ AS
 SELECT --fa.*   --unieke kolomnamen
 	
 
-	 [occurrenceID] = N'INBO:MEETNETTEN:OCC:' + Right( N'0000' + CONVERT(nvarchar(20) ,FieldworkObservationID),7)
+	 [occurrenceID] = N'INBO:MEETNETTEN:AB:OCC:' + Right( N'0000' + CONVERT(nvarchar(20) ,FieldworkObservationID),7)
 
 	---RECORD ---
 
@@ -42,11 +43,11 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	 ---EVENT---	
 	
-	,  [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
+	, [eventID ] = N'INBO:MEETNET:AB:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
-	, [samplingProtocol] = Protocolname
+--	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
-	, [protocol] = ProtocolSubjectDescription
+--	, [protocol] = ProtocolSubjectDescription
 	
 --	, [samplingEffort] =
 						
@@ -73,7 +74,7 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	---- OCCURRENCE ---
 		
-	, [recordedBy] = 'to complete'
+	, [recordedBy] = 'meetnetten'
 	, [individualCount] = Aantal
 
 	
@@ -86,7 +87,7 @@ SELECT --fa.*   --unieke kolomnamen
 
 	, [kingdom] = N'Animalia'
 	, [phylum] = N'Chordata'
-	, [class] = N''
+	, [class] = N'AVES'
 	, [nomenclaturalCode] = N'ICZN'
 	
 	, fa.ProjectKey
@@ -104,6 +105,7 @@ WHERE 1=1
 ---AND ProjectName = 'Vuursalamander'
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID =  '26'
+
 
 
 
