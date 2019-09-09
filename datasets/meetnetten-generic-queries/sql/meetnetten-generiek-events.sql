@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_generiek_events]    Script Date: 6/09/2019 10:03:10 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_generiek_events]    Script Date: 9/09/2019 13:44:32 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -49,7 +50,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] = Protocolname
-	, [lifeStage] = SpeciesLifestageName
+--	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
 	, [eventDate] = VisitStartDate
 --	, [individualCount] = Aantal
@@ -101,6 +102,7 @@ WHERE 1=1
 --AND fa.ProjectKey = '16'
 --AND fa.ProtocolID =  '26'
 --AND VisitStartDate IS NULL
+
 
 
 
