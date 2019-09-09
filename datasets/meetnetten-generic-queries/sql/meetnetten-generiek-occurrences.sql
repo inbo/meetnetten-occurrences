@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]    Script Date: 3/09/2019 14:48:13 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]    Script Date: 9/09/2019 14:31:09 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -23,8 +25,8 @@ GO
 
 
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]
-AS
+/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -51,6 +53,10 @@ SELECT --fa.*   --unieke kolomnamen
 	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
+	, [sex] = Geslacht
+	, fa.ProtocolKey
+	, fa.ProtocolID
+	, ProtocolSubjectName
 	
 --	, [samplingEffort] =
 						
@@ -108,6 +114,8 @@ WHERE 1=1
 ---AND ProjectName = 'Vuursalamander'
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID =  '4'
+
+
 
 
 
