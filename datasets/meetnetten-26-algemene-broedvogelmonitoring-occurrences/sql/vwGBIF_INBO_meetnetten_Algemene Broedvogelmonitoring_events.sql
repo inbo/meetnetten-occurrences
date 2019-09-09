@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 6/09/2019 10:11:41 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 9/09/2019 11:41:26 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -54,10 +55,11 @@ SELECT --fa.*   --unieke kolomnamen
 	, [samplingEffort] = '6 times 5 minutes count/UMT1km'
 	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
-	, [eventDate] = fwp.VisitStartDate
-	, [recordedBy] = 'meetnetten'
---	, [eventDate2] = FCo.VisitStartDate
---	, [dynamicProperties] = 
+	
+
+						
+	,[eventDate] = VisitStartDate
+--	,[dynamicProperties] = 
 	
 
 	--, CONVERT(decimal(10,5), dL.LocationGeom.STCentroid().STY) as decimalLatitude
@@ -70,9 +72,10 @@ SELECT --fa.*   --unieke kolomnamen
 	, [countryCode] = N'BE'
 	, [locality] = locationName
 	, [locality2] = ParentLocationName
-	, COALESCE (SUBSTRING(parentLocationName,5,6),SUBSTRING( locationName,5,6)) as locality3
 	
-	,[georeferenceRemarks] = 'coordinates are centroid of 1x1km UTM square' 
+	, COALESCE (parentLocationName, locationName) as locality3
+	
+	,[georeferenceRemarks] = 'coordinates are centroid of used grid square' 
 	
 	, COALESCE (CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STY),CONVERT(decimal(10,5), dL.ParentLocationGeom.MakeValid().STCentroid().STY)) as decimalLatitude
 	, COALESCE (CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX), CONVERT(decimal(10,5), dL.ParentLocationGeom.MakeValid().STCentroid().STX)) as decimalLongitude
@@ -91,13 +94,14 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
 	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
 	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
---	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
+	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 WHERE 1=1
 --AND ProjectName = 'Vuursalamander'
 --AND ProtocolName = 'vuursalamander transecten'
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID =  '26'
+
 
 
 
