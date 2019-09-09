@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 9/09/2019 11:41:26 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 9/09/2019 13:42:21 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -53,7 +54,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] = Protocolname
 	, [samplingEffort] = '6 times 5 minutes count/UMT1km'
-	, [lifeStage] = SpeciesLifestageName
+--	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
 	
 
@@ -101,6 +102,7 @@ WHERE 1=1
 --AND ProtocolName = 'vuursalamander transecten'
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID =  '26'
+
 
 
 
