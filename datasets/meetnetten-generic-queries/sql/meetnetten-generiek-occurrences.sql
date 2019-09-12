@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]    Script Date: 9/09/2019 14:31:09 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]    Script Date: 12/09/2019 9:25:01 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -25,8 +25,8 @@ GO
 
 
 
-/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]
-AS**/
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -48,12 +48,11 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	 ---EVENT---	
 	
-	,  [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
+	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
-	, [sex] = Geslacht
 	, fa.ProtocolKey
 	, fa.ProtocolID
 	, ProtocolSubjectName
@@ -85,6 +84,7 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	, [recordedBy] = 'to complete'
 	, [individualCount] = Aantal
+	, [sex] = Geslacht
 
 	
 	
