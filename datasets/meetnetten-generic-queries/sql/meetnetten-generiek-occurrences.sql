@@ -20,13 +20,13 @@ GO
 
 /* Generieke query inclusief soorten 
 	Update Change ID's in Keys  2019-09-03
-
+	add 'sex'
 */
 
 
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]
-AS
+/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -85,7 +85,11 @@ SELECT --fa.*   --unieke kolomnamen
 	, [recordedBy] = 'to complete'
 	, [individualCount] = Aantal
 	, [sex] = Geslacht
-
+	, [occurrenceStatus] =  CASE
+							WHEN Aantal = '0' THEN 'absent'
+							WHEN Aantal > '0' THEN 'present'
+							ELSE 'Check needed'
+							End
 	
 	
 	
