@@ -25,8 +25,8 @@ GO
 
 
 
-/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]
-AS**/
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_generiek_occurrence]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -85,6 +85,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [recordedBy] = 'to complete'
 	, [individualCount] = Aantal
 	, [sex] = Geslacht
+	, [behaviour] = SpeciesActivityName
 	, [occurrenceStatus] =  CASE
 							WHEN Aantal = '0' THEN 'absent'
 							WHEN Aantal > '0' THEN 'present'
