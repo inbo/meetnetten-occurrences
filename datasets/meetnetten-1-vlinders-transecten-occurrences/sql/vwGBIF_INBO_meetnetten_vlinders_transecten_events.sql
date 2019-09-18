@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_vlinders_transecten_events]    Script Date: 3/09/2019 15:36:43 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_vlinders_transecten_events]    Script Date: 18/09/2019 9:46:29 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -23,10 +24,11 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
 
 /* generieke query events, test met vuursalamander
    We creëren meerdere datasets uit meetnetten op basis van protocol
-   Vlinders transecten
+   Vlinders transecten 
+   Add lat long start transect
  */
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_vlinders_transecten_events]
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_vlinders_transecten_&_vlinders_transecten_algemene-monitoring_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -69,8 +71,14 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STY) as decimalLatitude
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX) as decimalLongitude
-	, [geodeticDatum] = N'WGS84'
+	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY) as decimalLatitudeStart
+	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STX) as decimalLongitudeStart
+	, (dL.LocationGeom.MakeValid().STAsText()) as WKTLocation
+	, (dL.parentLocationGeom.MakeValid().STAsText()) as WKTParentLocation
 
+	, [geodeticDatum] = N'WGS84'
+	, dl.LocationGeom
+	, dl.parentLocationGeom
 	
 	
 	, fa.ProjectKey
@@ -89,7 +97,8 @@ WHERE 1=1
 --AND ProjectName = 'Vuursalamander'
 --AND ProtocolName = 'Vlinders - Transecten'
 --AND fa.ProjectKey = '16'
-  AND fa.ProtocolID =  '1'
+  AND fa.ProtocolID IN ('1','29')
+
 
 
 
