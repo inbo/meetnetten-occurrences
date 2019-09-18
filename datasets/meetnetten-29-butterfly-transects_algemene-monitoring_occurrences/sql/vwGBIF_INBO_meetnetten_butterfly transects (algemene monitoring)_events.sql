@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]    Script Date: 3/09/2019 15:35:44 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]    Script Date: 18/09/2019 9:45:23 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -26,6 +26,7 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
    We creëren meerdere datasets uit meetnetten op basis van protocol
    distinct in FROM 23/08/2019
    remove aantal
+   add Start en stop transect
  */
 
 ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]
@@ -71,6 +72,8 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STY) as decimalLatitude
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX) as decimalLongitude
+	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY) as decimalLatitudeStart
+	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STX) as decimalLongitudeStart
 	, [geodeticDatum] = N'WGS84'
 
 	
