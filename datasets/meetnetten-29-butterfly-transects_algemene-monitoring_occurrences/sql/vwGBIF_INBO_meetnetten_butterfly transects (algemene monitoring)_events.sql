@@ -74,6 +74,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX) as decimalLongitude
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY) as decimalLatitudeStart
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STX) as decimalLongitudeStart
+	, (dL.LocationGeom.MakeValid().STAsText()) as WKT
 	, [geodeticDatum] = N'WGS84'
 
 	
