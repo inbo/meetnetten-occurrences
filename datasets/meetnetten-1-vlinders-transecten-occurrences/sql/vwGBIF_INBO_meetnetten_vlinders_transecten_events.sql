@@ -27,6 +27,7 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
    We creëren meerdere datasets uit meetnetten op basis van protocol
    Vlinders transecten 
    Add lat long start transect
+   Add visitstartDate
  */
 
 ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_events]
@@ -52,6 +53,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
+	, [eventDate] = fwp.VisitStartDate
 --	, [individualCount] = Aantal
 --	, [samplingEffort] =
 						
@@ -76,10 +78,10 @@ SELECT --fa.*   --unieke kolomnamen
 									ELSE 'Something else'
 									END
 
-	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STY) as decimalLatitude
-	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX) as decimalLongitude
-	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY) as decimalLatitudeStart
-	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STX) as decimalLongitudeStart
+--	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STY) as decimalLatitude
+--	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX) as decimalLongitude
+	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY) as decimalLatitude
+	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STX) as decimalLongitude
 --	, SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),1,10) as pointinfo3   **text uit kolom selecteren V1                          
 --	, LEFT(CAST(dL.LocationGeom.MakeValid().STAsText() AS VARCHAR(MAX)),10) as pointInfo2   **text uit kolom selecteren V2
 	, SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText()))) as pointinfo   /***text uit kolom selecteren V3 beste optie***/
@@ -98,7 +100,8 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
 	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
 	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
-	
+	--	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
+	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 WHERE 1=1

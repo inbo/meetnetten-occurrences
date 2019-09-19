@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]    Script Date: 18/09/2019 9:45:23 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1&29_vlinders_transecten_&_vlinders_transecten_algemene-monitoring_events]    Script Date: 19/09/2019 9:27:32 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -24,12 +25,12 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
 
 /* generieke query events, test met vuursalamander
    We creëren meerdere datasets uit meetnetten op basis van protocol
-   distinct in FROM 23/08/2019
-   remove aantal
-   add Start en stop transect
+   Vlinders transecten 
+   Add lat long start transect
+   Add visitStartDate 2019/09/19
  */
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_butterfly transects (algemene monitoring)_events]
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1&29_vlinders_transecten_&_vlinders_transecten_algemene-monitoring_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -42,7 +43,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'meetnettendatasetDOI'
-	, [datasetName] = N'Meetnetten - Butterfly transects (algemene monitoring)'
+	, [datasetName] = N'Meetnetten - Vlinders Transecten, Belgium'
 	, [institutionCode] = N'INBO'
 	
 	 ---EVENT---	
@@ -52,6 +53,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
+	, [eventDate] = fwp.VisitStartDate
 --	, [individualCount] = Aantal
 --	, [samplingEffort] =
 						
@@ -76,7 +78,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STX) as decimalLongitudeStart
 	, (dL.LocationGeom.MakeValid().STAsText()) as WKT
 	, [geodeticDatum] = N'WGS84'
-
+	, dl.LocationGeom
+	, dl.parentLocationGeom
 	
 	
 	, fa.ProjectKey
@@ -88,14 +91,16 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
 	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
 	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
-	
+	--	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
+	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 WHERE 1=1
 --AND ProjectName = 'Vuursalamander'
---AND ProtocolName = 'Butterfly transects (algemene monitoring)'
+--AND ProtocolName = 'Vlinders - Transecten'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID =  '29'
+  AND fa.ProtocolID IN ('1','29')
+
 
 
 
