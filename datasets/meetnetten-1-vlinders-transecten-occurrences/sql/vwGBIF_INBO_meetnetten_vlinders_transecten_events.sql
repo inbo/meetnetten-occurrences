@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_vlinders_transecten_events]    Script Date: 18/09/2019 9:46:29 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_events]    Script Date: 19/09/2019 9:41:30 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -28,8 +29,8 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
    Add lat long start transect
  */
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_vlinders_transecten_&_vlinders_transecten_algemene-monitoring_events]
-AS
+/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_events]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -73,9 +74,10 @@ SELECT --fa.*   --unieke kolomnamen
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX) as decimalLongitude
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY) as decimalLatitudeStart
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STX) as decimalLongitudeStart
-	, (dL.LocationGeom.MakeValid().STAsText()) as WKTLocation
-	, (dL.parentLocationGeom.MakeValid().STAsText()) as WKTParentLocation
-
+--	, SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),1,10) as pointinfo3   **text uit kolom selecteren V1                          
+--	, LEFT(CAST(dL.LocationGeom.MakeValid().STAsText() AS VARCHAR(MAX)),10) as pointInfo2   **text uit kolom selecteren V2
+	, SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText()))) as pointinfo   /***text uit kolom selecteren V3 beste optie***/
+	, (dL.LocationGeom.MakeValid().STAsText()) as WKT
 	, [geodeticDatum] = N'WGS84'
 	, dl.LocationGeom
 	, dl.parentLocationGeom
@@ -97,7 +99,8 @@ WHERE 1=1
 --AND ProjectName = 'Vuursalamander'
 --AND ProtocolName = 'Vlinders - Transecten'
 --AND fa.ProjectKey = '16'
-  AND fa.ProtocolID IN ('1','29')
+  AND fa.ProtocolID =  '1'
+
 
 
 
