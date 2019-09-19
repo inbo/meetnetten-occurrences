@@ -29,8 +29,8 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
    Add lat long start transect
  */
 
-/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_events]
-AS**/
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_events]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -68,8 +68,14 @@ SELECT --fa.*   --unieke kolomnamen
 --	, [waterbody] = dL.Location
 	, [countryCode] = N'BE'
 	, [locality] = locationName
-	, [georeferenceRemarks] = N'coordinates are centroid of location' 
-	
+	, [georeferenceRemarks] = CASE SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText())))
+									WHEN 'LINESTRING' THEN 'coördinates are starting point of transect'
+									WHEN 'Point' THEN 'coördinates are a point'
+									WHEN 'POLYGON' THEN 'coordinates are centroid of location'
+									WHEN 'MULTIPOLYGON' THEN  'coordinates are centroid of location'
+									ELSE 'Something else'
+									END
+
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STY) as decimalLatitude
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STCentroid().STX) as decimalLongitude
 	, CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY) as decimalLatitudeStart
