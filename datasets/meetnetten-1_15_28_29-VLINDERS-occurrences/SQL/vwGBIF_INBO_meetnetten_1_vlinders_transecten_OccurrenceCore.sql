@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_events]    Script Date: 25/09/2019 9:33:00 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_15_19_28_vlinders_transecten_OccurrenceCore]    Script Date: 27/09/2019 13:29:46 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -31,9 +33,10 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
    Add lat long start transect
    Add visitstartDate
    Changing into occ core
+   VisitStart=date > 2015-01-01 (na vlinderdatabank)
  */
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_OCCURRENCECORE]
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_15_19_28_vlinders_transecten_OccurrenceCore]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -55,9 +58,15 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
-	, [samplingProtocol] = Protocolname
-	, [lifeStage] = SpeciesLifestageName
-	, [protocol] = ProtocolSubjectDescription
+	, [samplingProtocol] =  CASE Protocolname
+							WHEN 'Vlinders - Transecten' THEN 'Butterflies Transects'
+							WHEN 'Vlinders - Eitellingen' THEN 'Butterflies Egg Counts'
+							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'Butterflies Transects Monitoring'
+							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'Butterflies Area Counts'
+							ELSE ProtocolName
+							END
+	
+--	, [protocol] = ProtocolSubjectDescription
 	, fa.ProtocolID
 	, [eventDate] = fwp.VisitStartDate
 --	, [individualCount] = Aantal
@@ -105,6 +114,7 @@ SELECT --fa.*   --unieke kolomnamen
 							When '0' then 'absent'
 							Else 'present'
 							End
+	, [lifeStage] = SpeciesLifestageName
 
 ----Taxon
 
@@ -137,6 +147,7 @@ WHERE 1=1
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID IN ('1','29','15','28')  ---Vlinders transecten 
 AND Aantal > '0'
+AND fwp.VisitStartDate > CONVERT(datetime, '2015-01-01', 120)
 
 
 
@@ -168,6 +179,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
