@@ -83,7 +83,7 @@ SELECT --fa.*   --unieke kolomnamen
 									WHEN 'MULTIPOLYGON' THEN  'original coordinates are centroid of location'
 									ELSE 'Something else'
 									END */
-	, [georeferenceRemarks] = dL.GeoType
+	, [georeferenceRemarks] = 'original geomerty is a' +  dL.GeoType
 	, [decimalLatitude_unblur] = CASE dL.GeoType
 						WHEN 'LINESTRING' THEN CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY)
 						WHEN 'MULTILINESTRING' THEN CONVERT(decimal(10,5), dL.LocationGeom.MakeValid().STStartPoint().STY)
@@ -107,13 +107,13 @@ SELECT --fa.*   --unieke kolomnamen
 	--, utm5.CentroidLat as decimallatitudeCentroid5
 	--, utm5.CentroidLong as decimallongitudeCentroid5
 	/**These are the blurred decimal and longitudinale coordinates**/
-	, [decimalLatitude] =  CASE Blur.HokType 
+	, [decimalLatitude] =  CASE Blur.HokType     --is blurred
 							WHEN 'UTM 1Km' THEN utm1.CentroidLat
 							WHEN 'UTM 5Km' THEN utm5.CentroidLat
 							WHEN 'UTM 10Km' THEN utm10.CentroidLat
 							ELSE 'checkthis'
 							END
-	, [decimalLongitudeBlurred] =  CASE Blur.HokType 
+	, [decimalLongitude] =  CASE Blur.HokType ---is blurred
 							WHEN 'UTM 1Km' THEN utm1.CentroidLong
 							WHEN 'UTM 5Km' THEN utm5.CentroidLong
 							WHEN 'UTM 10Km' THEN utm10.CentroidLong
@@ -153,7 +153,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
-	, [recordedBy] = 'to complete'
+	, [recordedBy] = 'Meetnetten'
 	, [individualCount] = Aantal
 	, [sex] = Geslacht
 	, [occurrenceStatus] = CASE Aantal
@@ -254,8 +254,8 @@ FROM dbo.FactAantal fA
 				SELECT N'Oranje zandoogje'			, N'UTM 1Km' UNION
 				SELECT N'Argusvlinder'				, N'UTM 1Km' ) as Blur ON Blur.project = dP.ProjectName
 	INNER JOIN [shp].[utm10_vl_WGS84] utm10 ON utm10.geom.STIntersects(dL.PointData) = 1
-	INNER JOIN [shp].[utm5_vl_WGS84] utm5 ON utm10.geom.STIntersects(dL.PointData) = 1
-	INNER JOIN [shp].[utm1_vl_WGS84] utm1 ON utm10.geom.STIntersects(dL.PointData) = 1
+	INNER JOIN [shp].[utm5_vl_WGS84] utm5 ON utm5.geom.STIntersects(dL.PointData) = 1
+	INNER JOIN [shp].[utm1_vl_WGS84] utm1 ON utm1.geom.STIntersects(dL.PointData) = 1
 	
 	
 	--INNER JOIN [shp].[utm10_vl_WGS84] utm10 ON dL.PointData.STWithin(utm10.geom) = 1
