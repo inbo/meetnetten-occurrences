@@ -1,12 +1,16 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_OccurrenceCore_jol]    Script Date: 11/10/2019 10:20:01 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_OccurrenceCore_jol_DiB]    Script Date: 14/10/2019 15:22:17 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
+
+
 
 
 
@@ -32,7 +36,7 @@ AS
 SELECT --fa.*   --unieke kolomnamen 
 	
 	---RECORD ---
-	 
+	 TOP 500
 	  [occurrenceID] = N'INBO:MEETNETTEN:OCC:' + Right( N'0000' + CONVERT(nvarchar(20) ,fa.FieldworkObservationID),7)
 
     , [type] = N'Event'
@@ -75,6 +79,7 @@ SELECT --fa.*   --unieke kolomnamen
 --	, [waterbody] = dL.Location
 	, [countryCode] = N'BE'
 	, [locality] = locationName
+	, [parentLocality] = parentLocationName
 	/*
 	, [georeferenceRemarks] = CASE SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText())))
 									WHEN 'LINESTRING' THEN 'original coördinates are starting point of transect'
@@ -107,16 +112,17 @@ SELECT --fa.*   --unieke kolomnamen
 	--, utm5.CentroidLat as decimallatitudeCentroid5
 	--, utm5.CentroidLong as decimallongitudeCentroid5
 	/**These are the blurred decimal and longitudinale coordinates**/
-	, [decimalLatitude] =  CASE Blur.HokType     --is blurred
-							WHEN 'UTM 1Km' THEN utm1.CentroidLat
-							WHEN 'UTM 5Km' THEN utm5.CentroidLat
-							WHEN 'UTM 10Km' THEN utm10.CentroidLat
+	
+	, [decimalLatitude] =  CASE dbl.BlurHokType     --is blurred
+							WHEN 'UTM 1Km' THEN utm.Centroid_1_Lat
+							WHEN 'UTM 5Km' THEN utm.Centroid_5_Lat
+							WHEN 'UTM 10Km' THEN utm.Centroid_10_Lat
 							ELSE 'checkthis'
 							END
-	, [decimalLongitude] =  CASE Blur.HokType ---is blurred
-							WHEN 'UTM 1Km' THEN utm1.CentroidLong
-							WHEN 'UTM 5Km' THEN utm5.CentroidLong
-							WHEN 'UTM 10Km' THEN utm10.CentroidLong
+	, [decimalLongitude] =  CASE dbl.BlurHokType ---is blurred
+							WHEN 'UTM 1Km' THEN utm.Centroid_1_Long
+							WHEN 'UTM 5Km' THEN utm.Centroid_5_Long
+							WHEN 'UTM 10Km' THEN utm.Centroid_10_Long
 							ELSE 'checkthis'
 							END
 
@@ -172,25 +178,31 @@ SELECT --fa.*   --unieke kolomnamen
 	, [class] = N''
 	, [nomenclaturalCode] = N'ICZN'
 	, fa.ProjectKey
-	, [Meetnet] = ProjectName 
+	, [Meetnet] = Dbl.ProjectName 
 	
-	/**original calculated blur to Use, now included in FROM**/
-	/*, [BlurToUse] = case ProjectName
-				WHEN    'Bruin dikkopje'			THEN 'UTM 5Km'
-				WHEN	'Kommavlinder'				THEN 'UTM 1Km'
-				WHEN	'Veldparelmoervlinder'		THEN 'UTM 1Km'
-				WHEN	'Bruine eikenpage'			THEN 'UTM 1Km'
-				WHEN	'Heivlinder'				THEN 'UTM 1Km'
-				WHEN	'Gentiaanblauwtje'			THEN 'UTM 5Km'
-				WHEN	'Klaverblauwtje'			THEN 'UTM 5Km'
-				WHEN	'Grote weerschijnvlinder'	THEN 'UTM 5Km'
-				WHEN	'Aardbeivlinder'			THEN 'UTM 5Km'
-				WHEN	'Oranje zandoogje'			THEN 'UTM 1Km'
-				WHEN	'Argusvlinder'				THEN 'UTM 1Km'
-				END
-	*/
-	, [BlurToUse] = Blur.HokType
-
+	/**original calculated blur to Use, now included in FROM
+	Zo wordt het een beetje te gecompliceerd**/
+	--, [BlurToUse2] = case 
+	--			WHEN  ProjectName =  'Bruin dikkopje'  THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Kommavlinder' 				THEN 'UTM 1Km'
+	--			WHEN	ProjectName = 'Kommavlinder' AND ParentLocationName in ('Groot Schietveld 2','Klein Schietveld') THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Veldparelmoervlinder'		THEN 'UTM 1Km'
+	--			WHEN	ProjectName = 'Veldparelmoervlinder' AND ParentLocationName in ('Groot Schietveld 2','Klein Schietveld') THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Bruine eikenpage'			THEN 'UTM 1Km'
+				
+	--			WHEN	ProjectName = 'Heivlinder' AND ParentLocationName in ('Groot Schietveld 2','Groot Schietveld','Klein Schietveld') THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Heivlinder'				    THEN 'UTM 1Km'
+	--			WHEN	ProjectName = 'Gentiaanblauwtje'			THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Klaverblauwtje'			    THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Grote weerschijnvlinder'	    THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Aardbeivlinder'			    THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Oranje zandoogje'			THEN 'UTM 1Km'
+	--			WHEN	ProjectName = 'Oranje zandoogje' AND ParentLocationName in ('Groot Schietveld 2','Groot Schietveld','Klein Schietveld') THEN 'UTM 5Km'
+	--			WHEN	ProjectName = 'Argusvlinder'				THEN 'UTM 1Km'
+	--			END
+	
+	, [BlurToUse] = dbl.BlurHokType
+	, [parentLocality2] = parentLocationName
 FROM dbo.FactAantal fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN ( SELECT *
@@ -241,21 +253,22 @@ FROM dbo.FactAantal fA
 	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
 	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 --	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
-	INNER JOIN dbo.DimBlur Dbl ON Dbl.SpeciesKey = fa.speciesKey
-	INNER JOIN (SELECT N'Bruin dikkopje' as	project , N'UTM 5Km' as HokType UNION
-				SELECT N'Kommavlinder'				, N'UTM 1Km' UNION
-				SELECT N'Veldparelmoervlinder'		, N'UTM 1Km' UNION
-				SELECT N'Bruine eikenpage'			, N'UTM 1Km' UNION
-				SELECT N'Heivlinder'				, N'UTM 1Km' UNION
-				SELECT N'Gentiaanblauwtje'			, N'UTM 5Km' UNION
-				SELECT N'Klaverblauwtje'			, N'UTM 5Km' UNION
-				SELECT N'Grote weerschijnvlinder'	, N'UTM 5Km' UNION
-				SELECT N'Aardbeivlinder'			, N'UTM 5Km' UNION
-				SELECT N'Oranje zandoogje'			, N'UTM 1Km' UNION
-				SELECT N'Argusvlinder'				, N'UTM 1Km' ) as Blur ON Blur.project = dP.ProjectName
-	INNER JOIN [shp].[utm10_vl_WGS84] utm10 ON utm10.geom.STIntersects(dL.PointData) = 1
-	INNER JOIN [shp].[utm5_vl_WGS84] utm5 ON utm5.geom.STIntersects(dL.PointData) = 1
-	INNER JOIN [shp].[utm1_vl_WGS84] utm1 ON utm1.geom.STIntersects(dL.PointData) = 1
+	INNER JOIN dbo.DimBlur Dbl ON Dbl.ProjectKey = fa.projectKey
+	--INNER JOIN (SELECT N'Bruin dikkopje' as	project , N'UTM 5Km' as HokType UNION
+	--			SELECT N'Kommavlinder'				, N'UTM 1Km' UNION
+	--			SELECT N'Veldparelmoervlinder'		, N'UTM 1Km' UNION
+	--			SELECT N'Bruine eikenpage'			, N'UTM 1Km' UNION
+	--			SELECT N'Heivlinder'				, N'UTM 1Km' UNION
+	--			SELECT N'Gentiaanblauwtje'			, N'UTM 5Km' UNION
+	--			SELECT N'Klaverblauwtje'			, N'UTM 5Km' UNION
+	--			SELECT N'Grote weerschijnvlinder'	, N'UTM 5Km' UNION
+	--			SELECT N'Aardbeivlinder'			, N'UTM 5Km' UNION
+	--			SELECT N'Oranje zandoogje'			, N'UTM 1Km' UNION
+	--			SELECT N'Argusvlinder'				, N'UTM 1Km' ) as Blur ON Blur.project = dP.ProjectName
+	--INNER JOIN [shp].[utm10_vl_WGS84] utm10 ON utm10.geom.STIntersects(dL.PointData) = 1
+	--INNER JOIN [shp].[utm5_vl_WGS84] utm5 ON utm5.geom.STIntersects(dL.PointData) = 1
+	--INNER JOIN [shp].[utm1_vl_WGS84] utm1 ON utm1.geom.STIntersects(dL.PointData) = 1
+	INNER JOIN [shp].[utm_vl_WGS84] utm WITH (INDEX(SI_utm_vl_WGS84__geom_1)) ON utm.geom_1.STIntersects(dL.PointData) = 1
 	
 	
 	--INNER JOIN [shp].[utm10_vl_WGS84] utm10 ON dL.PointData.STWithin(utm10.geom) = 1
@@ -269,7 +282,10 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2015-01-01', 120)
 --AND projectName = 'Argusvlinder'
 --AND fa.FieldworkObservationID =  491520
 --ORDER BY speciesName Asc
-
+--ORDER BY fa.FieldworkObservationID
+--AND ParentLocationName in ('Groot Schietveld 2','Klein Schietveld')
+--AND projectname = 'kommavlinder'
+--AND ProjectName = 'heivlinder'
 
 
 
@@ -300,6 +316,10 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
+
 
 
 
