@@ -30,8 +30,8 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
    remove 'algemene vlindermonitoring' protocolID = 29
  */
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_OccurrenceCore_jol_DiB]
-AS
+/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_OccurrenceCore_jol_DiB]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
 	
