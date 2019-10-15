@@ -34,3 +34,15 @@ vignettes/*.pdf
 datasets/meetnetten-26-algemene-broedvogelmonitoring-occurrences/data/ABV_events.csv
 *.csv
 datasets/meetnetten-26-algemene-broedvogelmonitoring-occurrences/data/oudeData.txt
+GIS militair/Gewestplan_MilitairDomein_WGS84.dbf
+GIS militair/Gewestplan_MilitairDomein_WGS84.cpg
+GIS militair/Gewestplan_MilitairDomein_WGS84.prj
+GIS militair/Gewestplan_MilitairDomein_WGS84.qpj
+GIS militair/Gewestplan_MilitairDomein_WGS84.shp
+GIS militair/Gewestplan_MilitairDomein_WGS84.shx
+GIS militair/Gewestplan_MilitairDomein_WGS84_II.cpg
+GIS militair/Gewestplan_MilitairDomein_WGS84_II.dbf
+GIS militair/Gewestplan_MilitairDomein_WGS84_II.prj
+GIS militair/Gewestplan_MilitairDomein_WGS84_II.qpj
+GIS militair/Gewestplan_MilitairDomein_WGS84_II.shp
+GIS militair/Gewestplan_MilitairDomein_WGS84_II.shx
