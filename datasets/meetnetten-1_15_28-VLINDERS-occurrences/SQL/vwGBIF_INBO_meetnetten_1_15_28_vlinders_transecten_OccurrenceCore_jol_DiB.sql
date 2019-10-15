@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_OccurrenceCore_jol_DiB]    Script Date: 14/10/2019 15:22:17 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_OccurrenceCore_jol_DiB]    Script Date: 15/10/2019 15:47:48 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -30,13 +32,13 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
    remove 'algemene vlindermonitoring' protocolID = 29
  */
 
-/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_OccurrenceCore_jol_DiB]
-AS**/
+ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_OccurrenceCore_jol_DiB]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
 	
 	---RECORD ---
-	 TOP 500
+	 
 	  [occurrenceID] = N'INBO:MEETNETTEN:OCC:' + Right( N'0000' + CONVERT(nvarchar(20) ,fa.FieldworkObservationID),7)
 
     , [type] = N'Event'
@@ -113,18 +115,23 @@ SELECT --fa.*   --unieke kolomnamen
 	--, utm5.CentroidLong as decimallongitudeCentroid5
 	/**These are the blurred decimal and longitudinale coordinates**/
 	
-	, [decimalLatitude] =  CASE dbl.BlurHokType     --is blurred
-							WHEN 'UTM 1Km' THEN utm.Centroid_1_Lat
-							WHEN 'UTM 5Km' THEN utm.Centroid_5_Lat
-							WHEN 'UTM 10Km' THEN utm.Centroid_10_Lat
+	, [decimalLatitude] =  CASE      --is blurred
+							
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN utm.Centroid_5_Lat
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN utm.Centroid_1_Lat
+							WHEN dbl.BlurHokType = 'UTM 5Km' THEN utm.Centroid_5_Lat
+							WHEN dbl.BlurHokType = 'UTM 10Km' THEN utm.Centroid_10_Lat
 							ELSE 'checkthis'
 							END
-	, [decimalLongitude] =  CASE dbl.BlurHokType ---is blurred
-							WHEN 'UTM 1Km' THEN utm.Centroid_1_Long
-							WHEN 'UTM 5Km' THEN utm.Centroid_5_Long
-							WHEN 'UTM 10Km' THEN utm.Centroid_10_Long
+	, [decimalLongitude] =  CASE ---is blurred
+							
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN utm.Centroid_5_Long
+							WHEN dbl.BlurHokType = 'UTM 1Km' THEN utm.Centroid_1_Long
+							WHEN dbl.BlurHokType = 'UTM 5Km' THEN utm.Centroid_5_Long
+							WHEN dbl.BlurHokType = 'UTM 10Km' THEN utm.Centroid_10_Long
 							ELSE 'checkthis'
 							END
+	
 
 
 	/** This is the original unblurred dec lat long calculation, now included in FROM **/
@@ -203,6 +210,16 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	, [BlurToUse] = dbl.BlurHokType
 	, [parentLocality2] = parentLocationName
+	, [usedBlur] =  CASE      --is blurred
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN 'utm 5km'
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN 'utm 1km'
+
+							WHEN dbl.BlurHokType = 'UTM 5Km' THEN 'utm 5Km'
+							WHEN dbl.BlurHokType = 'UTM 10Km' THEN 'utm 10Km'
+							ELSE 'checkthis'
+							END
+
+--SELECT *
 FROM dbo.FactAantal fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN ( SELECT *
@@ -316,6 +333,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
