@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_EventV2]    Script Date: 29/10/2019 12:53:53 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_Event]    Script Date: 26/11/2019 15:10:37 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,7 +10,9 @@ GO
 
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_Event]
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_Event]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -128,7 +130,7 @@ SELECT --fa.*   --unieke kolomnamen
 	--						ELSE 'checkthis'
 	--						END
 
---SELECT *
+
 FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN ( SELECT *
@@ -184,6 +186,8 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2015-01-01', 120)
 --AND ParentLocationName in ('Groot Schietveld 2','Klein Schietveld')
 --AND projectname = 'kommavlinder'
 --AND ProjectName = 'heivlinder'
+--AND fA.FieldworkSampleID = '190441'
+AND SpeciesLifestageName = 'imago'
 
 
 
@@ -214,6 +218,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
