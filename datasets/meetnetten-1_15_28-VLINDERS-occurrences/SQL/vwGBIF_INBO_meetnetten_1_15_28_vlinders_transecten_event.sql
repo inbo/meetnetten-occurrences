@@ -187,7 +187,7 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2015-01-01', 120)
 --AND projectname = 'kommavlinder'
 --AND ProjectName = 'heivlinder'
 --AND fA.FieldworkSampleID = '190441'
-AND SpeciesLifestageName = 'imago'
+--AND SpeciesLifestageName = 'imago'
 
 
 
