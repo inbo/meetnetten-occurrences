@@ -46,3 +46,6 @@ GIS militair/Gewestplan_MilitairDomein_WGS84_II.prj
 GIS militair/Gewestplan_MilitairDomein_WGS84_II.qpj
 GIS militair/Gewestplan_MilitairDomein_WGS84_II.shp
 GIS militair/Gewestplan_MilitairDomein_WGS84_II.shx
+GIS militair/miliGEOJSON.zip
+GIS militair/miliGEOJSON/Gewestplan_MilitairDomein_WGS84.geojson
+GIS militair/miliGEOJSON/log.txt
