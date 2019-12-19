@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_29_15_28_vlinders_transecten_tellingen_eitellingen__occurrences]    Script Date: 29/10/2019 14:07:15 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_occurrences]    Script Date: 28/11/2019 13:33:21 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,11 +18,12 @@ GO
 
 
 
+
 /* Generieke query inclusief soorten */
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_occurrences]
-AS
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_1_15_28_vlinders_transecten_occurrences]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -75,7 +76,7 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	---- OCCURRENCE ---
 		
-	, [recordedBy] = 'to complete'
+	, [recordedBy] = 'Meetnetten'
 	, [individualCount] = Aantal
 
 	
@@ -91,6 +92,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [nomenclaturalCode] = N'ICZN'
 	
 	, fa.ProjectKey
+	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' project'
 
 	
 FROM dbo.FactAantal fA
@@ -100,12 +102,17 @@ FROM dbo.FactAantal fA
 	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
 	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
 	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
+	INNER JOIN dbo.DimBlur Dbl ON Dbl.ProjectKey = fa.projectKey
+	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('1','15','28') ---Vlinders transecten + tellingen + eitellingen
+AND fa.ProtocolID IN ('1','15','28') ---Vlinders transecten 
+AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+
 
 
 
