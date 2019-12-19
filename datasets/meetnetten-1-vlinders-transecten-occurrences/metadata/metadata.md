@@ -105,17 +105,17 @@ There is a very strict sampling protocol to follow.
 ##Datasets
  
 ###Dataset description
-Object name: Darwin Core Archive Meetnetten - Transects for butterflies in Flanders, Belgium
-Character encoding: UTF-8
-Format name: Darwin Core Archive format
-Format version: 1.0
-Distribution: https://ipt.inbo.be/archive.do?r=meetnetten-butterflies-occurrences
-Publication date of data: 2019-11-27
-Language: English
-Licences of use: Public Domain (CC0 1.0)
- 
-Metadata language: English
-Date of metadata creation: 2019-10-15
-Hierarchy level: Dataset
+*Object name:* Darwin Core Archive Meetnetten - Transects for butterflies in Flanders, Belgium
+
+*Character encoding:* UTF-8  
+*Format name:* Darwin Core Archive format  
+*Format version:* 1.0  
+*Distribution:* https://ipt.inbo.be/archive.do?r=meetnetten-butterflies-occurrences  
+*Publication date of data:* 2019-11-27  
+*Language:* English  
+*Licences of use:* Public Domain (CC0 1.0)  
+*Metadata language:* English  
+*Date of metadata creation:* 2019-10-15  
+*Hierarchy level:* Dataset
  
 
