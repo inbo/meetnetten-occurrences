@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_vlinders_area_count_Event]    Script Date: 18/05/2020 10:23:17 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]    Script Date: 19/05/2020 14:18:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,8 +18,9 @@ GO
 
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_vlinders_area_count_Event]
-AS**/
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -32,7 +33,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'doi.org/10.15468/kfhvy4'
+	, [datasetID] = N'to complete'
 	, [datasetName] = N'Meetnetten - Transects for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
@@ -193,7 +194,7 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('28')  ---Vlinders transecten * ,'15','1' removed other protocols
+AND fa.ProtocolID IN ('28','39')  ---Vlinders transecten * ,'15','1' removed other protocols
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
@@ -236,6 +237,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

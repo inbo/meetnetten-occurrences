@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_vlinders_area_count_Meas]    Script Date: 18/05/2020 10:27:03 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Meas]    Script Date: 19/05/2020 14:18:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -19,7 +19,8 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_vlinders_area_count_Meas]
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Meas]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -80,7 +81,7 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('28')  ---Vlinders transecten * ,'15','1' removed other protocols
+AND fa.ProtocolID IN ('28','39')  ---Vlinders transecten * ,'15','1' removed other protocols
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
@@ -123,6 +124,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

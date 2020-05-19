@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_occurrences]    Script Date: 19/05/2020 14:06:11 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_occurrences]    Script Date: 19/05/2020 14:18:39 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -23,10 +23,11 @@ GO
 
 
 
+
 /* Generieke query inclusief soorten */
 
 
-Alter VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_occurrences]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_occurrences]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -116,6 +117,7 @@ WHERE 1=1
 AND fa.ProtocolID IN ('28','39') ---Vlinders transecten removed ,'15','1'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+
 
 
 
