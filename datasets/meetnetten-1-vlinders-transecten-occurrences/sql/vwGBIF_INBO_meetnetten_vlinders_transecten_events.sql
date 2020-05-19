@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 19/12/2019 11:39:09 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 19/05/2020 14:13:06 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -30,10 +31,10 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'meetnettendatasetDOI'
-	, [datasetName] = N'Meetnetten - Transect, area and egg counts for butterflies in Flanders, Belgium'
+	, [datasetID] = N'doi.org/10.15468/kfhvy4'
+	, [datasetName] = N'Meetnetten - Transects for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
-	, [parentEventID] = N'visitID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
+	, [parentEventID] = N'INBO:MEETNET:VISITID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	
 	 ---EVENT---	
 	
@@ -92,9 +93,17 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN utm.Centroid_10_Long
 							ELSE 'checkthis'
 							END
+	, [coordinateUncertaintyInMeters] =  CASE      --is blurred
+							
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '707'
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN '707'
+							WHEN dbl.BlurHokType = 'UTM 5Km' THEN '3536'
+							WHEN dbl.BlurHokType = 'UTM 10Km' THEN '7071'
+							ELSE 'checkthis'
+							END
 	
-	, SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText()))) as pointinfo   /***text uit kolom selecteren V3 beste optie***/
-	, (dL.LocationGeom.MakeValid().STAsText()) as footprintWKT
+--	, SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText()))) as pointinfo   /***text uit kolom selecteren V3 beste optie***/
+--	, (dL.LocationGeom.MakeValid().STAsText()) as footprintWKT
 	, [geodeticDatum] = N'WGS84'
 	, dl.LocationGeom
 	, dl.parentLocationGeom
@@ -226,6 +235,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

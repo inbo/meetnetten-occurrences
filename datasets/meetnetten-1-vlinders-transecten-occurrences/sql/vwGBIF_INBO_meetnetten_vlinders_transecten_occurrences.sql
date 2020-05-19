@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 19/12/2019 11:40:34 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 19/05/2020 14:14:14 ******/
 SET ANSI_NULLS ON
 GO
 
