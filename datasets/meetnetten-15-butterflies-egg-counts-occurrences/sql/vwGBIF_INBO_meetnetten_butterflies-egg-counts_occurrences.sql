@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_egg_count_occurrences]    Script Date: 15/05/2020 14:38:10 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_occurrences]    Script Date: 19/05/2020 14:06:11 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -22,10 +22,11 @@ GO
 
 
 
+
 /* Generieke query inclusief soorten */
 
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_1_vlinders_egg_count_occurrences]
+Alter VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_occurrences]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -41,7 +42,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'meetnettendatasetDOI'
-	, [datasetName] = N'Meetnetten - vlinders transecten, Belgium'
+	, [datasetName] = N'Meetnetten - butterflies area count, Belgium'
 	, [institutionCode] = N'INBO'
 
 	**/
@@ -112,9 +113,10 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('15') ---Vlinders transecten removed ,'15','28'
+AND fa.ProtocolID IN ('28','39') ---Vlinders transecten removed ,'15','1'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+
 
 
 
