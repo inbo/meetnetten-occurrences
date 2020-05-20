@@ -42,7 +42,7 @@ SELECT --fa.*   --unieke kolomnamen
 	 ---EVENT---	
 	
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
-	, [basisOfRecord] = N'HumanObservation'
+--	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
 							WHEN 'Vlinders - Transecten' THEN 'butterflies transects'
 							WHEN 'Vlinders - Eitellingen' THEN 'butterflies egg counts'
@@ -50,7 +50,7 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterflies area counts'
 							ELSE ProtocolName
 							END
-	, fa.ProtocolID
+--	, fa.ProtocolID
 	, [eventDate] = fwp.VisitStartDate
 	, [eventRemarks] = 'data collected in the '  + dbl.ProjectName + ' project'
 
@@ -108,8 +108,8 @@ SELECT --fa.*   --unieke kolomnamen
 --	, SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText()))) as pointinfo   /***text uit kolom selecteren V3 beste optie***/
 --	, (dL.LocationGeom.MakeValid().STAsText()) as footprintWKT
 	, [geodeticDatum] = N'WGS84'
-	, dl.LocationGeom
-	, dl.parentLocationGeom
+--	, dl.LocationGeom
+--	, dl.parentLocationGeom
 	
 	
 ---- OCCURRENCE ---
@@ -121,7 +121,7 @@ SELECT --fa.*   --unieke kolomnamen
 	--						When '0' then 'absent'
 	--						Else 'present'
 	--						End
-	, [lifeStage] = SpeciesLifestageName
+--	, [lifeStage] = SpeciesLifestageName
 
 /**----Taxon
 
