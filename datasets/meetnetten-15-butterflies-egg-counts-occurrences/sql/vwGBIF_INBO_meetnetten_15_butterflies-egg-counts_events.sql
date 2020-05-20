@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 19/05/2020 14:15:48 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 20/05/2020 8:59:13 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -20,8 +20,8 @@ GO
 
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]
-AS
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -38,6 +38,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [datasetName] = N'Meetnetten - Egg counts for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
+	, [informationWithheld] = N'High resolution data available on request'
 	
 	 ---EVENT---	
 	
@@ -59,9 +60,9 @@ SELECT --fa.*   --unieke kolomnamen
 	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'000000000' + CONVERT(nvarchar(20) ,dL.LocationID),10) 
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
-	, [locality0] = locationName
+	, [locality] = locationName
 	, [parentLocality0] = parentLocationName
-	, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
+	, [locality1] = CONCAT (ParentLocationName,'_ ',locationName)
 	, [georeferenceRemarks] = 'original geomerty is a: ' +  dL.GeoType
 	
 	-- USE FOR UNBLURRED DATA
@@ -121,7 +122,7 @@ SELECT --fa.*   --unieke kolomnamen
 	--						When '0' then 'absent'
 	--						Else 'present'
 	--						End
-	, [lifeStage] = SpeciesLifestageName
+	--, [lifeStage] = SpeciesLifestageName
 
 /**----Taxon
 

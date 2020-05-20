@@ -43,7 +43,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'meetnettendatasetDOI'
-	, [datasetName] = N'Meetnetten - butterflies area count, Belgium'
+	, [datasetName] = N'Meetnetten - butterflies site counts, Belgium'
 	, [institutionCode] = N'INBO'
 
 	**/
