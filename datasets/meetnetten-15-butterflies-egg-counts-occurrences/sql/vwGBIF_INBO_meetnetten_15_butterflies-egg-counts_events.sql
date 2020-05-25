@@ -68,7 +68,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [locality] = locationName
 	, [parentLocality0] = parentLocationName
 	, [locality1] = CONCAT (ParentLocationName,'_ ',locationName)
-	, [georeferenceRemarks] = 'original geometry is a: ' +  dL.GeoType
+	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
 	-- USE FOR UNBLURRED DATA
 	--, [decimalLatitude_unblur] = CASE dL.GeoType
