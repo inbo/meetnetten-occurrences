@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_occurrences]    Script Date: 19/05/2020 14:16:06 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_occurrences]    Script Date: 25/05/2020 9:54:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -53,9 +53,9 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
-	, [samplingProtocol] = Protocolname
+--	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
-	, [protocol] = ProtocolSubjectDescription
+--	, [protocol] = ProtocolSubjectDescription
 	
 --	, [samplingEffort] =
 						
@@ -82,7 +82,7 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	---- OCCURRENCE ---
 		
-	, [recordedBy] = 'Meetnetten'
+	, [recordedBy] = 'https://meetnetten.be'
 	, [individualCount] = Aantal
 	, [occurrenceStatus] = case
 						  when Aantal > '0' then 'present'
@@ -97,11 +97,13 @@ SELECT --fa.*   --unieke kolomnamen
 	, [vernacularName] = SpeciesName
 	, [kingdom] = N'Animalia'
 	, [phylum] = N'Arthropoda'
-	, [class] = N''
+	, [class] = N'Insecta'
+	, [order] = N'Lepidoptera'
 	, [nomenclaturalCode] = N'ICZN'
-	
-	, fa.ProjectKey
-	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
+	, [taxonRank] = N'species'
+
+--	, fa.ProjectKey
+--	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
 
 	
 FROM dbo.FactAantal fA

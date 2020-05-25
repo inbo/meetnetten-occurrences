@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 19/05/2020 14:14:14 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 25/05/2020 9:47:54 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -49,7 +50,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
-	, [samplingProtocol] = Protocolname
+--	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
 	
@@ -78,7 +79,7 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	---- OCCURRENCE ---
 		
-	, [recordedBy] = 'Meetnetten'
+	, [recordedBy] = 'https://meetnetten.be'
 	, [individualCount] = Aantal
 
 	
@@ -90,11 +91,13 @@ SELECT --fa.*   --unieke kolomnamen
 	, [vernacularName] = SpeciesName
 	, [kingdom] = N'Animalia'
 	, [phylum] = N'Arthropoda'
-	, [class] = N''
+	, [class] = N'Insecta'
+	, [order] = N'Lepidoptera'
 	, [nomenclaturalCode] = N'ICZN'
+	, [taxonRank] = N'species'
 	
-	, fa.ProjectKey
-	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
+--	, fa.ProjectKey
+--	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
 
 	
 FROM dbo.FactAantal fA
@@ -114,6 +117,7 @@ WHERE 1=1
 AND fa.ProtocolID IN ('1') ---Vlinders transecten removed ,'15','28'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+
 
 
 
