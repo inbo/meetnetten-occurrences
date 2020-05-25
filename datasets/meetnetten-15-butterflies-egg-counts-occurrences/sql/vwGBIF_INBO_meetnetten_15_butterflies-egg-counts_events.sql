@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 25/05/2020 8:52:13 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 25/05/2020 9:43:44 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -118,7 +119,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
-	, [recordedBy] = 'Meetnetten'
+	, [recordedBy] = 'https://meetnetten.be'
 --	, [individualCount] = Aantal
 --	, [sex] = Geslacht
 	--, [occurrenceStatus] = CASE Aantal
@@ -242,6 +243,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

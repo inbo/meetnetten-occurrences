@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]    Script Date: 20/05/2020 9:54:56 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]    Script Date: 25/05/2020 9:39:23 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -38,7 +39,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [datasetID] = N'to complete'
 	, [datasetName] = N'Meetnetten - Site count for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
-	, [parentEventID] = N'INBO:MEETNET:VISITID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
+	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'High resolution data available on request'
 	, [dataGeneralizations] = N'Data generalized based on target species and specific areas'
 	
@@ -54,18 +55,18 @@ SELECT --fa.*   --unieke kolomnamen
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
-	, [eventDate] = fwp.VisitStartDate
+	, [eventDate] = CONVERT(VARCHAR(10), fwp.VisitStartDate, 20)
 	, [eventRemarks] = 'data collected in the '  + dbl.ProjectName + ' project'
 
 
 	---LOCATION
-	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'000000000' + CONVERT(nvarchar(20) ,dL.LocationID),10) 
+	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),10) 
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality0] = locationName
 	, [parentLocality0] = parentLocationName
 	, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
-	, [georeferenceRemarks] = 'original geomerty is a: ' +  dL.GeoType
+	, [georeferenceRemarks] = 'original geometry is a: ' +  dL.GeoType
 	
 	-- USE FOR UNBLURRED DATA
 	--, [decimalLatitude_unblur] = CASE dL.GeoType
@@ -117,7 +118,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
-	, [recordedBy] = 'Meetnetten'
+	, [recordedBy] = 'https://meetnetten.be'
 --	, [individualCount] = Aantal
 --	, [sex] = Geslacht
 	--, [occurrenceStatus] = CASE Aantal
@@ -241,6 +242,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 
