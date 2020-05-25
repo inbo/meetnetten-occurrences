@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 20/05/2020 9:54:36 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 25/05/2020 8:52:13 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -38,7 +39,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [datasetID] = N'to complete'
 	, [datasetName] = N'Meetnetten - Egg counts for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
-	, [parentEventID] = N'INBO:MEETNET:VISITID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
+	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'High resolution data available on request'
 	, [dataGeneralizations] = N'Data generalized based on target species and specific areas'
 	
@@ -53,19 +54,19 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterflies area counts'
 							ELSE ProtocolName
 							END
---	, fa.ProtocolID
-	, [eventDate] = fwp.VisitStartDate
+--	, fa.Protocol
+	, [eventDate] =     CONVERT(VARCHAR(10), fwp.VisitStartDate, 20)
 	, [eventRemarks] = 'data collected in the '  + dbl.ProjectName + ' project'
 
 
 	---LOCATION
-	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'000000000' + CONVERT(nvarchar(20) ,dL.LocationID),10) 
+	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),10) 
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality] = locationName
 	, [parentLocality0] = parentLocationName
 	, [locality1] = CONCAT (ParentLocationName,'_ ',locationName)
-	, [georeferenceRemarks] = 'original geomerty is a: ' +  dL.GeoType
+	, [georeferenceRemarks] = 'original geometry is a: ' +  dL.GeoType
 	
 	-- USE FOR UNBLURRED DATA
 	--, [decimalLatitude_unblur] = CASE dL.GeoType
@@ -241,6 +242,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 
