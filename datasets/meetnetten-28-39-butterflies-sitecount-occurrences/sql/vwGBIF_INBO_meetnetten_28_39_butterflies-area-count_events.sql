@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]    Script Date: 25/05/2020 9:39:23 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]    Script Date: 25/05/2020 13:37:54 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -41,17 +42,17 @@ SELECT --fa.*   --unieke kolomnamen
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'High resolution data available on request'
-	, [dataGeneralizations] = N'Data generalized based on target species and specific areas'
+	, [dataGeneralizations] = N'data are generalized from ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
 	
 	 ---EVENT---	
 	
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	--, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
-							WHEN 'Vlinders - Transecten' THEN 'butterflies transects'
-							WHEN 'Vlinders - Eitellingen' THEN 'butterflies egg counts'
-							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'butterflies transects monitoring'
-							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterflies site counts'
+							WHEN 'Vlinders - Transecten' THEN 'butterfly transects'
+							WHEN 'Vlinders - Eitellingen' THEN 'butterfly egg count'
+							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'butterfly transect monitoring'
+							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterfly site count'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
@@ -66,7 +67,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [locality0] = locationName
 	, [parentLocality0] = parentLocationName
 	, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
-	, [georeferenceRemarks] = 'original geometry is a: ' +  dL.GeoType
+	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
 	-- USE FOR UNBLURRED DATA
 	--, [decimalLatitude_unblur] = CASE dL.GeoType
@@ -242,6 +243,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 
