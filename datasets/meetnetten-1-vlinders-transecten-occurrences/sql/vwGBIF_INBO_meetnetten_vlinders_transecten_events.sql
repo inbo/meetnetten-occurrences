@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 25/05/2020 13:37:17 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 27/05/2020 9:46:56 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -39,8 +39,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [datasetName] = N'Meetnetten - Transects for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
-	, [informationWithheld] = N'High resolution data available on request'
-	, [dataGeneralizations] = N'data are generalized from ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
+	, [informationWithheld] = N'point coordinates available on request'
+	, [dataGeneralizations] = N'coordinates are generalized from a ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
 	
 	 ---EVENT---	
 	
