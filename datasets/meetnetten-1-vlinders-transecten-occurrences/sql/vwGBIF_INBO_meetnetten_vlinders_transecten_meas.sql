@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 19/05/2020 14:13:55 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 28/05/2020 13:18:49 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -40,23 +40,23 @@ SELECT --fa.*   --unieke kolomnamen
 	, [measurementType] = FCo.AttributeName
 	, [measurementValue] = CASE FCO.AttributeValue
 							WHEN 'betrokken (8/8)' THEN 'cloudy (8/8)'
-							WHEN 'halfbewolkt (3 tot 5/8)' THEN 'half cloudy (3 to 5/8)'
+							WHEN 'halfbewolkt (3 tot 5/8)' THEN 'half cloud cover (3-5 on 8)'
 							WHEN 'heldere hemel (0/8)' THEN 'clear sky (0/8)'
-							WHEN 'lichtbewolkt (1 tot 2/8)' THEN 'partially cloudy (1 to 2/8'
-							WHEN 'matige wind (4 Bft)' THEN '4)'
+							WHEN 'lichtbewolkt (1 tot 2/8)' THEN 'partial cloud cover (1-2 on 8)'
+							WHEN 'matige wind (4 Bft)' THEN '4'
 							WHEN 'onbekend' THEN 'unknown'
 							WHEN 'vrij krachtige wind (5 Bft)' THEN '5'
 							WHEN 'vrij matige wind (3 Bft)' THEN '3'
 							WHEN 'winWdstil (0 Bft)' THEN '0'
 							WHEN 'zeer zwakke wind (1 Bft)' THEN '1'
-							WHEN 'zwaarbewolkt (6 tot 7/8)' THEN 'heavy clouded (6 to 7/8)'
+							WHEN 'zwaarbewolkt (6 tot 7/8)' THEN 'complete cloud cover (6-7 on 8)'
 							WHEN 'zwakke wind (2 Bft)' THEN '2'							
 							ELSE 'unknown'
 							END
 	, [measurementUnit] = CASE FCO.AttributeUnit
 							WHEN 'temperature' THEN ' °C'
 							WHEN 'wind-force' THEN 'Beaufort'
-							WHEN 'cloudiness' THEN 'cloudiness'
+							WHEN 'cloudiness' THEN ''
 							ELSE 'unknown'
 							END
 

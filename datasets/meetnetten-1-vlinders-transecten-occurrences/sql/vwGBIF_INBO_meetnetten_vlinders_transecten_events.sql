@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 27/05/2020 9:46:56 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 28/05/2020 13:17:09 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -35,8 +36,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'doi.org/10.15468/kfhvy4'
-	, [datasetName] = N'Meetnetten - Transects for butterflies in Flanders, Belgium'
+	, [datasetID] = N'https://doi.org/10.15468/kfhvy4'
+	, [datasetName] = N'Meetnetten.be - Transects for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'point coordinates available on request'
@@ -48,9 +49,9 @@ SELECT --fa.*   --unieke kolomnamen
 --	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
 							WHEN 'Vlinders - Transecten' THEN 'butterfly transects'
-							WHEN 'Vlinders - Eitellingen' THEN 'butterfly egg count'
+							WHEN 'Vlinders - Eitellingen' THEN 'butterfly egg counts'
 							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'butterfly transect monitoring'
-							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterfly site count'
+							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterfly site counts'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
@@ -241,6 +242,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

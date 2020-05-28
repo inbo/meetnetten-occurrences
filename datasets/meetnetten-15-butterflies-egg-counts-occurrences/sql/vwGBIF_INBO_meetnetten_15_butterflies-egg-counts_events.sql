@@ -25,8 +25,8 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]
-AS
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -40,21 +40,21 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten - Egg counts for butterflies in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Egg counts for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
-	, [informationWithheld] = N'coordinates available on request'
-	, [dataGeneralizations] = N'data are generalized from a ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
+	, [informationWithheld] = N'point coordinates available on request'
+	, [dataGeneralizations] = N'coordinates are generalized from a ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
 	
 	 ---EVENT---	
 	
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 --	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
-							WHEN 'Vlinders - Transecten' THEN 'butterflies transects'
-							WHEN 'Vlinders - Eitellingen' THEN 'butterflies egg count'
-							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'butterflies transects monitoring'
-							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterflies area counts'
+							WHEN 'Vlinders - Transecten' THEN 'butterfly transects'
+							WHEN 'Vlinders - Eitellingen' THEN 'butterfly egg counts'
+							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'butterfly transect monitoring'
+							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterfly site counts'
 							ELSE ProtocolName
 							END
 --	, fa.Protocol

@@ -23,9 +23,8 @@ GO
 
 
 
-
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]
-AS
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -39,7 +38,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten - Site count for butterflies in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Site count for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'point coordinates available on request'
@@ -51,9 +50,9 @@ SELECT --fa.*   --unieke kolomnamen
 	--, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
 							WHEN 'Vlinders - Transecten' THEN 'butterfly transects'
-							WHEN 'Vlinders - Eitellingen' THEN 'butterfly egg count'
+							WHEN 'Vlinders - Eitellingen' THEN 'butterfly egg counts'
 							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'butterfly transect monitoring'
-							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterfly site count'
+							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterfly site counts'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
