@@ -1,0 +1,59 @@
+# Scope: dwc-occurrence
+# Author: Peter Desmet
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+basisOfRecord:
+  allowed: HumanObservation
+
+occurrenceID:
+  regex: 'INBO:MEETNET:OCC:\d{7}'
+
+recordedBy:
+  allowed: https://meetnetten.be
+
+individualCount:
+  if:
+    - occurrenceStatus:
+        allowed: absent
+      allowed: '0'
+    - occurrenceStatus:
+        allowed: present
+      numberformat: x
+      min: 1
+      max: 20
+
+lifeStage:
+  allowed: egg
+
+occurrenceStatus:
+  allowed: [present, absent]
+
+eventID:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+scientificName:
+  allowed: Phengaris alcon
+
+kingdom:
+  allowed: Animalia
+
+phylum:
+  allowed: Arthropoda
+
+class:
+  allowed: Insecta
+
+order:
+  allowed: Lepidoptera
+
+taxonRank:
+  allowed: species
+
+vernacularName:
+  allowed: Gentiaanblauwtje
+
+nomenclaturalCode:
+  allowed: ICZN

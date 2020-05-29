@@ -1,0 +1,82 @@
+# Scope: dwc-event
+# Author: Peter Desmet
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+type:
+  allowed: Event
+
+language:
+  allowed: en
+
+license:
+  allowed: http://creativecommons.org/publicdomain/zero/1.0/
+
+rightsHolder:
+  allowed: INBO
+
+accessRights:
+  allowed: https://www.inbo.be/en/norms-data-use
+
+datasetID:
+  allowed: to complete
+
+institutionCode:
+  allowed: INBO
+
+datasetName:
+  allowed: Meetnetten - Egg counts for butterflies in Flanders, Belgium
+
+informationWithheld:
+  allowed: point coordinates available on request
+
+dataGeneralizations:
+  allowed: 'coordinates are generalized from a (POINT|LINE|POLYGON) to a UTM \dKm grid'
+
+eventID:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+parentEventID:
+  regex: 'INBO:MEETNET:VISITID:\d{6}'
+
+samplingProtocol:
+  allowed: 'butterfly egg counts'
+
+eventDate:
+  dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
+
+eventRemarks:
+  regex: 'data collected in the .*'
+
+locationID:
+  regex: 'INBO:MEETNET:LOCATION:\d{7}'
+
+continent:
+  allowed: Europe
+
+countryCode:
+  allowed: BE
+
+locality:
+  empty: false
+
+decimalLatitude:
+  numberformat: '.5'
+  min: 50.67 # SE Flanders
+  max: 51.51 # NW Belgium
+
+decimalLongitude:
+  numberformat: '.5'
+  min: 2.53 # NW Belgium
+  max: 5.94 # SE Flanders
+
+geodeticDatum:
+  allowed: WGS84
+
+coordinateUncertaintyInMeters:
+  allowed: '3536' # Radius of circle encompassing 5x5km grid
+
+georeferenceRemarks:
+  allowed: coordinates are centroid of used grid square
