@@ -33,7 +33,7 @@ informationWithheld:
   allowed: original locations available upon request
 
 dataGeneralizations:
-  allowed: 'coordinates are generalized from a (POINT|LINESTRING|POLYGON) to a UTM \dKm grid'
+  regex: 'coordinates are generalized from a (POINT|LINESTRING|MULTILINESTRING|POLYGON) to a UTM \d(K|k)m grid'
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
