@@ -42,7 +42,7 @@ parentEventID:
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
 samplingProtocol: # Dataset specific
-  allowed: 'butterfly transects'
+  allowed: butterfly transects
 
 eventDate:
   dateformat: ['%Y-%m-%d'] # YYYY-MM-DD

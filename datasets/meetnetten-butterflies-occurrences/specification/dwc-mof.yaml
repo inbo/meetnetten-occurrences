@@ -13,11 +13,11 @@ measurementValue: # Dataset specific
     - measurementType:
         allowed: cloudiness
       allowed:
-        - Clear (0/8)
-        - Mostly clear (1/8 - 2/8)
-        - Partly cloudy (3/8 - 5/8)
-        - Mostly cloudy (6/8 - 7/8)
-        - Cloudy (8/8)
+        - clear (0/8)
+        - mostly clear (1/8 - 2/8)
+        - partly cloudy (3/8 - 5/8)
+        - mostly cloudy (6/8 - 7/8)
+        - cloudy (8/8)
     - measurementType:
         allowed: temperature
       allowed: unknown
