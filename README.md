@@ -1,2 +1,1 @@
-# soortenmeetnetten-events
-Meetnetten.be - Monitoring of priority species in Flanders, Belgium
+# Meetnetten.be - Monitoring of priority species in Flanders, Belgium
