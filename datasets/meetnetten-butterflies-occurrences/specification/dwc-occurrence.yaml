@@ -3,13 +3,13 @@
 # Syntax version: 0.1
 
 id:
-  regex: 'INBO:MEETNET:EVENT:\d{6,7}'
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
 
 basisOfRecord:
   allowed: HumanObservation
 
 occurrenceID:
-  regex: 'INBO:MEETNET:OCC:\d{7}'
+  regex: 'INBO:MEETNET:OCC:\d{6,7}'
 
 recordedBy:
   allowed: https://meetnetten.be
