@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 25/05/2020 9:47:54 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 29/05/2020 10:09:01 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -52,6 +53,10 @@ SELECT --fa.*   --unieke kolomnamen
 	, [basisOfRecord] = N'HumanObservation'
 --	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
+	, [occurrenceStatus] = case
+						  when Aantal > '0' then 'present'
+						  Else 'absent'
+						  END
 	, [protocol] = ProtocolSubjectDescription
 	
 --	, [samplingEffort] =
@@ -94,7 +99,10 @@ SELECT --fa.*   --unieke kolomnamen
 	, [class] = N'Insecta'
 	, [order] = N'Lepidoptera'
 	, [nomenclaturalCode] = N'ICZN'
-	, [taxonRank] = N'species'
+	, [taxonRank] =	 case  SpeciesScientificName
+						  when  'Pieris spec.' THEN  N'genus'
+						  Else 'species'
+						  END
 	
 --	, fa.ProjectKey
 --	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
@@ -118,6 +126,7 @@ AND fa.ProtocolID IN ('1') ---Vlinders transecten removed ,'15','28'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
 
+--AND SpeciesScientificName like 'Pieris spec.'
 
 
 
