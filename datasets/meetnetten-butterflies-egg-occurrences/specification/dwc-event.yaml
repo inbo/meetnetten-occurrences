@@ -30,10 +30,10 @@ datasetName: # Dataset specific
   allowed: Meetnetten - Egg counts for butterflies in Flanders, Belgium
 
 informationWithheld:
-  allowed: point coordinates available on request
+  allowed: original locations available upon request
 
 dataGeneralizations:
-  allowed: 'coordinates are generalized from a (POINT|LINE|POLYGON) to a UTM \dKm grid'
+  allowed: 'coordinates are generalized from a (POINT|LINESTRING|POLYGON) to a UTM \dKm grid'
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
