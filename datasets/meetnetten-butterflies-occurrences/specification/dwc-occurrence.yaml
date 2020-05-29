@@ -3,7 +3,7 @@
 # Syntax version: 0.1
 
 id:
-  regex: 'INBO:MEETNET:EVENT:\d{6}'
+  regex: 'INBO:MEETNET:EVENT:\d{6,7}'
 
 basisOfRecord:
   allowed: HumanObservation
