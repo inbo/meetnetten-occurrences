@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 29/05/2020 10:03:02 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 29/05/2020 14:05:24 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -19,8 +19,14 @@ GO
 
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]
-AS**/
+
+
+
+
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -38,21 +44,27 @@ SELECT --fa.*   --unieke kolomnamen
 	--- Properties---
 
 --	, [measurementID] =  Fco.AttributeID 
-	, [measurementType] = FCo.AttributeName
+	, [measurementType] = case FCo.AttributeName
+							WHEN 'wind-force' THEN 'wind force'
+							ELSE FCo.AttributeName
+							END
 	, [measurementValue] = CASE FCO.AttributeValue
-							WHEN 'betrokken (8/8)' THEN 'Cloudy (8/8)'
-							WHEN 'halfbewolkt (3 tot 5/8)' THEN 'Partly cloudy (3/8 - 5/8)'
-							WHEN 'heldere hemel (0/8)' THEN 'Clear (0/8)'
-							WHEN 'lichtbewolkt (1 tot 2/8)' THEN 'Mostly clear (1/8 - 2/8)'
+							WHEN 'betrokken (8/8)' THEN 'cloudy (8/8)'
+							WHEN 'halfbewolkt (3 tot 5/8)' THEN 'partly cloudy (3/8 - 5/8)'
+							WHEN 'heldere hemel (0/8)' THEN 'clear (0/8)'
+							WHEN 'lichtbewolkt (1 tot 2/8)' THEN 'mostly clear (1/8 - 2/8)'
 							WHEN 'matige wind (4 Bft)' THEN '4'
 							WHEN 'onbekend' THEN 'unknown'
 							WHEN 'vrij krachtige wind (5 Bft)' THEN '5'
 							WHEN 'vrij matige wind (3 Bft)' THEN '3'
 							WHEN 'winWdstil (0 Bft)' THEN '0'
 							WHEN 'zeer zwakke wind (1 Bft)' THEN '1'
-							WHEN 'zwaarbewolkt (6 tot 7/8)' THEN 'Mostly cloudy (6/8 - 7/8)'
-							WHEN 'zwakke wind (2 Bft)' THEN '2'							
-							ELSE 'unknown'
+							WHEN 'zwaarbewolkt (6 tot 7/8)' THEN 'mostly cloudy (6/8 - 7/8)'
+							WHEN 'zwakke wind (2 Bft)' THEN '2'
+							WHEN 'onbekend' THEN 'unknown'
+							WHEN '' then 'unknown'						
+							ELSE FCO.AttributeValue  
+							      
 							END
 	, [measurementUnit] = CASE FCO.AttributeUnit
 							WHEN 'temperature' THEN ' °C'
@@ -123,6 +135,12 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
+
+
+
 
 
 
