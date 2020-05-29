@@ -1,12 +1,15 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 28/05/2020 13:17:09 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 29/05/2020 14:04:51 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
+
 
 
 
@@ -40,7 +43,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [datasetName] = N'Meetnetten.be - Transects for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
-	, [informationWithheld] = N'point coordinates available on request'
+	, [informationWithheld] = N'original locations available upon request'
 	, [dataGeneralizations] = N'coordinates are generalized from a ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
 	
 	 ---EVENT---	
@@ -60,7 +63,7 @@ SELECT --fa.*   --unieke kolomnamen
 
 
 	---LOCATION
-	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),10) 
+	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),6) 
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality0] = locationName
@@ -242,6 +245,9 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
 
 
 

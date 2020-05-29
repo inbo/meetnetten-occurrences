@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 27/05/2020 9:51:29 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 29/05/2020 14:06:10 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -25,8 +25,11 @@ GO
 
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]
-AS**/
+
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -43,7 +46,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [datasetName] = N'Meetnetten.be - Egg counts for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
-	, [informationWithheld] = N'point coordinates available on request'
+	, [informationWithheld] = N'original locations available upon request'
 	, [dataGeneralizations] = N'coordinates are generalized from a ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
 	
 	 ---EVENT---	
@@ -63,7 +66,7 @@ SELECT --fa.*   --unieke kolomnamen
 
 
 	---LOCATION
-	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),10) 
+	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),6) 
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality] = locationName
@@ -245,6 +248,9 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
 
 
 

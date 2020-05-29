@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]    Script Date: 27/05/2020 9:53:45 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]    Script Date: 29/05/2020 14:10:03 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -23,8 +23,12 @@ GO
 
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]
-AS**/
+
+
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_Event]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -38,11 +42,11 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - Site count for butterflies in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Site counts for butterflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
-	, [informationWithheld] = N'point coordinates available on request'
-	, [dataGeneralizations] = N'coordinates are generalized from a' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
+	, [informationWithheld] = N'original locations available upon request'
+	, [dataGeneralizations] = N'coordinates are generalized from a ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
 	
 	 ---EVENT---	
 	
@@ -243,6 +247,10 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
+
 
 
 

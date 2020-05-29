@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg-count_Meas]    Script Date: 29/05/2020 10:10:32 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg-count_Meas]    Script Date: 29/05/2020 14:09:35 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -40,19 +42,20 @@ SELECT --fa.*   --unieke kolomnamen
 --	, [measurementID] =  Fco.AttributeID 
 	, [measurementType] = FCo.AttributeName
 	, [measurementValue] = CASE FCO.AttributeValue
-							WHEN 'betrokken (8/8)' THEN 'Cloudy (8/8)'
-							WHEN 'halfbewolkt (3 tot 5/8)' THEN 'Partly cloudy (3/8 - 5/8)'
-							WHEN 'heldere hemel (0/8)' THEN 'Clear (0/8)'
-							WHEN 'lichtbewolkt (1 tot 2/8)' THEN 'Mostly clear (1/8 - 2/8)'
+							WHEN 'betrokken (8/8)' THEN 'cloudy (8/8)'
+							WHEN 'halfbewolkt (3 tot 5/8)' THEN 'partly cloudy (3/8 - 5/8)'
+							WHEN 'heldere hemel (0/8)' THEN 'clear (0/8)'
+							WHEN 'lichtbewolkt (1 tot 2/8)' THEN 'mostly clear (1/8 - 2/8)'
 							WHEN 'matige wind (4 Bft)' THEN '4'
 							WHEN 'onbekend' THEN 'unknown'
 							WHEN 'vrij krachtige wind (5 Bft)' THEN '5'
 							WHEN 'vrij matige wind (3 Bft)' THEN '3'
 							WHEN 'winWdstil (0 Bft)' THEN '0'
 							WHEN 'zeer zwakke wind (1 Bft)' THEN '1'
-							WHEN 'zwaarbewolkt (6 tot 7/8)' THEN 'Mostly cloudy (6/8 - 7/8)'
+							WHEN 'zwaarbewolkt (6 tot 7/8)' THEN 'mostly cloudy (6/8 - 7/8)'
 							WHEN 'zwakke wind (2 Bft)' THEN '2'							
-							ELSE 'unknown'
+							WHEN 'onbekend' THEN 'unknown'
+							ELSE FCO.AttributeValue
 							END
 	, [measurementUnit] = CASE FCO.AttributeUnit
 							WHEN 'temperature' THEN ' °C'
@@ -123,6 +126,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
