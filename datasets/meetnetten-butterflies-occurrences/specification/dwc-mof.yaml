@@ -1,0 +1,38 @@
+# Scope: dwc-measurementorfact
+# Author: Peter Desmet
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+measurementType: # Dataset specific
+  allowed: [cloudiness, temperature, wind force]
+
+measurementValue: # Dataset specific
+  if:
+    - measurementType:
+        allowed: cloudiness
+      allowed:
+        - Clear (0/8)
+        - Mostly clear (1/8 - 2/8)
+        - Partly cloudy (3/8 - 5/8)
+        - Mostly cloudy (6/8 - 7/8)
+        - Cloudy (8/8)
+    - measurementType:
+        allowed: temperature
+      allowed: unknown
+    - measurementType:
+        allowed: wind force
+      allowed: [1, 2, 3, 4, 5, unknown]
+
+measurementUnit: # Dataset specific
+  if:
+    - measurementType:
+        allowed: cloudiness
+      allowed: okta
+    - measurementType:
+        allowed: temperature
+      allowed: °C
+    - measurementType:
+        allowed: wind force
+      allowed: Beaufort
