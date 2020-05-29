@@ -35,6 +35,12 @@ vignettes/*.pdf
 # Mac OS X
 .DS_Store
 
+# Notebooks
+*.ipynb_checkpoints
+*.pyc
+
+# Data
+data/*
 datasets/meetnetten-26-algemene-broedvogelmonitoring-occurrences/data/ABV_events.csv
 *.csv
 datasets/meetnetten-26-algemene-broedvogelmonitoring-occurrences/data/oudeData.txt
