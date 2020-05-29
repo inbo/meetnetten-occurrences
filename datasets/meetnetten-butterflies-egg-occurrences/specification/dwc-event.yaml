@@ -20,13 +20,13 @@ rightsHolder:
 accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
-datasetID:
+datasetID: # Dataset specific
   allowed: to complete
 
 institutionCode:
   allowed: INBO
 
-datasetName:
+datasetName: # Dataset specific
   allowed: Meetnetten - Egg counts for butterflies in Flanders, Belgium
 
 informationWithheld:
@@ -41,7 +41,7 @@ eventID:
 parentEventID:
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
-samplingProtocol:
+samplingProtocol: # Dataset specific
   allowed: 'butterfly egg counts'
 
 eventDate:
@@ -75,8 +75,8 @@ decimalLongitude:
 geodeticDatum:
   allowed: WGS84
 
-coordinateUncertaintyInMeters:
-  allowed: '3536' # Radius of circle encompassing 5x5km grid
+coordinateUncertaintyInMeters: # Dataset specific
+  allowed: '3536'
 
 georeferenceRemarks:
   allowed: coordinates are centroid of used grid square
