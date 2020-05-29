@@ -21,19 +21,19 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: to complete
+  allowed: https://doi.org/10.15468/hsfq2u
 
 institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten - Egg counts for butterflies in Flanders, Belgium
+  allowed: Meetnetten.be - Egg counts for butterflies in Flanders, Belgium
 
 informationWithheld:
   allowed: original locations available upon request
 
 dataGeneralizations:
-  allowed: 'coordinates are generalized from a (POINT|LINESTRING|POLYGON) to a UTM \dKm grid'
+  regex: 'coordinates are generalized from a (POINT|LINESTRING|MULTILINESTRING|POLYGON) to a UTM \d(K|k)m grid'
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
@@ -51,7 +51,7 @@ eventRemarks:
   regex: 'data collected in the .*'
 
 locationID:
-  regex: 'INBO:MEETNET:LOCATION:\d{7}'
+  regex: 'INBO:MEETNET:LOCATION:\d{6}'
 
 continent:
   allowed: Europe
