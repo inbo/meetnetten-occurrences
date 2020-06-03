@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 29/05/2020 14:05:24 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 3/06/2020 10:46:26 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -48,24 +49,27 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'wind-force' THEN 'wind force'
 							ELSE FCo.AttributeName
 							END
-	, [measurementValue] = CASE FCO.AttributeValue
-							WHEN 'betrokken (8/8)' THEN 'cloudy (8/8)'
-							WHEN 'halfbewolkt (3 tot 5/8)' THEN 'partly cloudy (3/8 - 5/8)'
-							WHEN 'heldere hemel (0/8)' THEN 'clear (0/8)'
-							WHEN 'lichtbewolkt (1 tot 2/8)' THEN 'mostly clear (1/8 - 2/8)'
-							WHEN 'matige wind (4 Bft)' THEN '4'
-							WHEN 'onbekend' THEN 'unknown'
-							WHEN 'vrij krachtige wind (5 Bft)' THEN '5'
-							WHEN 'vrij matige wind (3 Bft)' THEN '3'
-							WHEN 'winWdstil (0 Bft)' THEN '0'
-							WHEN 'zeer zwakke wind (1 Bft)' THEN '1'
-							WHEN 'zwaarbewolkt (6 tot 7/8)' THEN 'mostly cloudy (6/8 - 7/8)'
-							WHEN 'zwakke wind (2 Bft)' THEN '2'
-							WHEN 'onbekend' THEN 'unknown'
-							WHEN '' then 'unknown'						
-							ELSE FCO.AttributeValue  
-							      
-							END
+	, [measurementValue] = CASE
+			WHEN FCO.AttributeUnit = 'temperature' AND FCO.AttributeValue = 'onbekend' THEN ''
+			WHEN FCO.AttributeUnit = 'temperature' AND FCO.AttributeValue = '' THEN ''
+
+			WHEN FCO.AttributeValue = 'windstil (0 Bft)' THEN '0'
+			WHEN FCO.AttributeValue = 'zeer zwakke wind (1 Bft)' THEN '1'
+			WHEN FCO.AttributeValue = 'zwakke wind (2 Bft)' THEN '2'
+			WHEN FCO.AttributeValue = 'vrij matige wind (3 Bft)' THEN '3'
+			WHEN FCO.AttributeValue = 'matige wind (4 Bft)' THEN '4'
+			WHEN FCO.AttributeValue = 'vrij krachtige wind (5 Bft)' THEN '5'
+
+			WHEN FCO.AttributeValue = 'heldere hemel (0/8)' THEN 'clear (0/8)'
+			WHEN FCO.AttributeValue = 'lichtbewolkt (1 tot 2/8)' THEN 'mostly clear (1/8 - 2/8)'
+			WHEN FCO.AttributeValue = 'halfbewolkt (3 tot 5/8)' THEN 'partly cloudy (3/8 - 5/8)'
+			WHEN FCO.AttributeValue = 'zwaarbewolkt (6 tot 7/8)' THEN 'mostly cloudy (6/8 - 7/8)'
+			WHEN FCO.AttributeValue = 'betrokken (8/8)' THEN 'cloudy (8/8)'
+			WHEN FCO.AttributeValue = 'onbekend' THEN 'unknown'
+			WHEN FCO.AttributeValue = '' THEN 'unknown'
+
+			ELSE FCO.AttributeValue
+			END
 	, [measurementUnit] = CASE FCO.AttributeUnit
 							WHEN 'temperature' THEN ' °C'
 							WHEN 'wind-force' THEN 'Beaufort'
@@ -135,6 +139,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 
