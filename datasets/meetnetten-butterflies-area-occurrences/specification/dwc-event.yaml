@@ -20,20 +20,20 @@ rightsHolder:
 accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
-datasetID:
+datasetID: # Dataset specific
   allowed: to complete
 
 institutionCode:
   allowed: INBO
 
-datasetName:
-  allowed: Meetnetten - Egg counts for butterflies in Flanders, Belgium
+datasetName: # Dataset specific
+  allowed: Meetnetten.be - Site counts for butterflies in Flanders, Belgium
 
 informationWithheld:
-  allowed: point coordinates available on request
+  allowed: original locations available upon request
 
 dataGeneralizations:
-  allowed: 'coordinates are generalized from a (POINT|LINE|POLYGON) to a UTM \dKm grid'
+  regex: 'coordinates are generalized from a (POINT|LINESTRING|MULTILINESTRING|POLYGON) to a UTM \d(K|k)m grid'
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
@@ -41,8 +41,8 @@ eventID:
 parentEventID:
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
-samplingProtocol:
-  allowed: 'butterfly egg counts'
+samplingProtocol: # Dataset specific
+  allowed: butterfly site counts
 
 eventDate:
   dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
@@ -51,7 +51,7 @@ eventRemarks:
   regex: 'data collected in the .*'
 
 locationID:
-  regex: 'INBO:MEETNET:LOCATION:\d{7}'
+  regex: 'INBO:MEETNET:LOCATION:\d{6}'
 
 continent:
   allowed: Europe
@@ -75,8 +75,8 @@ decimalLongitude:
 geodeticDatum:
   allowed: WGS84
 
-coordinateUncertaintyInMeters:
-  allowed: '3536' # Radius of circle encompassing 5x5km grid
+coordinateUncertaintyInMeters: # Dataset specific
+  allowed: ['707', '3536']
 
 georeferenceRemarks:
   allowed: coordinates are centroid of used grid square

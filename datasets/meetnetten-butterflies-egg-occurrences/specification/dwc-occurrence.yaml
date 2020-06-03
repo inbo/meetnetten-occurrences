@@ -23,9 +23,9 @@ individualCount:
         allowed: present
       numberformat: x
       min: 1
-      max: 20
+      max: 20 # Dataset specific
 
-lifeStage:
+lifeStage: # Dataset specific
   allowed: egg
 
 occurrenceStatus:
@@ -34,26 +34,26 @@ occurrenceStatus:
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
 
-scientificName:
+scientificName: # Dataset specific
   allowed: Phengaris alcon
 
 kingdom:
   allowed: Animalia
 
-phylum:
+phylum: # Dataset specific
   allowed: Arthropoda
 
-class:
+class: # Dataset specific
   allowed: Insecta
 
-order:
+order: # Dataset specific
   allowed: Lepidoptera
 
-taxonRank:
+taxonRank: # Dataset specific
   allowed: species
 
-vernacularName:
+vernacularName: # Dataset specific
   allowed: Gentiaanblauwtje
 
-nomenclaturalCode:
+nomenclaturalCode: # Dataset specific
   allowed: ICZN
