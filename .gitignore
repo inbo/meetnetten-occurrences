@@ -38,6 +38,7 @@ vignettes/*.pdf
 # Notebooks
 *.ipynb_checkpoints
 *.pyc
+reports/*
 
 # Data
 data/*
