@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 3/06/2020 10:46:26 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 4/06/2020 9:23:07 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -61,9 +62,13 @@ SELECT --fa.*   --unieke kolomnamen
 			WHEN FCO.AttributeValue = 'vrij krachtige wind (5 Bft)' THEN '5'
 
 			WHEN FCO.AttributeValue = 'heldere hemel (0/8)' THEN 'clear (0/8)'
+			WHEN FCO.AttributeValue = 'unclouded' THEN 'clear (0/8)'
 			WHEN FCO.AttributeValue = 'lichtbewolkt (1 tot 2/8)' THEN 'mostly clear (1/8 - 2/8)'
 			WHEN FCO.AttributeValue = 'halfbewolkt (3 tot 5/8)' THEN 'partly cloudy (3/8 - 5/8)'
+			WHEN FCO.AttributeValue = 'half clouded' THEN 'partly cloudy (3/8 - 5/8)'
+			WHEN FCO.AttributeValue = 'partially clouded' THEN 'partly cloudy (3/8 - 5/8)'
 			WHEN FCO.AttributeValue = 'zwaarbewolkt (6 tot 7/8)' THEN 'mostly cloudy (6/8 - 7/8)'
+			WHEN FCO.AttributeValue = 'heavily clouded' THEN 'mostly cloudy (6/8 - 7/8)'
 			WHEN FCO.AttributeValue = 'betrokken (8/8)' THEN 'cloudy (8/8)'
 			WHEN FCO.AttributeValue = 'onbekend' THEN 'unknown'
 			WHEN FCO.AttributeValue = '' THEN 'unknown'
@@ -139,6 +144,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 
