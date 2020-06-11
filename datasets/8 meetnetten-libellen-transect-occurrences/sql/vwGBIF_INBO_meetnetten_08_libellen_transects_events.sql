@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 4/06/2020 14:07:36 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen-transect-events]    Script Date: 11/06/2020 9:41:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,18 +15,7 @@ GO
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-CREATE VIEW [iptdev].[vwGBIF_INBO_meetnetten_08_libellen-transect-events]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_08_libellen-transect-events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -57,7 +46,8 @@ SELECT --fa.*   --unieke kolomnamen
 							END
 --	, fa.ProtocolID
 	, [eventDate] = CONVERT(VARCHAR(10), fwp.VisitStartDate, 20)
-	, [eventRemarks] = 'data collected in the '  + dbl.ProjectName + ' project'
+--    , [eventDate] = SampleDate 
+   	, [eventRemarks] = 'data collected in the '  + dbl.ProjectName + ' project'
 
 
 	---LOCATION
@@ -155,7 +145,7 @@ SELECT --fa.*   --unieke kolomnamen
 	--						END
 
 
-FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
+FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN ( SELECT *
 					, CASE 
@@ -191,8 +181,8 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 						
 				FROM dbo.DimLocation dL) dL ON dL.LocationKey = fA.LocationKey
 	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
-	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
-	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+--	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+--	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
 --	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
 	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 --	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
@@ -209,6 +199,7 @@ AND fa.ProtocolID IN ('8')  ---Dragonflies transecten *
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+
 --AND projectName = 'Argusvlinder'
 --AND fa.FieldworkObservationID =  491520
 --ORDER BY speciesName Asc
@@ -248,6 +239,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
