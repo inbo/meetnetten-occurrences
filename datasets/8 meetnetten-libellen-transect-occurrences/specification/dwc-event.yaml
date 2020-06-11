@@ -21,7 +21,7 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: to be completed
+  allowed: to complete
 
 institutionCode:
   allowed: INBO
