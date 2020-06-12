@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Meas]    Script Date: 4/06/2020 14:19:13 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_Meas]    Script Date: 11/06/2020 10:22:01 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,9 @@ GO
 
 
 
-CREATE VIEW [iptdev].[vwGBIF_INBO_meetnetten_08_libellen_transecten_Meas]
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_Meas]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -25,9 +27,9 @@ SELECT --fa.*   --unieke kolomnamen
 	 ---EVENT---	
 	
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
-	, [eventDate] = fwp.VisitStartDate
+--	, [eventDate] = fwp.VisitStartDate
 	
-
+	
 	--- Properties---
 
 --	, [measurementID] =  Fco.AttributeID 
@@ -63,27 +65,28 @@ SELECT --fa.*   --unieke kolomnamen
 
 			ELSE FCO.AttributeValue
 			END
-	, [measurementUnit] = CASE FCO.AttributeUnit
+	, [measurementUnit] = CASE FCo.AttributeUnit
 							WHEN 'temperature' THEN ' °C'
 							WHEN 'wind-force' THEN 'Beaufort'
 							WHEN 'cloudiness' THEN 'okta'
 							WHEN 'transect length' THEN 'm'
-							ELSE FCO.AttributeUnit
+							ELSE FCo.AttributeUnit
 							END
 
 	
 
 
 
-FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
-	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
+FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, ProtocolKey, LocationID, ProtocolID FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
+	LEFT JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	
-	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
-	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
-	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+	LEFT JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
+--	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+--	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
 --	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
-	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
-	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
+	LEFT JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
+	LEFT JOIN (SELECT DISTINCT(FieldworkSampleID), AttributeName, AttributeUnit, AttributeValue FROM dbo.FactCovariabele WHERE FieldworkSampleID > 0) FCo on FCo.FieldworkSampleID = fa.FieldworkSampleID
+--	LEFT JOIN  FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 --	LEFT OUTER JOIN dbo.DimModel DMo ON DMo.AttributeID = FCo.AttributeID
 	
 	
@@ -94,6 +97,11 @@ AND fa.ProtocolID IN ('8')  ---Vlinders transecten * ,'15','28' removed other pr
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+
+
+
+
+
 --AND projectName = 'Argusvlinder'
 --AND fa.FieldworkObservationID =  491520
 --ORDER BY speciesName Asc
@@ -133,6 +141,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
