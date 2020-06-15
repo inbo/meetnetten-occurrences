@@ -29,7 +29,7 @@ sex: # Dataset specific
   allowed: [male, female, unknown]
 
 lifeStage: # Dataset specific
-  allowed: [imago, adult]
+  allowed: [imago, adult, exuviae] # See https://github.com/inbo/meetnetten-occurrences/issues/6
 
 occurrenceStatus:
   allowed: [present, absent]
