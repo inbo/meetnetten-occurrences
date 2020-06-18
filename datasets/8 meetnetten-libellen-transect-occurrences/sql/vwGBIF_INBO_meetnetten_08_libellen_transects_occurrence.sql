@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 4/06/2020 14:17:03 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]    Script Date: 15/06/2020 11:11:48 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -17,18 +17,10 @@ GO
 
 
 
-
-
-
-
-
-
-
-
 /* Generieke query inclusief soorten */
 
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -54,7 +46,11 @@ SELECT --fa.*   --unieke kolomnamen
 	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
 --	, [samplingProtocol] = Protocolname
-	, [lifeStage] = SpeciesLifestageName
+	, [lifeStage] = CASE SpeciesLifestageName
+					WHEN 'exuvium' THEN 'exuviae'
+					WHEN 'imago (not fully colored)' THEN 'imago'
+					ELSE SpeciesLifestageName
+					END
 	, [occurrenceStatus] = case
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
@@ -103,7 +99,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [kingdom] = N'Animalia'
 	, [phylum] = N'Arthropoda'
 	, [class] = N'Insecta'
-	, [order] = N'Lepidoptera'
+	, [order] = N'Odonata'
 	, [nomenclaturalCode] = N'ICZN'
 	, [taxonRank] =	 case  SpeciesScientificName
 						  when  'Pieris spec.' THEN  N'genus'
@@ -133,6 +129,9 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
+
 
 
 
