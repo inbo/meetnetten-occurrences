@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_08_libellen_transecten_Meas]    Script Date: 18/06/2020 16:32:09 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_Meas]    Script Date: 19/06/2020 13:45:17 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,9 @@ GO
 
 
 
-CREATE VIEW [iptdev].[vwGBIF_INBO_meetnetten_08_libellen_larvehuidjes_Meas]
+
+
+CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_Meas]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -94,7 +96,7 @@ WHERE 1=1
 AND fa.ProtocolID IN ('9')  ---Libellen larvehuidjes
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 --AND projectName = 'Argusvlinder'
 --AND fa.FieldworkObservationID =  491520
 --ORDER BY speciesName Asc
@@ -134,6 +136,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 

@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_08_libellen-transect-events]    Script Date: 18/06/2020 16:02:40 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_09_37_libellen-larvenhuidjes-events]    Script Date: 19/06/2020 13:45:51 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,11 +12,8 @@ GO
 
 
 
-
-
-
-CREATE VIEW [iptdev].[vwGBIF_INBO_meetnetten_09_libellen-larvenhuidjes-events]
-AS
+/**CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen-larvenhuidjes-events]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -30,7 +27,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - Transects for dragonflies in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Larval skin (Exuvia) for dragonflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -194,10 +191,10 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('9')  ---Dragonflies huidjes * 
+AND fa.ProtocolID IN ('9','37')  ---Dragonflies huidjes beek en rivierrombout * 
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 --AND projectName = 'Argusvlinder'
 --AND fa.FieldworkObservationID =  491520
 --ORDER BY speciesName Asc
@@ -237,6 +234,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
