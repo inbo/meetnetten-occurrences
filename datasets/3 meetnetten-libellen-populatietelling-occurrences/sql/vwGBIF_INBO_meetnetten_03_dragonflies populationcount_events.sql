@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen-populatietelling-events]    Script Date: 22/06/2020 9:42:01 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen-populatietelling-events]    Script Date: 1/07/2020 9:02:30 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,8 +13,13 @@ GO
 
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_03_libellen-populatietelling-events]
-AS**/
+
+
+
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_03_libellen-populatietelling-events]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
 	

@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 22/06/2020 9:38:33 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 1/07/2020 9:02:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -19,11 +19,12 @@ GO
 
 
 
+
 /* Generieke query inclusief soorten */
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]
-AS**/
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -131,6 +132,7 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
 
 
 
