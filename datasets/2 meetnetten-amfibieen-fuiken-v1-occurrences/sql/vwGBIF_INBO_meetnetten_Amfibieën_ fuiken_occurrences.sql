@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_amfibieen_larven_occurrences]    Script Date: 17/07/2020 8:50:19 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 15/07/2020 10:25:15 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,12 +10,10 @@ GO
 
 
 
-
-
 /* Generieke query inclusief soorten */
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_amfibieen_larven_occurrences]
+/**CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_occurrences]
 AS**/
 
 SELECT --fa.*   --unieke kolomnamen
@@ -79,12 +77,12 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	, [recordedBy] = 'https://meetnetten.be'
 	, [individualCount] = Aantal
-/**	, [sex] = CASE Geslacht
+	, [sex] = CASE Geslacht
 				WHEN 'U' THEN 'unknown'
 				WHEN 'M' THEN 'male'
 				WHEN 'F' THEN 'female'
 				ELSE Geslacht
-				END  **/
+				END
 	, [behaviour] = SpeciesActivityName
 		
 	----Taxon
@@ -92,7 +90,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [scientificName] = SpeciesScientificName
 	, [vernacularName] = SpeciesName
 	, [kingdom] = N'Animalia'
-	, [phylum] = N'Chordata'
+	, [phylum] = N'Vertebrata'
 	, [class] = N'Amphibia'
 --	, [order] = N''
 	, [nomenclaturalCode] = N'ICZN'
@@ -120,13 +118,11 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('25') ---amphibia larvae
+AND fa.ProtocolID IN ('2') ---amphibia fykes
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
-
-
 
 
 
