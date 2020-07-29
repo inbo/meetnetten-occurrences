@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_occurrences]    Script Date: 29/07/2020 14:06:59 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_occurrences]    Script Date: 29/07/2020 14:12:15 ******/
 SET ANSI_NULLS ON
 GO
 
