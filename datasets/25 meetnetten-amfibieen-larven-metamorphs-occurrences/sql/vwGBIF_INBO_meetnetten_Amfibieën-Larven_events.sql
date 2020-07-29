@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_amfibieen_larven_events]    Script Date: 17/07/2020 8:49:12 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_events]    Script Date: 29/07/2020 15:49:11 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -20,7 +20,8 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_amfibieen_larven_events]
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -202,7 +203,7 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('25')  ---Amphibia larvae * 
+AND fa.ProtocolID IN ('25','32')  ---Amphibia larvae --- amphibia larvae and metamorphs * 
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
@@ -246,6 +247,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

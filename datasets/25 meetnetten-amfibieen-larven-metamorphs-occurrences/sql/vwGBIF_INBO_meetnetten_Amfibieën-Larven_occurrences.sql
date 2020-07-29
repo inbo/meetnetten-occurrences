@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_amfibieen_larven_occurrences]    Script Date: 17/07/2020 8:50:19 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_occurrences]    Script Date: 29/07/2020 15:47:22 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,7 +15,7 @@ GO
 /* Generieke query inclusief soorten */
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_amfibieen_larven_occurrences]
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_occurrences]
 AS**/
 
 SELECT --fa.*   --unieke kolomnamen
@@ -120,7 +120,7 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('25') ---amphibia larvae
+AND fa.ProtocolID IN ('25','32') ---amphibia larvae -- larvae & metamorphs
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
