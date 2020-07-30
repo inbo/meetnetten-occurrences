@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]    Script Date: 15/07/2020 10:10:19 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen-populatietelling-events]    Script Date: 1/07/2020 9:02:30 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,7 +18,7 @@ GO
 
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_03_libellen-populatietelling-events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -32,8 +32,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - Amphibia in fikes in Flanders, Belgium'
+	, [datasetID] = N'to be completed'
+	, [datasetName] = N'Meetnetten.be - Population count for dragonflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -44,8 +44,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 --	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
-							WHEN 'Libellen - Transect' THEN 'dragonfly transects'
-							WHEN 'Amfibieën - Fuiken (v1)' THEN 'amphibia fykes'
+							WHEN 'Libellen - Populatietelling per locatie' THEN 'dragonfly population count'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
@@ -199,10 +198,10 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('2')  ---Amphibia fikes * 
+AND fa.ProtocolID IN ('3')  ---Dragonflies transecten * 
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND projectName = 'Argusvlinder'
 --AND fa.FieldworkObservationID =  491520

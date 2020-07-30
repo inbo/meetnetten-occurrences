@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]    Script Date: 15/06/2020 11:11:48 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 1/07/2020 9:02:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -17,10 +17,13 @@ GO
 
 
 
+
+
+
 /* Generieke query inclusief soorten */
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -124,11 +127,14 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('8') ---dragonfly transects
+AND fa.ProtocolID IN ('3') ---dragonfly population count
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
+
 
 
 

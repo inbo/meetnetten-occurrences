@@ -44,3 +44,5 @@ reports/*
 data/*
 *.csv
 *.zip
+datasets/25 meetnetten-amfibieen-larven-metamorphs-occurrences/protocols/Monitoringsprotocol_amfibie_Versie2.pdf
+*.pdf

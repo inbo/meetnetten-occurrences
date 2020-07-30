@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]    Script Date: 15/07/2020 10:10:19 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_09_37_libellen-larvenhuidjes-events]    Script Date: 19/06/2020 13:45:51 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,14 +12,8 @@ GO
 
 
 
-
-
-
-
-
-
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]
-AS
+/**CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen-larvenhuidjes-events]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -33,7 +27,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - Amphibia in fikes in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Larval skin (Exuvia) for dragonflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -45,13 +39,11 @@ SELECT --fa.*   --unieke kolomnamen
 --	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
 							WHEN 'Libellen - Transect' THEN 'dragonfly transects'
-							WHEN 'Amfibieën - Fuiken (v1)' THEN 'amphibia fykes'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
 	, [eventDate] = CONVERT(VARCHAR(10), fwp.VisitStartDate, 20)
---    , [eventDate] = SampleDate 
-   	, [eventRemarks] = 'data collected in the '  + dbl.ProjectName + ' project'
+	, [eventRemarks] = 'data collected in the '  + dbl.ProjectName + ' project'
 
 
 	---LOCATION
@@ -149,7 +141,7 @@ SELECT --fa.*   --unieke kolomnamen
 	--						END
 
 
-FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
+FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN ( SELECT *
 					, CASE 
@@ -185,8 +177,8 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 						
 				FROM dbo.DimLocation dL) dL ON dL.LocationKey = fA.LocationKey
 	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
---	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
---	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
 --	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
 	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 --	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
@@ -199,11 +191,10 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('2')  ---Amphibia fikes * 
+AND fa.ProtocolID IN ('9','37')  ---Dragonflies huidjes beek en rivierrombout * 
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
-
+AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 --AND projectName = 'Argusvlinder'
 --AND fa.FieldworkObservationID =  491520
 --ORDER BY speciesName Asc
@@ -243,8 +234,6 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
-
-
 
 
 

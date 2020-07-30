@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]    Script Date: 15/06/2020 11:11:48 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_occurrences]    Script Date: 29/07/2020 15:47:22 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,16 +12,11 @@ GO
 
 
 
-
-
-
-
-
 /* Generieke query inclusief soorten */
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]
-AS
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_occurrences]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -84,12 +79,12 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	, [recordedBy] = 'https://meetnetten.be'
 	, [individualCount] = Aantal
-	, [sex] = CASE Geslacht
+/**	, [sex] = CASE Geslacht
 				WHEN 'U' THEN 'unknown'
 				WHEN 'M' THEN 'male'
 				WHEN 'F' THEN 'female'
 				ELSE Geslacht
-				END
+				END  **/
 	, [behaviour] = SpeciesActivityName
 		
 	----Taxon
@@ -97,9 +92,9 @@ SELECT --fa.*   --unieke kolomnamen
 	, [scientificName] = SpeciesScientificName
 	, [vernacularName] = SpeciesName
 	, [kingdom] = N'Animalia'
-	, [phylum] = N'Arthropoda'
-	, [class] = N'Insecta'
-	, [order] = N'Odonata'
+	, [phylum] = N'Chordata'
+	, [class] = N'Amphibia'
+--	, [order] = N''
 	, [nomenclaturalCode] = N'ICZN'
 	, [taxonRank] =	 case  SpeciesScientificName
 						  when  'Pieris spec.' THEN  N'genus'
@@ -108,6 +103,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 --	, fa.ProjectKey
 --	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
+
 
 	
 FROM dbo.FactAantal fA
@@ -124,11 +120,15 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('8') ---dragonfly transects
+AND fa.ProtocolID IN ('25','32') ---amphibia larvae -- larvae & metamorphs
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
+
+
 
 
 

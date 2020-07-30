@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]    Script Date: 15/07/2020 10:10:19 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_events]    Script Date: 29/07/2020 15:49:11 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,7 +18,10 @@ GO
 
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]
+
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -33,7 +36,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - Amphibia in fikes in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Amphibia larvae count in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -46,6 +49,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [samplingProtocol] =  CASE Protocolname
 							WHEN 'Libellen - Transect' THEN 'dragonfly transects'
 							WHEN 'Amfibieën - Fuiken (v1)' THEN 'amphibia fykes'
+							WHEN 'Amfibieën - Larven' THEN 'amphibia larval count'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
@@ -199,7 +203,7 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('2')  ---Amphibia fikes * 
+AND fa.ProtocolID IN ('25','32')  ---Amphibia larvae --- amphibia larvae and metamorphs * 
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
@@ -243,6 +247,9 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
 
 
 

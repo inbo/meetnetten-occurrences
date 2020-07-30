@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]    Script Date: 15/06/2020 11:11:48 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_occurrences]    Script Date: 19/06/2020 13:45:33 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,16 +11,10 @@ GO
 
 
 
-
-
-
-
-
-
 /* Generieke query inclusief soorten */
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]
+CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_occurrences]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -46,11 +40,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
 --	, [samplingProtocol] = Protocolname
-	, [lifeStage] = CASE SpeciesLifestageName
-					WHEN 'exuvium' THEN 'exuviae'
-					WHEN 'imago (not fully colored)' THEN 'imago'
-					ELSE SpeciesLifestageName
-					END
+	, [lifeStage] = SpeciesLifestageName
 	, [occurrenceStatus] = case
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
@@ -124,11 +114,12 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('8') ---dragonfly transects
+AND fa.ProtocolID IN ('9','37') ---dragonfly exuvia
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
 
 
 
