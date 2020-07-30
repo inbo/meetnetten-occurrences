@@ -27,7 +27,7 @@ institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten.be - Amphibia in fikes in Flanders, Belgium
+  allowed: Meetnetten.be - Fyke counts for Amphibia in Flanders, Belgium
 
 informationWithheld:
   allowed: original locations available upon request
