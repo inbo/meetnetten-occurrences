@@ -10,15 +10,19 @@ measurementType: # Dataset specific
     - maximum depth
     - number of sweeps
     - permanent water column
-    - pH value # change to "pH"
-    - present fish # change to "fish present"
+    - pH
+    - fish present
     - shading
-    - surface pond # change to "pond surface"
-    - waterquality # change to "water quality"
+    - pond surface
+    - water quality
 
 measurementValue: # Dataset specific
   empty: true
   if:
+    - measurementType:
+        allowed: fish present
+      allowed: ['TRUE', 'FALSE']
+      empty: true
     - measurementType:
         allowed: maximum depth
       allowed:
@@ -37,14 +41,18 @@ measurementValue: # Dataset specific
       allowed: ['TRUE', 'FALSE']
       empty: true
     - measurementType:
-        allowed: pH value
+        allowed: pH
       numberformat: x
       min: 6
       max: 7
       empty: true
     - measurementType:
-        allowed: present fish
-      allowed: ['TRUE', 'FALSE']
+        allowed: pond surface
+      allowed:
+        - 10-100
+        - 101-250
+        - 251-400
+        - '>400'
       empty: true
     - measurementType:
         allowed: shading
@@ -52,14 +60,6 @@ measurementValue: # Dataset specific
         - no shading
         - <30%
         - unknown
-    - measurementType:
-        allowed: surface pond
-      allowed:
-        - 10-100
-        - 101-250
-        - 251-400
-        - '>400'
-      empty: true
     - measurementType:
         allowed: water quality
       allowed:
@@ -72,6 +72,10 @@ measurementUnit: # Dataset specific
   empty: true
   if:
     - measurementType:
+        allowed: fish present
+      allowed: ""
+      empty: true
+    - measurementType:
         allowed: maximum depth
       allowed: m
     - measurementType:
@@ -83,20 +87,16 @@ measurementUnit: # Dataset specific
       allowed: ""
       empty: true
     - measurementType:
-        allowed: pH value
+        allowed: pH
       allowed: ""
       empty: true
     - measurementType:
-        allowed: present fish
-      allowed: ""
-      empty: true
+        allowed: pond surface
+      allowed: "m²"
     - measurementType:
         allowed: shading
       allowed: ""
       empty: true
-    - measurementType:
-        allowed: surface pond
-      allowed: "m²"
     - measurementType:
         allowed: water quality
       allowed: ""

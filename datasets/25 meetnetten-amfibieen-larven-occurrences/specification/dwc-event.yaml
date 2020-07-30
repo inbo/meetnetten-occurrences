@@ -42,7 +42,7 @@ parentEventID:
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
 samplingProtocol: # Dataset specific
-  allowed: amphibia larvae count
+  allowed: [amphibia larvae count, amphibia larvae and metamorphs count]
 
 eventDate:
   dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
