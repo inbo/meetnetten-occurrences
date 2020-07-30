@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_events]    Script Date: 29/07/2020 14:04:10 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_events]    Script Date: 30/07/2020 14:52:52 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -21,7 +21,9 @@ GO
 
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_events]
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -36,7 +38,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - Amphibia choir count in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Choir counts for Amphibia in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -247,6 +249,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
