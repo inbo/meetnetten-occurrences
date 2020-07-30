@@ -1,0 +1,18 @@
+# Scope: dwc-measurementorfact
+# Author: Peter Desmet
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+measurementType: # Dataset specific
+  allowed: transect length
+
+measurementValue: # Dataset specific
+  empty: true
+  numberformat: 'x'
+  min: 150
+  max: 850
+
+measurementUnit: # Dataset specific
+  allowed: m
