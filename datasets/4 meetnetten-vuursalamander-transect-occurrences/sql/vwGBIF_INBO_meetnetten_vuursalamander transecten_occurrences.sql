@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_occurrences]    Script Date: 30/07/2020 10:39:41 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]    Script Date: 30/07/2020 14:40:55 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,11 +11,12 @@ GO
 
 
 
+
 /* Generieke query inclusief soorten */
 
 
-CREATE VIEW [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]
-AS
+/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -103,7 +104,6 @@ SELECT --fa.*   --unieke kolomnamen
 --	, fa.ProjectKey
 --	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
 
-
 	
 FROM dbo.FactAantal fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
@@ -124,6 +124,7 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
 
 
 
