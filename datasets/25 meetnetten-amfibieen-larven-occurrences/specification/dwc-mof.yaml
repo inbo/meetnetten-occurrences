@@ -1,0 +1,103 @@
+# Scope: dwc-measurementorfact
+# Author: Peter Desmet
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+measurementType: # Dataset specific
+  allowed:
+    - maximum depth
+    - number of sweeps
+    - permanent water column
+    - pH
+    - fish present
+    - shading
+    - pond surface
+    - water quality
+
+measurementValue: # Dataset specific
+  empty: true
+  if:
+    - measurementType:
+        allowed: fish present
+      allowed: ['TRUE', 'FALSE']
+      empty: true
+    - measurementType:
+        allowed: maximum depth
+      allowed:
+        - <0.5
+        - 0.5-1
+        - 1-1.5
+        - '>1.5'
+    - measurementType:
+        allowed: number of sweeps
+      numberformat: x
+      min: 10
+      max: 40
+      empty: true
+    - measurementType:
+        allowed: permanent water column
+      allowed: ['TRUE', 'FALSE']
+      empty: true
+    - measurementType:
+        allowed: pH
+      numberformat: x
+      min: 6
+      max: 7
+      empty: true
+    - measurementType:
+        allowed: pond surface
+      allowed:
+        - 10-100
+        - 101-250
+        - 251-400
+        - '>400'
+      empty: true
+    - measurementType:
+        allowed: shading
+      allowed:
+        - no shading
+        - <30%
+        - unknown
+    - measurementType:
+        allowed: water quality
+      allowed:
+        - good
+        - average
+        - bad
+      empty: true
+
+measurementUnit: # Dataset specific
+  empty: true
+  if:
+    - measurementType:
+        allowed: fish present
+      allowed: ""
+      empty: true
+    - measurementType:
+        allowed: maximum depth
+      allowed: m
+    - measurementType:
+        allowed: number of sweeps
+      allowed: ""
+      empty: true
+    - measurementType:
+        allowed: permanent water column
+      allowed: ""
+      empty: true
+    - measurementType:
+        allowed: pH
+      allowed: ""
+      empty: true
+    - measurementType:
+        allowed: pond surface
+      allowed: "m²"
+    - measurementType:
+        allowed: shading
+      allowed: ""
+      empty: true
+    - measurementType:
+        allowed: water quality
+      allowed: ""
+      empty: true
