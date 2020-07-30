@@ -23,13 +23,13 @@ individualCount:
         allowed: present
       numberformat: x
       min: 1
-      max: 250 # Dataset specific
+      max: 165 # Dataset specific
 
 sex: # Dataset specific
   allowed: [male, female, unknown]
 
 lifeStage: # Dataset specific
-  allowed: [imago, adult, exuviae] # See https://github.com/inbo/meetnetten-occurrences/issues/6
+  allowed: exuviae
 
 occurrenceStatus:
   allowed: [present, absent]
@@ -39,40 +39,11 @@ eventID:
 
 scientificName: # Dataset specific
   allowed:
-    - Aeshna cyanea
-    - Aeshna isoceles # target species
-    - Anax imperator
-    - Anax parthenope
     - Brachytron pratense
-    - Calopteryx splendens
-    - Calopteryx virgo # target species
-    - Ceriagrion tenellum
-    - Chalcolestes viridis
-    - Coenagrion puella
-    - Coenagrion pulchellum # target species
-    - Coenagrion scitulum
-    - Cordulia aenea
-    - Crocothemis erythraea
-    - Enallagma cyathigerum
-    - Erythromma najas
-    - Erythromma viridulum
-    - Ischnura elegans
-    - Lestes sponsa
-    - Lestes virens
-    - Leucorrhinia pectoralis
-    - Libellula depressa
+    - Gomphus flavipes # target species
+    - Gomphus vulgatissimus # target species
     - Libellula fulva
-    - Libellula quadrimaculata
-    - Orthetrum brunneum
-    - Orthetrum cancellatum
-    - Orthetrum coerulescens
-    - Platycnemis pennipes
-    - Pyrrhosoma nymphula
     - Somatochlora metallica
-    - Sympecma fusca
-    - Sympetrum danae
-    - Sympetrum sanguineum
-    - Sympetrum striolatum
 
 kingdom:
   allowed: Animalia

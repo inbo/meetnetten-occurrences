@@ -9,10 +9,10 @@ measurementType: # Dataset specific
   allowed: transect length
 
 measurementValue: # Dataset specific
-  empty: true # See https://github.com/inbo/meetnetten-occurrences/issues/5
+  empty: true
   numberformat: 'x'
-  min: 70
-  max: 1850
+  min: 150
+  max: 850
 
 measurementUnit: # Dataset specific
   allowed: m

@@ -21,13 +21,13 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: https://doi.org/10.15468/y8u6e9
+  allowed: to complete
 
 institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten.be - Transects for dragonflies in Flanders, Belgium
+  allowed: Meetnetten.be - Exuviae counts for dragonflies in Flanders, Belgium
 
 informationWithheld:
   allowed: original locations available upon request
@@ -42,7 +42,9 @@ parentEventID:
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
 samplingProtocol: # Dataset specific
-  allowed: dragonfly transects
+  allowed:
+    - exuviae counts
+    - exuviae counts for Gomphus vulgatissimus
 
 eventDate:
   dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
@@ -76,7 +78,7 @@ geodeticDatum:
   allowed: WGS84
 
 coordinateUncertaintyInMeters: # Dataset specific
-  allowed: ['707', '3536']
+  allowed: ['707']
 
 georeferenceRemarks:
   allowed: coordinates are centroid of used grid square

@@ -21,19 +21,19 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: https://doi.org/10.15468/y8u6e9
+  allowed: "to complete"
 
 institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten.be - Transects for dragonflies in Flanders, Belgium
+  allowed: Meetnetten.be - Fyke counts for Amphibia in Flanders, Belgium
 
 informationWithheld:
   allowed: original locations available upon request
 
 dataGeneralizations:
-  regex: 'coordinates are generalized from a (POINT|LINESTRING|MULTILINESTRING|POLYGON|MULTIPOLYGON) to a UTM \d(K|k)m grid'
+  regex: 'coordinates are generalized from a (POINT|LINESTRING|MULTILINESTRING|POLYGON|MULTIPOLYGON) to a UTM \d{1,2}(K|k)m grid'
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
@@ -42,7 +42,7 @@ parentEventID:
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
 samplingProtocol: # Dataset specific
-  allowed: dragonfly transects
+  allowed: amphibia fykes
 
 eventDate:
   dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
@@ -76,7 +76,7 @@ geodeticDatum:
   allowed: WGS84
 
 coordinateUncertaintyInMeters: # Dataset specific
-  allowed: ['707', '3536']
+  allowed: '7071' # Currently all UTM 10km
 
 georeferenceRemarks:
   allowed: coordinates are centroid of used grid square
