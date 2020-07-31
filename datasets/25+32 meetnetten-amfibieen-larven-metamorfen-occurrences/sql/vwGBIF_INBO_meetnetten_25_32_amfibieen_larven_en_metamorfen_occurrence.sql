@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrences]    Script Date: 30/07/2020 15:35:46 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrences]    Script Date: 31/07/2020 11:34:17 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -14,11 +14,12 @@ GO
 
 
 
+
 /* Generieke query inclusief soorten */
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrences]
-AS**/
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrences]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -102,9 +103,9 @@ SELECT --fa.*   --unieke kolomnamen
 	, [nomenclaturalCode] = N'ICZN'
 	, [taxonRank] =	 case  SpeciesScientificName
 						  when  'Pieris spec.' THEN  N'genus'
-						  when  'Pelophylax esculenta synklepton' THEN  N'multispecies'
-						  when 'Lissotriton spec.' THEN N'genus'
-						  Else 'species'
+						  when 'Pelophylax esculenta synklepton' THEN 'speciesAggregate'
+						  when 'Lissotriton spec.' then N'genus'
+						  Else  'species'
 						  END
 	
 --	, fa.ProjectKey
@@ -130,8 +131,8 @@ AND fa.ProtocolID IN ('25','32') ---amphibia larvae -- larvae & metamorphs
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
+--AND SpeciesScientificName like 'Pieris spec.'
 
---AND SpeciesScientificName like '%lessonae'
 
 
 
