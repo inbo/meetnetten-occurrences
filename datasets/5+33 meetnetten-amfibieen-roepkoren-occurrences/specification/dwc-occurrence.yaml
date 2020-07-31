@@ -1,0 +1,71 @@
+# Scope: dwc-occurrence
+# Author: Peter Desmet
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+basisOfRecord:
+  allowed: HumanObservation
+
+occurrenceID:
+  regex: 'INBO:MEETNET:OCC:\d{6,7}'
+
+recordedBy:
+  allowed: https://meetnetten.be
+
+individualCount:
+  if:
+    - occurrenceStatus:
+        allowed: absent
+      allowed: '0'
+    - occurrenceStatus:
+        allowed: present
+      numberformat: x
+      min: 1
+      max: 2100 # Dataset specific
+
+sex:
+  allowed: male
+
+lifeStage: # Dataset specific
+  allowed: [larva, adult, metamorph]
+
+occurrenceStatus:
+  allowed: [present, absent]
+
+eventID:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+scientificName: # Dataset specific
+  allowed:
+    - Bufo bufo
+    - Bufo calamita
+    - Hyla arborea
+    - Pelobates fuscus
+    - Pelophylax esculenta synklepton
+    - Pelophylax lessonae
+    - Rana arvalis
+    - Rana temporaria
+
+kingdom:
+  allowed: Animalia
+
+phylum: # Dataset specific
+  allowed: Chordata
+
+class: # Dataset specific
+  allowed: Amphibia
+
+taxonRank: # Dataset specific
+  if:
+    - scientificName:
+        allowed: Pelophylax esculenta synklepton
+      allowed: speciesAggregate
+  allowed: [species, speciesAggregate]
+
+vernacularName: # Dataset specific
+  empty: false
+
+nomenclaturalCode: # Dataset specific
+  allowed: ICZN
