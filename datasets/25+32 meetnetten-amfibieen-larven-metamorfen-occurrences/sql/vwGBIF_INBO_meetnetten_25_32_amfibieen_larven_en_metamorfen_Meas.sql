@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_Meas]    Script Date: 30/07/2020 14:03:55 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_Meas]    Script Date: 30/07/2020 15:51:49 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -14,8 +14,9 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_Meas]
-AS
+
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_Meas]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -169,6 +170,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_events]    Script Date: 30/07/2020 14:23:18 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_events]    Script Date: 30/07/2020 15:15:47 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -42,6 +42,7 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'Libellen - Transect' THEN 'dragonfly transects'
 							WHEN 'Amfibieën - Fuiken (v1)' THEN 'amphibia fykes'
 							WHEN 'Amfibieën - Larven' THEN 'amphibia larvae count'
+							WHEN 'Amfibieën - Larven en metamorfen' THEN 'amphibia larvae and metamorph count'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
