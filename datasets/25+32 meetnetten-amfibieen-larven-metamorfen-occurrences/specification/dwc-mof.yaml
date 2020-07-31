@@ -44,11 +44,12 @@ measurementValue: # Dataset specific
         allowed: pH
       numberformat: x
       min: 6
-      max: 7
+      max: 8
       empty: true
     - measurementType:
         allowed: pond surface
       allowed:
+        - '<10'
         - 10-100
         - 101-250
         - 251-400
@@ -58,8 +59,9 @@ measurementValue: # Dataset specific
         allowed: shading
       allowed:
         - no shading
-        - <30%
-        - unknown
+        - '<30%'
+        - '30-60%'
+        - '>60%'
     - measurementType:
         allowed: water quality
       allowed:

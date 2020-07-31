@@ -43,7 +43,7 @@ scientificName: # Dataset specific
     - Lissotriton spec.
     - Lissotriton vulgaris
     - Pelobates fuscus
-    - Pelobates lessonae
+    - Pelophylax lessonae
     - Pelophylax esculenta synklepton
     - Rana arvalis
     - Rana temporaria
@@ -62,11 +62,11 @@ taxonRank: # Dataset specific
   if:
     - scientificName:
         allowed: Pelophylax esculenta synklepton
-      allowed: subspecies
+      allowed: speciesAggregate
     - scientificName:
         allowed: Lissotriton spec.
       allowed: genus
-  allowed: [genus, species, subspecies]
+  allowed: [genus, species, speciesAggregate]
 
 vernacularName: # Dataset specific
   empty: false

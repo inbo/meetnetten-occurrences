@@ -76,7 +76,14 @@ geodeticDatum:
   allowed: WGS84
 
 coordinateUncertaintyInMeters: # Dataset specific
-  allowed: '7071' # Currently all UTM 10km
+  if:
+    - dataGeneralizations:
+        regex: '.*UTM 5km grid'
+      allowed: '3536'
+    - dataGeneralizations:
+        regex: '.*UTM 10km grid'
+      allowed: '7071'
+  allowed: ['3536', '7071']
 
 georeferenceRemarks:
   allowed: coordinates are centroid of used grid square
