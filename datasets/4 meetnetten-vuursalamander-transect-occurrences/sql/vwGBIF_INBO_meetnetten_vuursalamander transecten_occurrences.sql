@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]    Script Date: 30/07/2020 14:40:55 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]    Script Date: 31/07/2020 8:51:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,7 +15,7 @@ GO
 /* Generieke query inclusief soorten */
 
 
-/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]
+/**CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]
 AS**/
 
 SELECT --fa.*   --unieke kolomnamen
@@ -103,6 +103,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 --	, fa.ProjectKey
 --	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
+
 
 	
 FROM dbo.FactAantal fA

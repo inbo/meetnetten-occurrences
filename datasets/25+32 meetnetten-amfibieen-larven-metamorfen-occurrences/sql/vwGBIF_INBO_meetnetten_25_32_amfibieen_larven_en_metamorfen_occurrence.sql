@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrences]    Script Date: 30/07/2020 14:23:44 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrences]    Script Date: 31/07/2020 11:34:17 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -102,7 +103,9 @@ SELECT --fa.*   --unieke kolomnamen
 	, [nomenclaturalCode] = N'ICZN'
 	, [taxonRank] =	 case  SpeciesScientificName
 						  when  'Pieris spec.' THEN  N'genus'
-						  Else 'species'
+						  when 'Pelophylax esculenta synklepton' THEN 'speciesAggregate'
+						  when 'Lissotriton spec.' then N'genus'
+						  Else  'species'
 						  END
 	
 --	, fa.ProjectKey
@@ -129,6 +132,7 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
 
 
 

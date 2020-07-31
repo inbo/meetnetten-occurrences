@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]    Script Date: 30/07/2020 14:38:25 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]    Script Date: 31/07/2020 8:55:32 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -20,7 +20,8 @@ GO
 
 
 
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]
+
+CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -246,6 +247,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 
