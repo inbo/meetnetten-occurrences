@@ -69,7 +69,8 @@ decimalLatitude:
 
 decimalLongitude:
   numberformat: '.5'
-  min: 2.53 # NW Belgium
+  min: 2.50 # NW Belgium. Normally 2.53, but one 10 km grid in North-West of Belgium places centroid 
+            # in France, see https://github.com/inbo/meetnetten-occurrences/issues/12
   max: 5.94 # SE Flanders
 
 geodeticDatum:

@@ -12,7 +12,8 @@ measurementType: # Dataset specific
     - permanent water column
     - pH
     - fish present
-    - shading
+    - sampling effort type
+    - shade
     - pond surface
     - water quality
 
@@ -26,14 +27,15 @@ measurementValue: # Dataset specific
     - measurementType:
         allowed: maximum depth
       allowed:
-        - <0.5
+        - 0-0.5
         - 0.5-1
         - 1-1.5
         - '>1.5'
+      empty: true
     - measurementType:
         allowed: number of sweeps
       numberformat: x
-      min: 10
+      min: 0 # As such in database
       max: 40
       empty: true
     - measurementType:
@@ -56,18 +58,26 @@ measurementValue: # Dataset specific
         - '>400'
       empty: true
     - measurementType:
-        allowed: shading
+        allowed: sampling effort type
       allowed:
-        - no shading
+        - sweep for larvae only
+        - sweep for larvae, metamorphs counted on land
+      empty: true
+    - measurementType:
+        allowed: shade
+      allowed:
+        - no shade
         - '<30%'
         - '30-60%'
         - '>60%'
+      empty: true
     - measurementType:
         allowed: water quality
       allowed:
         - good
         - average
         - bad
+        - pond has disappeared
       empty: true
 
 measurementUnit: # Dataset specific
@@ -96,7 +106,11 @@ measurementUnit: # Dataset specific
         allowed: pond surface
       allowed: "m²"
     - measurementType:
-        allowed: shading
+        allowed: sampling effort type
+      allowed: ""
+      empty: true
+    - measurementType:
+        allowed: shade
       allowed: ""
       empty: true
     - measurementType:
