@@ -29,7 +29,7 @@ sex: # Dataset specific
   allowed: [male, female, unknown]
 
 lifeStage: # Dataset specific
-  allowed: [egg, larvae, juvenile, adult]
+  allowed: [egg, larva, juvenile, adult]
 
 occurrenceStatus:
   allowed: [present, absent]
