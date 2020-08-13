@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_events]    Script Date: 30/07/2020 14:52:52 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_events]    Script Date: 13/08/2020 14:21:53 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -52,6 +53,7 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'Libellen - Transect' THEN 'dragonfly transects'
 							WHEN 'Amfibieën - Fuiken (v1)' THEN 'amphibia fykes'
 							WHEN 'Padden en kikkers - Roepkoren' THEN 'amphibia choir count'
+							WHEN 'Rugstreeppad - Roepkoren' THEN 'natterjack toad choir count'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
@@ -249,6 +251,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

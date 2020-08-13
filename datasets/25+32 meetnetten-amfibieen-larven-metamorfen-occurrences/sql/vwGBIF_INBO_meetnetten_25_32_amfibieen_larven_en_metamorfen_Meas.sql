@@ -1,12 +1,15 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_Meas]    Script Date: 31/07/2020 11:50:51 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_Meas]    Script Date: 13/08/2020 14:30:15 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
+
 
 
 
@@ -41,7 +44,7 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'pH value' THEN 'pH'
 							WHEN 'surface pond' THEN 'pond surface'
 							WHEN 'waterquality' THEN 'water quality'
-							WHEN 'zoekinspanning' THEN 'type effort'
+							WHEN 'zoekinspanning' THEN 'sampling effort type'
 
 							ELSE FCo.AttributeName
 							END
@@ -68,14 +71,16 @@ SELECT --fa.*   --unieke kolomnamen
 			WHEN FCO.AttributeValue = 'zwaarbewolkt (6 tot 7/8)' THEN 'mostly cloudy (6/8 - 7/8)'
 			WHEN FCO.AttributeValue = 'heavily clouded' THEN 'mostly cloudy (6/8 - 7/8)'
 			WHEN FCO.AttributeValue = 'betrokken (8/8)' THEN 'cloudy (8/8)'
-			WHEN FCO.AttributeValue = 'onbekend' THEN 'unknown'
+			WHEN FCO.AttributeValue = 'onbekend' THEN ''
 			WHEN FCO.AttributeValue = 'aantal keer geschept' THEN 'number of sweeps'
 			WHEN FCO.AttributeValue = 'goed (helder water, typische oever en/of waterplanten, weinig verlanding, niet zichtbaar vervuild)' THEN 'good'
 			WHEN FCO.AttributeValue = 'slecht (verwaarloosde poel met eutroof water (algen, kroos), anders vervuild of verregaand verland)' THEN 'bad'
 			WHEN FCO.AttributeValue = 'middelmatig (tussen slecht en goed)' THEN 'average'
 			WHEN FCO.AttributeValue = 'geen schaduw' THEN 'no shading'
-
-			WHEN FCO.AttributeValue = 'geen schaduw' THEN 'no shading'
+			WHEN FCO.AttributeValue = 'niet bekeken/niet van toepassing' THEN ''
+			WHEN FCO.AttributeValue = 'plas verdwenen of volledig verland' THEN 'pond has disappeared
+'           WHEN FCO.AttributeValue = '3' THEN ''
+			
 
 			WHEN FCO.AttributeValue = '>1' THEN '1-1.5'
 			WHEN FCO.AttributeValue = '<0.5' THEN '0-0.5'
@@ -83,7 +88,19 @@ SELECT --fa.*   --unieke kolomnamen
 			WHEN FCO.AttributeValue = 'alleen larven geschept' THEN 'sweep for larvae only'
 			WHEN FCO.AttributeValue = 'larven geschept en metamorfen op land geteld' THEN 'sweep for larvae, metamorphs counted on land'
 
+			WHEN FCO.AttributeValue = 'niet bekeken/niet van toepassing' THEN ''
+			WHEN FCO.AttributeValue = 'nee' THEN 'FALSE'
+			WHEN FCO.AttributeValue = 'ja' THEN 'TRUE'
+			WHEN FCO.AttributeValue = 'U' THEN ''
+
+			WHEN FCO.AttributeValue = '-4' THEN '4'
+
 			ELSE FCO.AttributeValue
+
+
+
+
+
 			END
 	, [measurementUnit] = CASE FCo.AttributeUnit
 							WHEN 'temperature' THEN ' °C'
@@ -170,6 +187,9 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
 
 
 
