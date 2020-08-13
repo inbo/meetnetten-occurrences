@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]    Script Date: 31/07/2020 8:55:32 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]    Script Date: 13/08/2020 13:24:59 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -21,7 +21,8 @@ GO
 
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -36,7 +37,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - transects for fire salamander in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Transects for fire salamanders in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -247,6 +248,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 

@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]    Script Date: 31/07/2020 8:51:29 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]    Script Date: 13/08/2020 13:52:06 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,11 +12,13 @@ GO
 
 
 
+
+
 /* Generieke query inclusief soorten */
 
 
-/**CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]
-AS**/
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -44,6 +46,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [lifeStage] = CASE SpeciesLifestageName
 					WHEN 'exuvium' THEN 'exuviae'
 					WHEN 'imago (not fully colored)' THEN 'imago'
+					WHEN 'post-metamorf' THEN 'post-metamorph'
 					ELSE SpeciesLifestageName
 					END
 	, [occurrenceStatus] = case
@@ -125,6 +128,8 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
 
 
 
