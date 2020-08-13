@@ -26,10 +26,10 @@ individualCount:
       max: 319 # Dataset specific
 
 sex:
-  allowed: unknown
+  allowed: [male, female, unknown] # All values are unknown
 
 lifeStage: # Dataset specific
-  allowed: adult
+  allowed: [adult, post-metamorph] # All values are post-metamorph
 
 occurrenceStatus:
   allowed: [present, absent]
