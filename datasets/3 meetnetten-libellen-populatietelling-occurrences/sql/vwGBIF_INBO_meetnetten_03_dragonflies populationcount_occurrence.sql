@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 1/07/2020 9:02:14 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 27/08/2020 8:36:21 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -57,6 +57,14 @@ SELECT --fa.*   --unieke kolomnamen
 	, [occurrenceStatus] = case
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
+						  END
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Sympetrum depressiusculum') AND fa.ProjectKey = 5  then 'project "Kempense heidelibel" target species'
+						  when SpeciesScientificName IN ('Coenagrion lunulatum') AND fa.ProjectKey = 9  then 'project "Maanwaterjuffer" target species'
+						  when SpeciesScientificName IN ('Leucorrhinia pectoralis') AND fa.ProjectKey = 1  then 'project "Gevlekte witsnuitlibel" target species'
+						  when SpeciesScientificName IN ('Coenagrion hastulatum') AND fa.ProjectKey = 153  then 'target "Speerwaterjuffer" species'
+						  when SpeciesScientificName IN ('Somatochlora arctica') AND fa.ProjectKey = 210  then 'target "Hoogveenglanslibel" species'
+						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
 	
