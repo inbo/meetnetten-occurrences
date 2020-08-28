@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrences]    Script Date: 31/07/2020 11:34:17 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_occurrences]    Script Date: 28/08/2020 11:51:50 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -54,6 +54,12 @@ SELECT --fa.*   --unieke kolomnamen
 	, [occurrenceStatus] = case
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
+						  END
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Triturus cristatus') AND fa.ProjectKey = 185  then 'target species'
+						  when SpeciesScientificName IN ('Hyla arborea') AND fa.ProjectKey = 13  then 'target species'
+						  when SpeciesScientificName IN ('Pelobates fuscus') AND fa.ProjectKey = 152  then 'target species'
+						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
 	
