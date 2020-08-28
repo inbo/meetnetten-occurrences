@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_10_vaatplanten_oppervlakte_occurrences]    Script Date: 20/08/2020 15:50:16 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_10_vaatplanten_oppervlakte_occurrences]    Script Date: 28/08/2020 15:33:39 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -51,6 +52,20 @@ SELECT --fa.*   --unieke kolomnamen
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
 						  END
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Potamogeton acutifolius') AND fa.ProjectKey = 124  then 'target species'
+						  when SpeciesScientificName IN ('Wahlenbergia hederacea') AND fa.ProjectKey = 88  then 'target species'
+						  when SpeciesScientificName IN ('Gentiana uliginosa') AND fa.ProjectKey = 56  then 'target species'
+						  when SpeciesScientificName IN ('Scirpus triqueter') AND fa.ProjectKey = 52  then 'target species'
+						  when SpeciesScientificName IN ('Potamogeton coloratus') AND fa.ProjectKey = 136  then 'target species'
+						  when SpeciesScientificName IN ('Eriophorum gracile') AND fa.ProjectKey = 120  then 'target species'
+						  when SpeciesScientificName IN ('Carex diandra') AND fa.ProjectKey = 116  then 'target species'
+						  when SpeciesScientificName IN ('Ranunculus ololeucos') AND fa.ProjectKey = 144  then 'target species'
+						  when SpeciesScientificName IN ('Schoenoplectus pungens') AND fa.ProjectKey = 128  then 'target species'
+						  Else 'casual observation'
+						  END
+
+
 --	, [protocol] = ProtocolSubjectDescription
 	
 --	, [samplingEffort] =
@@ -126,6 +141,7 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
 
 
 

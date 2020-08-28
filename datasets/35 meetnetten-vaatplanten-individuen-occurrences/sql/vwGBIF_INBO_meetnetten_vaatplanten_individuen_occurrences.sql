@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_34_rugstreeppad_sighting_occurrences]    Script Date: 28/08/2020 16:08:31 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_35_vaatplanten_individuen_occurrences]    Script Date: 28/08/2020 16:18:17 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,12 +13,11 @@ GO
 
 
 
-
 /* Generieke query inclusief soorten */
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_34_rugstreeppad_sighting_occurrences]
-AS**/
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_35_vaatplanten_individuen_occurrences]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -33,7 +32,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'meetnettendatasetDOI'
-	, [datasetName] = N'Meetnetten - vlinders transecten, Belgium'
+	, [datasetName] = N'Meetnetten - vascular plants, surface in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 
 	**/
@@ -46,8 +45,6 @@ SELECT --fa.*   --unieke kolomnamen
 	, [lifeStage] = CASE SpeciesLifestageName
 					WHEN 'exuvium' THEN 'exuviae'
 					WHEN 'imago (not fully colored)' THEN 'imago'
-					WHEN 'Larva' THEN 'larva'
-					WHEN 'juveniel' THEN 'juvenile'
 					ELSE SpeciesLifestageName
 					END
 	, [occurrenceStatus] = case
@@ -55,7 +52,17 @@ SELECT --fa.*   --unieke kolomnamen
 						  Else 'absent'
 						  END
 	, [occurrenceRemarks] = case 
-						  when SpeciesName IN ('Rugstreeppad') AND fa.ProjectKey = 219  then 'target species'
+						  when SpeciesName IN ('Koprus') AND fa.ProjectKey = 92  then 'target species'
+						  when SpeciesName IN ('Krabbenscheer') AND fa.ProjectKey = 96  then 'target species'
+						  when SpeciesName IN ('Purperorchis') AND fa.ProjectKey = 112  then 'target species'
+						  when SpeciesName IN ('Honingorchis') AND fa.ProjectKey = 92  then 'target species'
+						  when SpeciesName IN ('Kleine schorseneer') AND fa.ProjectKey = 80  then 'target species'
+						  when SpeciesName IN ('Veenmosorchis') AND fa.ProjectKey = 132  then 'target species'
+						  when SpeciesName IN ('Grote bremraap') AND fa.ProjectKey = 68  then 'target species'
+						  when SpeciesName IN ('Kleine wolfsklauw') AND fa.ProjectKey = 84  then 'target species'
+						  when SpeciesName IN ('Welriekende nachtorchis') AND fa.ProjectKey = 140  then 'target species'
+						  when SpeciesName IN ('Duingentiaan') AND fa.ProjectKey = 56  then 'target species'
+						  when SpeciesName IN ('Harlekijn') AND fa.ProjectKey = 72  then 'target species'
 						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
@@ -87,14 +94,14 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	, [recordedBy] = 'https://meetnetten.be'
 	, [individualCount] = Aantal
-	, [sex] = CASE Geslacht
-				WHEN 'U' THEN 'unknown'
-				WHEN 'M' THEN 'male'
-				WHEN 'F' THEN 'female'
-				ELSE Geslacht
-				END
-	, [behaviour] = SpeciesActivityName
-		
+	--, [sex] = CASE Geslacht
+	--			WHEN 'U' THEN 'unknown'
+	--			WHEN 'M' THEN 'male'
+	--			WHEN 'F' THEN 'female'
+	--			ELSE Geslacht
+	--			END
+	--, [behaviour] = SpeciesActivityName
+	  , protocolName	
 	----Taxon
 
 	, [scientificName] = SpeciesScientificName
@@ -128,12 +135,11 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('34') ---amphibia fire salamander transects
+AND fa.ProtocolID IN ('35') ---vaatplanten
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
-
 
 
 

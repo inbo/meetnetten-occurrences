@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_occurrences]    Script Date: 29/05/2020 14:11:07 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_28_39_vlinders_area_count_occurrences]    Script Date: 28/08/2020 15:58:13 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -75,7 +75,11 @@ SELECT --fa.*   --unieke kolomnamen
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
 						  END
-	
+	, [occurrenceRemarks] = case 
+						  when SpeciesName IN ('Bruine eikenpage') AND fa.ProjectKey = 181  then 'target species'
+						  when SpeciesName IN ('Grote weerschijnvlinder') AND fa.ProjectKey = 172  then 'target species'
+						   Else 'casual observation'
+						  END
 	
 	
 	----Taxon
