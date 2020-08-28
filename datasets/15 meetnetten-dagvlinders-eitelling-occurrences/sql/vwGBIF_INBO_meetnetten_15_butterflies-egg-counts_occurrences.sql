@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_occurrences]    Script Date: 29/05/2020 14:09:13 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_occurrences]    Script Date: 28/08/2020 11:48:22 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -90,7 +90,10 @@ SELECT --fa.*   --unieke kolomnamen
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
 						  END
-	
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Phengaris alcon') AND fa.ProjectKey = 45  then 'target species'
+						  Else 'casual observation'
+						  END
 	
 	
 	----Taxon
