@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]    Script Date: 13/08/2020 13:52:06 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_occurrences]    Script Date: 27/08/2020 10:55:42 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -52,6 +52,10 @@ SELECT --fa.*   --unieke kolomnamen
 	, [occurrenceStatus] = case
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
+						  END
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Salamandra salamandra') AND fa.ProjectKey = 16  then 'target species'
+						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
 	
