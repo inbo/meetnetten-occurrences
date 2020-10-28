@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]    Script Date: 15/07/2020 10:10:19 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]    Script Date: 28/10/2020 15:07:26 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,7 +18,10 @@ GO
 
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]
+
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_events]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -32,8 +35,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - Amphibia in fikes in Flanders, Belgium'
+	, [datasetID] = N'https://doi.org/10.15468/zeaq2t'
+	, [datasetName] = N'Meetnetten.be - Fyke counts for Amphibia in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -59,7 +62,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality] = locationName
-	, [parentLocality0] = parentLocationName
+--	, [parentLocality0] = parentLocationName
 	--, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
 	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
@@ -97,7 +100,7 @@ SELECT --fa.*   --unieke kolomnamen
 							END
 	, [coordinateUncertaintyInMeters] =  CASE      --is blurred
 							
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '707'
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN '707'
 							WHEN dbl.BlurHokType = 'UTM 5Km' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN '7071'
@@ -113,7 +116,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
-	, [recordedBy] = 'https://meetnetten.be'
+--	, [recordedBy] = 'https://meetnetten.be'
 --	, [individualCount] = Aantal
 --	, [sex] = Geslacht
 	--, [occurrenceStatus] = CASE Aantal
@@ -243,6 +246,9 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
 
 
 

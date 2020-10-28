@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_occurrences]    Script Date: 27/08/2020 13:13:49 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 28/10/2020 15:03:08 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,10 +12,20 @@ GO
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* Generieke query inclusief soorten */
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_02_amfibieen_fuiken_occurrences]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -51,7 +61,11 @@ SELECT --fa.*   --unieke kolomnamen
 						  Else 'absent'
 						  END
 	, [occurrenceRemarks] = case 
-						  when SpeciesScientificName IN ('Triturus cristatus') AND fa.ProjectKey = 185  then 'target species'
+						  when SpeciesScientificName IN ('Sympetrum depressiusculum') AND fa.ProjectKey = 5  then 'target species'
+						  when SpeciesScientificName IN ('Coenagrion lunulatum') AND fa.ProjectKey = 9  then 'target species'
+						  when SpeciesScientificName IN ('Leucorrhinia pectoralis') AND fa.ProjectKey = 1  then 'target species'
+						  when SpeciesScientificName IN ('Coenagrion hastulatum') AND fa.ProjectKey = 153  then 'target species'
+						  when SpeciesScientificName IN ('Somatochlora arctica') AND fa.ProjectKey = 210  then 'target species'
 						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
@@ -89,16 +103,16 @@ SELECT --fa.*   --unieke kolomnamen
 				WHEN 'F' THEN 'female'
 				ELSE Geslacht
 				END
-	, [behaviour] = SpeciesActivityName
+	, [behavior] = SpeciesActivityName
 		
 	----Taxon
 
 	, [scientificName] = SpeciesScientificName
 	, [vernacularName] = SpeciesName
 	, [kingdom] = N'Animalia'
-	, [phylum] = N'Chordata'
-	, [class] = N'Amphibia'
---	, [order] = N''
+	, [phylum] = N'Arthropoda'
+	, [class] = N'Insecta'
+	, [order] = N'Odonata'
 	, [nomenclaturalCode] = N'ICZN'
 	, [taxonRank] =	 case  SpeciesScientificName
 						  when  'Pieris spec.' THEN  N'genus'
@@ -107,7 +121,6 @@ SELECT --fa.*   --unieke kolomnamen
 	
 --	, fa.ProjectKey
 --	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
-
 
 	
 FROM dbo.FactAantal fA
@@ -124,11 +137,12 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('2') ---amphibia fykes
+AND fa.ProtocolID IN ('3') ---dragonfly population count
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
 
 
 
