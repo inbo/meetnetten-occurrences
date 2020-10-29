@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_Meas]    Script Date: 19/06/2020 13:45:17 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_Meas]    Script Date: 29/10/2020 10:47:59 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,7 +15,8 @@ GO
 
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_Meas]
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_Meas]
 AS
 
 SELECT --fa.*   --unieke kolomnamen 
@@ -23,12 +24,12 @@ SELECT --fa.*   --unieke kolomnamen
 	
 
 
-	 [parentEventID] = N'visitID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
+--	 [parentEventID] = N'visitID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	
 	 ---EVENT---	
 	
-	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
-	, [eventDate] = fwp.VisitStartDate
+	  [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
+--	, [eventDate] = fwp.VisitStartDate
 	
 
 	--- Properties---
@@ -136,6 +137,7 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
 
 
 
