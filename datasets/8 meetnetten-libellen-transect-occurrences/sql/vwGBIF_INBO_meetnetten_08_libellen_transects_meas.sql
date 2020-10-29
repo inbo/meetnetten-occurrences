@@ -1,15 +1,12 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_Meas]    Script Date: 11/06/2020 10:22:01 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_Meas]    Script Date: 29/10/2020 10:53:15 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
 
 
 
@@ -22,11 +19,11 @@ SELECT --fa.*   --unieke kolomnamen
 	
 
 
-	 [parentEventID] = N'visitID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
+--	 [parentEventID] = N'visitID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	
 	 ---EVENT---	
 	
-	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
+	  [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 --	, [eventDate] = fwp.VisitStartDate
 	
 	
@@ -93,7 +90,7 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, ProtocolKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('8')  ---Vlinders transecten * ,'15','28' removed other protocols
+AND fa.ProtocolID IN ('8')  ---Dragon fly population count
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
@@ -141,6 +138,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
