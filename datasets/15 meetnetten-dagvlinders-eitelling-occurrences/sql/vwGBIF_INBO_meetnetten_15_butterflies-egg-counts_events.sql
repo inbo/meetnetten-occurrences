@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 4/06/2020 10:17:43 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_15_vlinders_egg_count_Event]    Script Date: 29/10/2020 9:10:02 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -71,8 +73,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality] = locationName
-	, [parentLocality0] = parentLocationName
-	, [locality1] = CONCAT (ParentLocationName,'_ ',locationName)
+--	, [parentLocality0] = parentLocationName
+--	, [locality1] = CONCAT (ParentLocationName,'_ ',locationName)
 	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
 	-- USE FOR UNBLURRED DATA
@@ -109,7 +111,7 @@ SELECT --fa.*   --unieke kolomnamen
 							END
 	, [coordinateUncertaintyInMeters] =  CASE      --is blurred
 							
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '707'
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN '707'
 							WHEN dbl.BlurHokType = 'UTM 5Km' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN '7071'
@@ -125,7 +127,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
-	, [recordedBy] = 'https://meetnetten.be'
+--	, [recordedBy] = 'https://meetnetten.be'
 --	, [individualCount] = Aantal
 --	, [sex] = Geslacht
 	--, [occurrenceStatus] = CASE Aantal
@@ -254,6 +256,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
