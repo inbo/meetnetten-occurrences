@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_34_rugstreeppad_sighting_occurrences]    Script Date: 28/08/2020 16:08:31 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_34_rugstreeppad_sighting_occurrences]    Script Date: 30/10/2020 9:36:08 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -14,11 +14,12 @@ GO
 
 
 
+
 /* Generieke query inclusief soorten */
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_34_rugstreeppad_sighting_occurrences]
-AS**/
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_34_rugstreeppad_sighting_occurrences]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -93,7 +94,7 @@ SELECT --fa.*   --unieke kolomnamen
 				WHEN 'F' THEN 'female'
 				ELSE Geslacht
 				END
-	, [behaviour] = SpeciesActivityName
+--	, [behavior] = SpeciesActivityName
 		
 	----Taxon
 
@@ -133,6 +134,7 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
 
 
 
