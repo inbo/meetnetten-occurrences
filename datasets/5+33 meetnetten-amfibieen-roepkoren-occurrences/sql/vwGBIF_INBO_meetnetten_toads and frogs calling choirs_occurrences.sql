@@ -1,12 +1,15 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_occurrences]    Script Date: 28/08/2020 10:21:06 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_05_33_amfibieen_roepkoor_occurrences]    Script Date: 30/10/2020 9:31:57 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
+
 
 
 
@@ -55,6 +58,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [occurrenceRemarks] = case 
 						  when SpeciesScientificName IN ('Hyla arborea') AND fa.ProjectKey = 13  then 'target species'
 						  when SpeciesScientificName IN ('Pelobates fuscus') AND fa.ProjectKey = 152  then 'target species'
+						  when SpeciesScientificName IN ('Bufo calamita') AND fa.ProjectKey = 219  then 'target species'
+						  when SpeciesScientificName IN ('Epidalea calamita') AND fa.ProjectKey = 219  then 'target species'
 						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
@@ -92,11 +97,14 @@ SELECT --fa.*   --unieke kolomnamen
 				WHEN 'F' THEN 'female'
 				ELSE Geslacht
 				END
-	, [behaviour] = SpeciesActivityName
+--	, [behavior] = SpeciesActivityName
 		
 	----Taxon
 
-	, [scientificName] = SpeciesScientificName
+	, [scientificName] = CASE  SpeciesScientificName
+						WHEN 'Bufo calamita' THEN 'Epidalea calamita'
+						ELSE SpeciesScientificName
+						END
 	, [vernacularName] = SpeciesName
 	, [kingdom] = N'Animalia'
 	, [phylum] = N'Chordata'
@@ -132,6 +140,9 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
+
 
 
 
