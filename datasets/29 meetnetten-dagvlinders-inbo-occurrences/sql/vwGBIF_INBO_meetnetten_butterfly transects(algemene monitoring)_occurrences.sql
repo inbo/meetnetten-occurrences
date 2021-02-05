@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_occurrences]    Script Date: 2/02/2021 14:17:00 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_occurrences]    Script Date: 5/02/2021 11:50:13 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -14,8 +14,8 @@ GO
 /* Generieke query inclusief soorten */
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_occurrences]
-AS
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_occurrences]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -86,7 +86,7 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	---- OCCURRENCE ---
 		
-	, [recordedBy] = 'https://meetnetten.be'
+	, [recordedBy] = 'volunteer'
 	, [individualCount] = Aantal
 	, [lifeStage] = SpeciesLifestageName
 	
@@ -111,7 +111,7 @@ SELECT --fa.*   --unieke kolomnamen
 --	, fa.ProjectKey
 --	, [occurrenceRemarks] = 'data collected in the '  + Dbl.ProjectName + ' monitoring scheme'
 
- 	
+	
 FROM dbo.FactAantal fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
