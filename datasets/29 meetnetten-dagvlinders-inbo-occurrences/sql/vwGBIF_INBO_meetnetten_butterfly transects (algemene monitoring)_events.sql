@@ -1,22 +1,12 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_event]    Script Date: 2/02/2021 10:36:17 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_event]    Script Date: 5/02/2021 11:13:32 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -35,7 +25,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'https://xxxxxxx'
-	, [datasetName] = N'Meetnetten.be - Transects for butterflies in Flanders (monitoring common), Belgium'
+	, [datasetName] = N'Transects for butterflies (non-target species) in Flanders Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -63,7 +53,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [countryCode] = N'BE'
 --	, [locality0] = locationName
 --	, [parentLocality0] = parentLocationName
-	, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
+	, [locality] = LTRIM (CONCAT (ParentLocationName,'  ',locationName))
 	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
 	-- USE FOR UNBLURRED DATA
@@ -116,7 +106,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
---	, [recordedBy] = 'https://meetnetten.be'
+--	, [recordedBy] = 'volunteer'
 --	, [individualCount] = Aantal
 --	, [sex] = Geslacht
 	--, [occurrenceStatus] = CASE Aantal
@@ -245,6 +235,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 
