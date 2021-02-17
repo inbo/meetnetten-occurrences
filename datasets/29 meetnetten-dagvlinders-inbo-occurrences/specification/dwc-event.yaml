@@ -1,5 +1,5 @@
 # Scope: dwc-event
-# Author: Peter Desmet
+# Author: Peter Desmet, Dimitri Brosens
 # Syntax version: 0.1
 
 id:
@@ -27,7 +27,8 @@ institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten.be - Transects for butterflies in Flanders, Belgium
+  allowed: Transects for butterflies (non-target species) in Flanders Belgium
+
 
 informationWithheld:
   allowed: original locations available upon request
@@ -42,7 +43,7 @@ parentEventID:
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
 samplingProtocol: # Dataset specific
-  allowed: butterfly transects
+  allowed: Flemish butterfly monitoring scheme
 
 eventDate:
   dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
