@@ -1,25 +1,12 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_meas]    Script Date: 2/02/2021 15:37:10 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_meas]    Script Date: 8/02/2021 10:00:01 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -75,7 +62,7 @@ SELECT  TOP 1000 --fa.*   --unieke kolomnamen
 							WHEN 'temperature' THEN ' °C'
 							WHEN 'wind-force' THEN 'Beaufort'
 							WHEN 'cloudiness' THEN 'okta'
-							ELSE ''
+							ELSE FCO.AttributeUnit
 							END
 
 	

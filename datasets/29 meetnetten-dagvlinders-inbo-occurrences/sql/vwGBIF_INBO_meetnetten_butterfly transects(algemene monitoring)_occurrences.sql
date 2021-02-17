@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_occurrences]    Script Date: 5/02/2021 11:50:13 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_occurrences]    Script Date: 8/02/2021 9:49:42 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -86,7 +86,7 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	---- OCCURRENCE ---
 		
-	, [recordedBy] = 'volunteer'
+	, [recordedBy] = 'https://meetnetten.be'
 	, [individualCount] = Aantal
 	, [lifeStage] = SpeciesLifestageName
 	
