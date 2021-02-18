@@ -35,7 +35,6 @@ eventID:
 
 scientificName: # Dataset specific
   empty: false
-    
 
 kingdom:
   allowed: Animalia

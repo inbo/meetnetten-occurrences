@@ -29,7 +29,6 @@ institutionCode:
 datasetName: # Dataset specific
   allowed: Transects for butterflies (non-target species) in Flanders Belgium
 
-
 informationWithheld:
   allowed: original locations available upon request
 
