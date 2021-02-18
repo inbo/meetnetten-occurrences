@@ -1,12 +1,15 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]    Script Date: 13/08/2020 13:24:59 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_04_vuursalamander_transects_events]    Script Date: 29/10/2020 10:57:00 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
+
 
 
 
@@ -36,7 +39,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'to complete'
+	, [datasetID] = N'https://doi.org/10.15468/nbsk9h'
 	, [datasetName] = N'Meetnetten.be - Transects for fire salamanders in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
@@ -64,7 +67,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality] = locationName
-	, [parentLocality0] = parentLocationName
+--	, [parentLocality0] = parentLocationName
 	--, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
 	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
@@ -102,7 +105,7 @@ SELECT --fa.*   --unieke kolomnamen
 							END
 	, [coordinateUncertaintyInMeters] =  CASE      --is blurred
 							
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '707'
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN '707'
 							WHEN dbl.BlurHokType = 'UTM 5Km' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN '7071'
@@ -118,7 +121,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
-	, [recordedBy] = 'https://meetnetten.be'
+--	, [recordedBy] = 'https://meetnetten.be'
 --	, [individualCount] = Aantal
 --	, [sex] = Geslacht
 	--, [occurrenceStatus] = CASE Aantal
@@ -248,6 +251,9 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
 
 
 

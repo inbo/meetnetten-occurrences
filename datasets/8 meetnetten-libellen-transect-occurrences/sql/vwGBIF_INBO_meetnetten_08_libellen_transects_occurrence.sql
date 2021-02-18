@@ -1,16 +1,12 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]    Script Date: 15/06/2020 11:11:48 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_08_libellen_transecten_occurrences]    Script Date: 29/10/2020 10:54:33 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
-
 
 
 
@@ -55,6 +51,12 @@ SELECT --fa.*   --unieke kolomnamen
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
 						  END
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Calopteryx virgo') AND fa.ProjectKey = 214  then 'target species'
+						  when SpeciesScientificName IN ('Aeshna isoceles') AND fa.ProjectKey = 195  then 'target species'
+						  when SpeciesScientificName IN ('Coenagrion pulchellum') AND fa.ProjectKey = 193  then 'target species'
+						  Else 'casual observation'
+						  END
 --	, [protocol] = ProtocolSubjectDescription
 	
 --	, [samplingEffort] =
@@ -90,7 +92,7 @@ SELECT --fa.*   --unieke kolomnamen
 				WHEN 'F' THEN 'female'
 				ELSE Geslacht
 				END
-	, [behaviour] = SpeciesActivityName
+	, [behavior] = SpeciesActivityName
 		
 	----Taxon
 
@@ -129,6 +131,8 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
 
 
 

@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_09_37_libellen-larvenhuidjes-events]    Script Date: 19/06/2020 13:45:51 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen-larvenhuidjes-events]    Script Date: 29/10/2020 10:48:24 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,8 +12,17 @@ GO
 
 
 
-/**CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen-larvenhuidjes-events]
-AS**/
+
+
+
+
+
+
+
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen-larvenhuidjes-events]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -26,8 +35,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'to complete'
-	, [datasetName] = N'Meetnetten.be - Larval skin (Exuvia) for dragonflies in Flanders, Belgium'
+	, [datasetID] = N'https://doi.org/10.15468/ue87ux'
+	, [datasetName] = N'Meetnetten.be - Exuviae counts for dragonflies in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -51,7 +60,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality] = locationName
-	, [parentLocality0] = parentLocationName
+--	, [parentLocality0] = parentLocationName
 	--, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
 	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
@@ -89,7 +98,7 @@ SELECT --fa.*   --unieke kolomnamen
 							END
 	, [coordinateUncertaintyInMeters] =  CASE      --is blurred
 							
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '707'
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN '707'
 							WHEN dbl.BlurHokType = 'UTM 5Km' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN '7071'
@@ -105,7 +114,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
-	, [recordedBy] = 'https://meetnetten.be'
+--	, [recordedBy] = 'https://meetnetten.be'
 --	, [individualCount] = Aantal
 --	, [sex] = Geslacht
 	--, [occurrenceStatus] = CASE Aantal
@@ -191,7 +200,7 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('9','37')  ---Dragonflies huidjes beek en rivierrombout * 
+AND fa.ProtocolID IN ('9') --,'37')  Dragonflies huidjes **** en rivierrombout * 
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
@@ -234,6 +243,10 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
+
+
 
 
 

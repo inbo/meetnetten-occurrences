@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_Meas]    Script Date: 13/08/2020 14:30:15 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_25_32_amfibieen_larven_en_metamorfen_Meas]    Script Date: 28/10/2020 14:59:15 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -26,11 +28,11 @@ SELECT --fa.*   --unieke kolomnamen
 	
 
 
-	 [parentEventID] = N'visitID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
+--	 [parentEventID] = N'visitID :' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	
 	 ---EVENT---	
 	
-	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
+	 [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 --	, [eventDate] = fwp.VisitStartDate
 	
 	
@@ -45,6 +47,7 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'surface pond' THEN 'pond surface'
 							WHEN 'waterquality' THEN 'water quality'
 							WHEN 'zoekinspanning' THEN 'sampling effort type'
+							WHEN 'shading' THEN 'shade'
 
 							ELSE FCo.AttributeName
 							END
@@ -76,7 +79,8 @@ SELECT --fa.*   --unieke kolomnamen
 			WHEN FCO.AttributeValue = 'goed (helder water, typische oever en/of waterplanten, weinig verlanding, niet zichtbaar vervuild)' THEN 'good'
 			WHEN FCO.AttributeValue = 'slecht (verwaarloosde poel met eutroof water (algen, kroos), anders vervuild of verregaand verland)' THEN 'bad'
 			WHEN FCO.AttributeValue = 'middelmatig (tussen slecht en goed)' THEN 'average'
-			WHEN FCO.AttributeValue = 'geen schaduw' THEN 'no shading'
+			WHEN FCO.AttributeValue = 'geen schaduw' THEN 'no shade'
+			WHEN FCO.AttributeValue = 'no shade' THEN 'no shade'
 			WHEN FCO.AttributeValue = 'niet bekeken/niet van toepassing' THEN ''
 			WHEN FCO.AttributeValue = 'plas verdwenen of volledig verland' THEN 'pond has disappeared
 '           WHEN FCO.AttributeValue = '3' THEN ''
@@ -187,6 +191,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 

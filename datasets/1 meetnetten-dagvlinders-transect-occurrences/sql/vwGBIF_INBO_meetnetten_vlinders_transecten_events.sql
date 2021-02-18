@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 4/06/2020 10:19:54 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 29/10/2020 10:38:21 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -25,8 +25,10 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]
-AS
+
+
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
 	
@@ -66,8 +68,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),6) 
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
-	, [locality0] = locationName
-	, [parentLocality0] = parentLocationName
+--	, [locality0] = locationName
+--	, [parentLocality0] = parentLocationName
 	, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
 	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
@@ -105,7 +107,7 @@ SELECT --fa.*   --unieke kolomnamen
 							END
 	, [coordinateUncertaintyInMeters] =  CASE      --is blurred
 							
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '707'
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN '707'
 							WHEN dbl.BlurHokType = 'UTM 5Km' THEN '3536'
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN '7071'
@@ -121,7 +123,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 ---- OCCURRENCE ---
 		
-	, [recordedBy] = 'https://meetnetten.be'
+--	, [recordedBy] = 'https://meetnetten.be'
 --	, [individualCount] = Aantal
 --	, [sex] = Geslacht
 	--, [occurrenceStatus] = CASE Aantal
@@ -250,6 +252,8 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
+
+
 
 
 

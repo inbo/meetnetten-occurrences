@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_occurrences]    Script Date: 19/06/2020 13:45:33 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_occurrences]    Script Date: 29/10/2020 10:50:07 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,10 +11,14 @@ GO
 
 
 
+
+
+
+
 /* Generieke query inclusief soorten */
 
 
-CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_occurrences]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_occurrences]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -40,10 +44,17 @@ SELECT --fa.*   --unieke kolomnamen
 	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
 --	, [samplingProtocol] = Protocolname
-	, [lifeStage] = SpeciesLifestageName
+	, [lifeStage] = CASE SpeciesLifestageName
+						WHEN 'exuvium' THEN 'exuviae'
+						ELSE SpeciesLifestageName
+						END
 	, [occurrenceStatus] = case
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
+						  END
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Gomphus flavipes') AND fa.ProjectKey = 23  then 'target species'
+						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
 	
@@ -80,7 +91,7 @@ SELECT --fa.*   --unieke kolomnamen
 				WHEN 'F' THEN 'female'
 				ELSE Geslacht
 				END
-	, [behaviour] = SpeciesActivityName
+	, [behavior] = SpeciesActivityName
 		
 	----Taxon
 
@@ -114,11 +125,15 @@ FROM dbo.FactAantal fA
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('9','37') ---dragonfly exuvia
+AND fa.ProtocolID IN ('9') ---dragonfly exuvia
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
+
+
 
 
 

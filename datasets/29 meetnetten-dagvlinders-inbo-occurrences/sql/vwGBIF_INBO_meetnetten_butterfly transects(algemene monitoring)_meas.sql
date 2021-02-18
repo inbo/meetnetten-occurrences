@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_Meas]    Script Date: 29/10/2020 10:47:59 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_meas]    Script Date: 8/02/2021 10:00:01 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,16 +10,10 @@ GO
 
 
 
-
-
-
-
-
-
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_09_37_libellen_larvehuidjes_Meas]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_meas]
 AS
 
-SELECT --fa.*   --unieke kolomnamen 
+SELECT  TOP 1000 --fa.*   --unieke kolomnamen
 	
 	
 
@@ -40,12 +34,9 @@ SELECT --fa.*   --unieke kolomnamen
 							ELSE FCo.AttributeName
 							END
 	, [measurementValue] = CASE
-			WHEN FCO.AttributeUnit = 'temperature'     AND FCO.AttributeValue = 'onbekend' THEN ''
-			WHEN FCO.AttributeUnit = 'temperature'     AND FCO.AttributeValue = '' THEN ''
-			WHEN FCO.AttributeUnit = 'transect length' AND FCO.AttributeValue = '' THEN ''
-			
-			
-			
+			WHEN FCO.AttributeUnit = 'temperature' AND FCO.AttributeValue = 'onbekend' THEN ''
+			WHEN FCO.AttributeUnit = 'temperature' AND FCO.AttributeValue = '' THEN ''
+
 			WHEN FCO.AttributeValue = 'windstil (0 Bft)' THEN '0'
 			WHEN FCO.AttributeValue = 'zeer zwakke wind (1 Bft)' THEN '1'
 			WHEN FCO.AttributeValue = 'zwakke wind (2 Bft)' THEN '2'
@@ -62,8 +53,8 @@ SELECT --fa.*   --unieke kolomnamen
 			WHEN FCO.AttributeValue = 'zwaarbewolkt (6 tot 7/8)' THEN 'mostly cloudy (6/8 - 7/8)'
 			WHEN FCO.AttributeValue = 'heavily clouded' THEN 'mostly cloudy (6/8 - 7/8)'
 			WHEN FCO.AttributeValue = 'betrokken (8/8)' THEN 'cloudy (8/8)'
-			WHEN FCO.AttributeValue = 'onbekend' THEN 'unknown'
-			WHEN FCO.AttributeValue = '' THEN 'unknown'
+			WHEN FCO.AttributeValue = 'onbekend' THEN ''
+			WHEN FCO.AttributeValue = '' THEN ''
 
 			ELSE FCO.AttributeValue
 			END
@@ -71,7 +62,6 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'temperature' THEN ' °C'
 							WHEN 'wind-force' THEN 'Beaufort'
 							WHEN 'cloudiness' THEN 'okta'
-							WHEN 'transect length' THEN 'm'
 							ELSE FCO.AttributeUnit
 							END
 
@@ -94,10 +84,10 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('9')  ---Libellen larvehuidjes
+AND fa.ProtocolID IN ('29')  ---Vlinders transecten * ,'15','28' removed other protocols
 --AND Aantal > '0'
-AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
+--AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2020-12-31', 120)
 --AND projectName = 'Argusvlinder'
 --AND fa.FieldworkObservationID =  491520
 --ORDER BY speciesName Asc
@@ -137,8 +127,6 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
-
-
 
 
 

@@ -11,7 +11,7 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 
 
-SELECT protocolName,fa.ProtocolID, Count(*) 
+SELECT protocolName,fa.ProtocolID, fa.projectkey, Count(*) 
 FROM dbo.FactAantal fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
@@ -22,5 +22,21 @@ FROM dbo.FactAantal fA
 
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 WHERE 1=1
-Group by protocolName, fa.protocolID
+Group by protocolName, fa.protocolID, fa.projectKey
 ORDER BY fa.ProtocolID
+
+SELECT protocolName,fa.ProtocolID, fa.projectkey, dp.ProjectName, Count(*) 
+FROM dbo.FactAantal fA
+	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
+	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
+	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
+	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
+
+	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
+WHERE 1=1
+AND fa.protocolID = 4
+Group by protocolName, fa.protocolID, fa.projectKey, dp.projectName
+ORDER BY fa.ProtocolID
+

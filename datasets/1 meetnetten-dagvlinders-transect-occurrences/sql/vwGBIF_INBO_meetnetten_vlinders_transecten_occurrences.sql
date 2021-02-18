@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 29/05/2020 14:05:45 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 29/10/2020 10:41:27 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -54,12 +56,23 @@ SELECT --fa.*   --unieke kolomnamen
 	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
 --	, [samplingProtocol] = Protocolname
-	, [lifeStage] = SpeciesLifestageName
+	
 	, [occurrenceStatus] = case
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
 						  END
-	, [protocol] = ProtocolSubjectDescription
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Lasiommata megera') AND fa.ProjectKey = 40  then 'target species'
+						  when SpeciesScientificName IN ('Pyrgus malvae') AND fa.ProjectKey = 157  then 'target species'
+						  when SpeciesScientificName IN ('Melitaea cinxia') AND fa.ProjectKey = 25  then 'target species'
+						  when SpeciesScientificName IN ('Pyronia tithonus') AND fa.ProjectKey = 175  then 'target species'
+						  when SpeciesScientificName IN ('Hipparchia semele') AND fa.ProjectKey = 35  then 'target species'
+						  when SpeciesScientificName IN ('Erynnis tages') AND fa.ProjectKey = 162  then 'target species'
+						  when SpeciesScientificName IN ('Cyaniris semiargus') AND fa.ProjectKey = 167  then 'target species'
+						  when SpeciesScientificName IN ('Hesperia comma') AND fa.ProjectKey = 30  then 'target species'
+						  Else 'casual observation'
+						  END
+--	, [protocol] = ProtocolSubjectDescription
 	
 --	, [samplingEffort] =
 						
@@ -88,6 +101,8 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	, [recordedBy] = 'https://meetnetten.be'
 	, [individualCount] = Aantal
+	, [lifeStage] = SpeciesLifestageName
+	
 
 	
 	
@@ -129,6 +144,8 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
 
 
 

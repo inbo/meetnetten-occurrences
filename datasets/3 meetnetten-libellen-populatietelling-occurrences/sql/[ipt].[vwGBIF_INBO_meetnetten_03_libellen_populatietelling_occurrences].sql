@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 1/07/2020 9:02:14 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_03_libellen_populatietelling_occurrences]    Script Date: 28/10/2020 15:03:08 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -58,6 +60,14 @@ SELECT --fa.*   --unieke kolomnamen
 						  when Aantal > '0' then 'present'
 						  Else 'absent'
 						  END
+	, [occurrenceRemarks] = case 
+						  when SpeciesScientificName IN ('Sympetrum depressiusculum') AND fa.ProjectKey = 5  then 'target species'
+						  when SpeciesScientificName IN ('Coenagrion lunulatum') AND fa.ProjectKey = 9  then 'target species'
+						  when SpeciesScientificName IN ('Leucorrhinia pectoralis') AND fa.ProjectKey = 1  then 'target species'
+						  when SpeciesScientificName IN ('Coenagrion hastulatum') AND fa.ProjectKey = 153  then 'target species'
+						  when SpeciesScientificName IN ('Somatochlora arctica') AND fa.ProjectKey = 210  then 'target species'
+						  Else 'casual observation'
+						  END
 --	, [protocol] = ProtocolSubjectDescription
 	
 --	, [samplingEffort] =
@@ -93,7 +103,7 @@ SELECT --fa.*   --unieke kolomnamen
 				WHEN 'F' THEN 'female'
 				ELSE Geslacht
 				END
-	, [behaviour] = SpeciesActivityName
+	, [behavior] = SpeciesActivityName
 		
 	----Taxon
 
@@ -132,6 +142,8 @@ AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
 
 
 
