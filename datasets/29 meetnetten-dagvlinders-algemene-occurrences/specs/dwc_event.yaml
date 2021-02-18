@@ -21,13 +21,13 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: https://doi.org/10.15468/kfhvy4
+  allowed: 
 
 institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Transects for butterflies (non-target species) in Flanders Belgium
+  allowed: Transects for butterflies (non-target species) in Flanders, Belgium
 
 informationWithheld:
   allowed: original locations available upon request
