@@ -25,7 +25,7 @@ measurementValue: # Dataset specific
       empty: true
       # numberformat: '.1' # Some are 20 or 22.25
       min: 0
-      max: 35
+      max: 37
     - measurementType:
         allowed: wind force
       allowed: ['0', '1', '2', '3', '4', '5', unknown]
