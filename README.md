@@ -19,7 +19,7 @@ Title (and GitHub directory) | IPT | GBIF
 [Meetnetten.be - Transects for butterflies in Flanders, Belgium](datasets/1%20meetnetten-dagvlinders-transect-occurrences/sql) | [meetnetten-butterflies-occurrences](https://ipt.inbo.be/resource?r=meetnetten-butterflies-occurrences) | <https://doi.org/10.15468/kfhvy4>
 [Meetnetten.be - Transects for dragonflies in Flanders, Belgium](datasets/8%20meetnetten-libellen-transect-occurrences) | [meetnetten-libellen-transect-occurrences](https://ipt.inbo.be/resource?r=meetnetten-libellen-transect-occurrences) | <https://doi.org/10.15468/y8u6e9>
 [Meetnetten.be - Transects for fire salamanders in Flanders, Belgium](datasets/4%20meetnetten-vuursalamander-transect-occurrences) | [meetnetten-vuursalamander-transect-occurrences](https://ipt.inbo.be/resource?r=meetnetten-vuursalamander-transect-occurrences) | <https://doi.org/10.15468/nbsk9h>
-[Transects for non-target butterfly species in Flanders, Belgium](datasets/29%20meetnetten-dagvlinders-algemene-occurrences) | [meetnetten-butterflies-algemene-occurrences](https://ipt.inbo.be/resource?r=meetnetten-butterflies-algemene-occurrences) | <>
+Butterfly monitoring scheme in Flanders, Belgium](datasets/29%20meetnetten-dagvlinders-algemene-occurrences) | [bms-occurrences](https://ipt.inbo.be/resource?r=bms-occurrences) | <https://doi.org/10.15468/wwrgcd>
 
 ## Repo structure
 

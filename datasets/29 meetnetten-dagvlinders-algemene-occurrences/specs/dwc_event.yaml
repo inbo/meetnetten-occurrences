@@ -21,13 +21,13 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: ''
+  allowed: 'https://doi.org/10.15468/wwrgcd'
 
 institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Transects for butterflies (non-target species) in Flanders, Belgium
+  allowed: Butterfly monitoring scheme in Flanders, Belgium
 
 informationWithheld:
   allowed: original locations available upon request
