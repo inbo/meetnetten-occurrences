@@ -1,0 +1,101 @@
+# Scope: dwc-occurrence
+# Author: Peter Desmet
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+basisOfRecord:
+  allowed: HumanObservation
+
+occurrenceID:
+  regex: 'INBO:MEETNET:OCC:\d{6,7}'
+
+recordedBy:
+  allowed: https://meetnetten.be
+
+individualCount:
+  if:
+    - occurrenceStatus:
+        allowed: absent
+      allowed: '0'
+    - occurrenceStatus:
+        allowed: present
+      numberformat: x
+      min: 1
+      max: 45 # Dataset specific
+
+lifeStage: # Dataset specific
+  allowed: imago
+
+occurrenceStatus:
+  allowed: [present, absent]
+
+eventID:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+scientificName: # Dataset specific
+  allowed:
+    - Aglais io
+    - Aglais urticae
+    - Anthocharis cardamines
+    - Aphantopus hyperantus
+    - Araschnia levana
+    - Aricia agestis
+    - Callophrys rubi
+    - Carcharodus alceae
+    - Carterocephalus palaemon
+    - Celastrina argiolus
+    - Coenonympha pamphilus
+    - Colias croceus
+    - Colias hyale
+    - Cupido minimus
+    - Cyaniris semiargus
+    - Erynnis tages
+    - Favonius quercus
+    - Gonepteryx rhamni
+    - Hesperia comma
+    - Hipparchia semele
+    - Issoria lathonia
+    - Lasiommata megera
+    - Leptidea sinapis
+    - Lycaena phlaeas
+    - Maniola jurtina
+    - Melitaea cinxia
+    - Ochlodes sylvanus
+    - Papilio machaon
+    - Pararge aegeria
+    - Pieris brassicae
+    - Pieris napi
+    - Pieris rapae
+    - Pieris spec.
+    - Plebejus argus
+    - Polygonia c-album
+    - Polyommatus icarus
+    - Pyrgus malvae
+    - Pyronia tithonus
+    - Thymelicus lineola
+    - Thymelicus sylvestris
+    - Vanessa atalanta
+    - Vanessa cardui
+
+kingdom:
+  allowed: Animalia
+
+phylum: # Dataset specific
+  allowed: Arthropoda
+
+class: # Dataset specific
+  allowed: Insecta
+
+order: # Dataset specific
+  allowed: Lepidoptera
+
+taxonRank: # Dataset specific
+  allowed: [genus, species]
+
+vernacularName: # Dataset specific
+  empty: false
+
+nomenclaturalCode: # Dataset specific
+  allowed: ICZN
