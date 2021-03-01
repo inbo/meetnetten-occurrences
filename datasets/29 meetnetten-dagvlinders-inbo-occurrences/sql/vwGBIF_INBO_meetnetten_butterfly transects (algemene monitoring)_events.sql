@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_event]    Script Date: 5/02/2021 11:13:32 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_event]    Script Date: 1/03/2021 9:23:24 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,11 +10,14 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_event]
-AS
+
+
+
+/**ALTER  VIEW [ipt].[vwGBIF_INBO_meetnetten_29_vlinders_transecten_alg_event]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen 
-	
+	DISTINCT 
 	---RECORD ---
 	 
 --	  [occurrenceID] = N'INBO:MEETNETTEN:OCC:' + Right( N'0000' + CONVERT(nvarchar(20) ,fa.FieldworkObservationID),7)
@@ -25,15 +28,16 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'https://xxxxxxx'
-	, [datasetName] = N'Transects for butterflies (non-target species) in Flanders Belgium'
 	, [institutionCode] = N'INBO'
-	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
+	, [datasetName] = N'Transects for butterflies (non-target species) in Flanders, Belgium'
+	
 	, [informationWithheld] = N'original locations available upon request'
-	, [dataGeneralizations] = N'coordinates are generalized from a ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
+	, [dataGeneralizations] = N'coordinates are generalized from a ' + duL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
 	
 	 ---EVENT---	
-	
+--	, fA.FieldworkSampleID
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
+	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 --	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
 							WHEN 'Vlinders - Transecten' THEN 'butterfly transects'
@@ -48,13 +52,13 @@ SELECT --fa.*   --unieke kolomnamen
 
 
 	---LOCATION
-	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),6) 
+	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,duL.LocationID),6) 
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 --	, [locality0] = locationName
 --	, [parentLocality0] = parentLocationName
-	, [locality] = LTRIM (CONCAT (ParentLocationName,'  ',locationName))
-	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
+	, [locality] = LTRIM (CONCAT (dul.ParentLocationName,'  ',dul.LocationName))
+	
 	
 	-- USE FOR UNBLURRED DATA
 	--, [decimalLatitude_unblur] = CASE dL.GeoType
@@ -88,6 +92,7 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN utm.Centroid_10_Long
 							ELSE 'checkthis'
 							END
+	, [geodeticDatum] = N'WGS84'
 	, [coordinateUncertaintyInMeters] =  CASE      --is blurred
 							
 							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN '3536'
@@ -96,54 +101,30 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN '7071'
 							ELSE 'checkthis'
 							END
-	
---	, SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText()))) as pointinfo   /***text uit kolom selecteren V3 beste optie***/
---	, (dL.LocationGeom.MakeValid().STAsText()) as footprintWKT
-	, [geodeticDatum] = N'WGS84'
---	, dl.LocationGeom
---	, dl.parentLocationGeom
-	
-	
----- OCCURRENCE ---
-		
---	, [recordedBy] = 'volunteer'
---	, [individualCount] = Aantal
---	, [sex] = Geslacht
-	--, [occurrenceStatus] = CASE Aantal
-	--						When '0' then 'absent'
-	--						Else 'present'
-	--						End
---	, [lifeStage] = SpeciesLifestageName
+	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 
-/**----Taxon
-
-	, [scientificName] = SpeciesScientificName
-	, [vernacularName] = SpeciesName
-	, [kingdom] = N'Animalia'
-	, [phylum] = N'Arthropoda'
-	, [class] = N'Insecta'
-	, [order] = N'Lepidoptera'
-	, [nomenclaturalCode] = N'ICZN' **/
-	
-	
 	
 
-	--			END
-	--, [Project] = Dbl.ProjectName 
-	--, [BlurToUse] = dbl.BlurHokType
-	--, [parentLocality2] = parentLocationName
-	--, [usedBlur] =  CASE      --is blurred
-	--						WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN 'utm 5km'
-	--						WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN 'utm 1km'
-
-	--						WHEN dbl.BlurHokType = 'UTM 5Km' THEN 'utm 5Km'
-	--						WHEN dbl.BlurHokType = 'UTM 10Km' THEN 'utm 10Km'
-	--						ELSE 'checkthis'
-	--						END
+FROM dbo.FactAantal fA
 
 
-FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
+	
+	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
+	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+	INNER JOIN ( SELECT fa.FieldworkSampleID
+					, COALESCE( dlp.LocationKey, dol.LocationKey) as ParentLocationKey
+					, COUNT (*) as Nmbr
+				FROM dbo.FactAantal fa
+				LEFT OUTER JOIN dbo.DimLocation dol ON dol.LocationKey = fa.LocationKey
+				LEFT OUTER JOIN dbo.DimLocation dlp ON dlp.LocationID = dol.ParentLocationID
+				GROUP BY fa.FieldworkSampleID
+					, COALESCE( dlp.LocationKey, dol.LocationKey)
+				) ParentLocation ON  ParentLocation.FieldworkSampleID = fa.FieldworkSampleID
+								--AND ParentLocation.ParentLocationKey = fa.LocationKey
+	--INNER JOIN dbo.DimLocation duL ON duL.LocationKey = ParentLocation.ParentLocationKey
+
 	INNER JOIN ( SELECT *
 					, CASE 
 						WHEN SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText()))) = 'LINESTRING' THEN 'LINESTRING'
@@ -176,65 +157,28 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 							--, 0 )
 						END, 4326) as PointData
 						
-				FROM dbo.DimLocation dL) dL ON dL.LocationKey = fA.LocationKey
-	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
-	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
-	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+				FROM dbo.DimLocation dL) duL ON duL.LocationKey = ParentLocation.ParentLocationKey
+
 --	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
 	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 --	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 	INNER JOIN dbo.DimBlur Dbl ON Dbl.ProjectKey = fa.projectKey
-	INNER JOIN [shp].[utm_vl_WGS84] utm WITH (INDEX(SI_utm_vl_WGS84__geom_1)) ON utm.geom_1.STIntersects(dL.PointData) = 1
+	INNER JOIN [shp].[utm_vl_WGS84] utm WITH (INDEX(SI_utm_vl_WGS84__geom_1)) ON utm.geom_1.STIntersects(duL.PointData) = 1
 	
 	
 	--INNER JOIN [shp].[utm10_vl_WGS84] utm10 ON dL.PointData.STWithin(utm10.geom) = 1
 	
 WHERE 1=1
---AND ProjectName = '***'
---AND fa.ProjectKey = '16'
+
 AND fa.ProtocolID IN ('29')  ---Vlinders transecten * ,'15','28' removed other protocols
---AND Aantal > '0'
---AND fwp.VisitStartDate > CONVERT(datetime, '2014-11-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2020-12-31', 120)
---AND projectName = 'Argusvlinder'
---AND fa.FieldworkObservationID =  491520
---ORDER BY speciesName Asc
---ORDER BY fa.FieldworkObservationID
---AND ParentLocationName in ('Groot Schietveld 2','Klein Schietveld')
---AND projectname = 'kommavlinder'
---AND ProjectName = 'heivlinder'
---AND fA.FieldworkSampleID = '190441'
---AND SpeciesLifestageName = 'imago'
+AND fwp.VisitStartDate > CONVERT(datetime, '2020-01-01', 120)
 
 
 
 
 
---SELECT fa.FieldworkSampleID, count(*) as tel
 
-
-/***FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
-	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
-	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
-	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
-	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
-	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
-	--	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
-	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
-
-	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
-WHERE 1=1
---AND ProjectName = 'Vuursalamander'
---AND ProtocolName = 'Vlinders - Transecten'
---AND fa.ProjectKey = '16'
-  AND fa.ProtocolID =  '1'
---  AND fa.FieldworkSampleID in ('196717','196456','197026','54759','194584')
-  --AND ParentLocationGeom IS NULL
---ORDER BY FA.FieldworkSampleID DesC
-
---- Verification by counts ---
---  GROUP BY fa.FieldworkSampleID
---  ORDER BY tel DESC  **/
 
 
 
