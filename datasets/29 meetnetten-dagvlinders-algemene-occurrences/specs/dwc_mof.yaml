@@ -9,7 +9,6 @@ measurementType: # Dataset specific
   allowed: [cloudiness, temperature, wind force]
 
 measurementValue: # Dataset specific
-  empty: true
   if:
     - measurementType:
         allowed: cloudiness
@@ -19,16 +18,14 @@ measurementValue: # Dataset specific
         - partly cloudy (3/8 - 5/8)
         - mostly cloudy (6/8 - 7/8)
         - cloudy (8/8)
-        - unknown
     - measurementType:
         allowed: temperature
-      empty: true
       # numberformat: '.1' # Some are 20 or 22.25
       min: 0
       max: 37
     - measurementType:
         allowed: wind force
-      allowed: ['0', '1', '2', '3', '4', '5', unknown]
+      allowed: ['0', '1', '2', '3', '4', '5']
 
 measurementUnit: # Dataset specific
   if:
