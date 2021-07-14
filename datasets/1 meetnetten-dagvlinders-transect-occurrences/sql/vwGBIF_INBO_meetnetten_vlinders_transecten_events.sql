@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 29/10/2020 10:38:21 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]    Script Date: 11/06/2021 9:54:32 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -27,11 +27,15 @@ GO
 
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event]
-AS**/
+
+/** used Flemish Monitoring Scheme (prtocolId 29) to undouble some double eventID's**/
+
+
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_Event_update]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
-	
+	DISTINCT
 	---RECORD ---
 	 
 --	  [occurrenceID] = N'INBO:MEETNETTEN:OCC:' + Right( N'0000' + CONVERT(nvarchar(20) ,fa.FieldworkObservationID),7)
@@ -46,7 +50,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
-	, [dataGeneralizations] = N'coordinates are generalized from a ' + dL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
+	, [dataGeneralizations] = N'coordinates are generalized from a ' + duL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
 	
 	 ---EVENT---	
 	
@@ -65,12 +69,12 @@ SELECT --fa.*   --unieke kolomnamen
 
 
 	---LOCATION
-	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,dL.LocationID),6) 
+	, [locationID] = N'INBO:MEETNET:LOCATION:' + Right( N'00' + CONVERT(nvarchar(20) ,duL.LocationID),6) 
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 --	, [locality0] = locationName
 --	, [parentLocality0] = parentLocationName
-	, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
+	, [locality] = LTRIM (CONCAT (dul.ParentLocationName,'  ',dul.LocationName))
 	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
 	-- USE FOR UNBLURRED DATA
@@ -159,8 +163,26 @@ SELECT --fa.*   --unieke kolomnamen
 	--						END
 
 
-FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
+FROM dbo.FactAantal fA
+
+
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
+	
+	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
+	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+	INNER JOIN ( SELECT fa.FieldworkSampleID
+					, COALESCE( dlp.LocationKey, dol.LocationKey) as ParentLocationKey
+					, COUNT (*) as Nmbr
+				FROM dbo.FactAantal fa
+				LEFT OUTER JOIN dbo.DimLocation dol ON dol.LocationKey = fa.LocationKey
+				LEFT OUTER JOIN dbo.DimLocation dlp ON dlp.LocationID = dol.ParentLocationID
+				GROUP BY fa.FieldworkSampleID
+					, COALESCE( dlp.LocationKey, dol.LocationKey)
+				) ParentLocation ON  ParentLocation.FieldworkSampleID = fa.FieldworkSampleID
+								--AND ParentLocation.ParentLocationKey = fa.LocationKey
+	--INNER JOIN dbo.DimLocation duL ON duL.LocationKey = ParentLocation.ParentLocationKey
+
 	INNER JOIN ( SELECT *
 					, CASE 
 						WHEN SUBSTRING (dL.LocationGeom.MakeValid().STAsText(),0,CHARINDEX('(',(dL.LocationGeom.MakeValid().STAsText()))) = 'LINESTRING' THEN 'LINESTRING'
@@ -193,65 +215,23 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 							--, 0 )
 						END, 4326) as PointData
 						
-				FROM dbo.DimLocation dL) dL ON dL.LocationKey = fA.LocationKey
-	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
-	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
-	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+				FROM dbo.DimLocation dL) duL ON duL.LocationKey = ParentLocation.ParentLocationKey
+
 --	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
 	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 --	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 	INNER JOIN dbo.DimBlur Dbl ON Dbl.ProjectKey = fa.projectKey
-	INNER JOIN [shp].[utm_vl_WGS84] utm WITH (INDEX(SI_utm_vl_WGS84__geom_1)) ON utm.geom_1.STIntersects(dL.PointData) = 1
+	INNER JOIN [shp].[utm_vl_WGS84] utm WITH (INDEX(SI_utm_vl_WGS84__geom_1)) ON utm.geom_1.STIntersects(duL.PointData) = 1
 	
 	
 	--INNER JOIN [shp].[utm10_vl_WGS84] utm10 ON dL.PointData.STWithin(utm10.geom) = 1
 	
 WHERE 1=1
---AND ProjectName = '***'
---AND fa.ProjectKey = '16'
+
 AND fa.ProtocolID IN ('1')  ---Vlinders transecten * ,'15','28' removed other protocols
---AND Aantal > '0'
-AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
---AND projectName = 'Argusvlinder'
---AND fa.FieldworkObservationID =  491520
---ORDER BY speciesName Asc
---ORDER BY fa.FieldworkObservationID
---AND ParentLocationName in ('Groot Schietveld 2','Klein Schietveld')
---AND projectname = 'kommavlinder'
---AND ProjectName = 'heivlinder'
---AND fA.FieldworkSampleID = '190441'
---AND SpeciesLifestageName = 'imago'
+AND fwp.VisitStartDate < CONVERT(datetime, '2020-12-31', 120)
 
 
-
-
-
---SELECT fa.FieldworkSampleID, count(*) as tel
-
-
-/***FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKey, ProtocolKey, LocationID, ProtocolID, SpeciesActivityID, SpeciesActivityKey, SpeciesLifestageID, SpeciesLifestageKey FROM dbo.FactAantal WHERE FieldworkSampleID > 0) fA
-	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
-	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
-	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
-	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
-	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
-	--	INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
-	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
-
-	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
-WHERE 1=1
---AND ProjectName = 'Vuursalamander'
---AND ProtocolName = 'Vlinders - Transecten'
---AND fa.ProjectKey = '16'
-  AND fa.ProtocolID =  '1'
---  AND fa.FieldworkSampleID in ('196717','196456','197026','54759','194584')
-  --AND ParentLocationGeom IS NULL
---ORDER BY FA.FieldworkSampleID DesC
-
---- Verification by counts ---
---  GROUP BY fa.FieldworkSampleID
---  ORDER BY tel DESC  **/
 
 
 
