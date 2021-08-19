@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_13_sprinkhanen_zadelsprinkhaan_event]    Script Date: 19/08/2021 10:50:12 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_14_sprinkhanen_schavertje_event]    Script Date: 19/08/2021 15:47:31 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,8 +16,8 @@ GO
 
 
 
-/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_13_sprinkhanen_zadelsprinkhaan_event]
-AS**/
+CREATE  VIEW [ipt].[vwGBIF_INBO_meetnetten_14_sprinkhanen_schavertje_event]
+AS
 
 SELECT --fa.*   --unieke kolomnamen 
 	DISTINCT 
@@ -30,9 +30,9 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'https://doi.org/10.15468/ptdpyx'
+	, [datasetID] = N'complete'
 	, [institutionCode] = N'INBO'
-	, [datasetName] = N'Meetnetten.be - Sightings for Ephippiger ephippiger in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Sightings for Stenobothrus stigmaticus in Flanders, Belgium'
 	
 	, [informationWithheld] = N'original locations available upon request'
 	, [dataGeneralizations] = N'coordinates are generalized from a ' + duL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
@@ -43,8 +43,8 @@ SELECT --fa.*   --unieke kolomnamen
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 --	, [basisOfRecord] = N'HumanObservation'
 	, [samplingProtocol] =  CASE Protocolname
-							WHEN 'Sprinkhanen - Wegvangst' THEN 'grasshopper, capture and count'
-							WHEN 'Sprinkhanen - Gebiedstelling' THEN 'grasshoppers site counts'
+							WHEN 'Sprinkhanen - Wegvangst' THEN 'capture and count'
+							WHEN 'Vlinders - Eitellingen' THEN 'butterfly egg counts'
 							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'Flemish butterfly monitoring scheme'
 							WHEN 'Vlinders - Gebiedstelling (v1)' THEN 'butterfly site counts'
 							ELSE ProtocolName
@@ -173,7 +173,7 @@ FROM dbo.FactAantal fA
 	
 WHERE 1=1
 
-AND fa.ProtocolID IN ('13')  ---sprinkhanen zadelsprinkhaan
+AND fa.ProtocolID IN ('14')  ---sprinkhanen schavertje
 AND fwp.VisitStartDate < CONVERT(datetime, '2020-12-31', 120)
 
 

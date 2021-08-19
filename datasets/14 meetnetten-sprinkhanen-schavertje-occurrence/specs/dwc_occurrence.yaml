@@ -1,0 +1,61 @@
+# Scope: dwc-occurrence
+# Author: Peter Desmet
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+basisOfRecord:
+  allowed: HumanObservation
+
+occurrenceID:
+  regex: 'INBO:MEETNET:OCC:\d{6,7}'
+
+recordedBy:
+  allowed: https://meetnetten.be
+
+individualCount:
+  if:
+    - occurrenceStatus:
+        allowed: absent
+      allowed: '0'
+    - occurrenceStatus:
+        allowed: present
+      numberformat: x
+      min: 1
+      max: 500 # Dataset specific
+
+
+
+lifeStage: # Dataset specific
+  allowed: [adult, post-metamorph] # All values are adult
+
+occurrenceStatus:
+  allowed: [present, absent]
+  
+occurrenceRemarkts:
+  allowed: [target species, casual observation]
+
+eventID:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+scientificName: # Dataset specific
+  empty: false
+
+kingdom:
+  allowed: Animalia
+
+phylum: # Dataset specific
+  allowed: Arthropoda
+
+class: # Dataset specific
+  allowed: Insecta
+
+taxonRank: # Dataset specific
+  allowed: species
+
+vernacularName: # Dataset specific
+  empty: false
+
+nomenclaturalCode: # Dataset specific
+  allowed: ICZN

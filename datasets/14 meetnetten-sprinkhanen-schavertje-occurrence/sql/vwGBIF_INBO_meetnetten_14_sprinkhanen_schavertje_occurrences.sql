@@ -1,13 +1,12 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_13_sprinkhanen_zadelsprinkhaan_occurrences]    Script Date: 19/08/2021 10:54:14 ******/
+/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_14_sprinkhanen_schavertje_occurrences]    Script Date: 19/08/2021 15:47:59 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 
 
@@ -31,8 +30,8 @@ GO
 
 
 
-/**CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_13_sprinkhanen_zadelsprinkhaan_occurrences]
-AS**/
+CREATE VIEW [ipt].[vwGBIF_INBO_meetnetten_14_sprinkhanen_schavertje_occurrences]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -86,7 +85,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 --	, fa.ProjectKey
 	, [occurrenceRemarks] = case SpeciesScientificName
-							WHEN 'Ephippiger ephippiger' THEN 'target species'
+							WHEN 'Stenobothrus stigmaticus' THEN 'target species'
 							ELSE 'casual observation'
 							END
 							
@@ -116,13 +115,12 @@ FROM dbo.FactAantal fA
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 WHERE 1=1
 
-AND fa.ProtocolID IN ('13') ---sprinkhanen zadelsprinkhaan
+AND fa.ProtocolID IN ('14') ---sprinkhanen schavertje
 AND fwp.VisitStartDate < CONVERT(datetime, '2020-12-31', 120)
 AND fA.FieldworkSampleID > 0
 --AND SpeciesName NOT IN ('Bleek blauwtje','Boswitje','Oranje steppevlinder','Phegeavlinder','Zuidelijke luzernevlinder')
 --AND speciesName like 'kommavlinder'
 --AND fA.FieldworkSampleID NOT IN ('0529736','0529738','0617922')
-
 
 
 
