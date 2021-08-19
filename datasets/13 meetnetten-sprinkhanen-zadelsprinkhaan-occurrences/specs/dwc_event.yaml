@@ -1,5 +1,5 @@
 # Scope: dwc-event
-# Author: Peter Desmet
+# Author: Dimitri Brosens
 # Syntax version: 0.1
 
 id:
@@ -33,7 +33,7 @@ informationWithheld:
   allowed: original locations available upon request
 
 dataGeneralizations:
-  regex: 'coordinates are generalized from a (POLYGON|MULTIPOLYGON) to a UTM 5km grid'
+  regex: 'coordinates are generalized from a (POLYGON|MULTIPOLYGON) to a UTM 1km grid'
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
