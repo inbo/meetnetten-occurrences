@@ -29,7 +29,7 @@ individualCount:
       max: 500 # Dataset specific
 
 lifeStage: # Dataset specific
-  allowed: [adult, post-metamorph] # All values are adult
+  allowed: adult
 
 occurrenceStatus:
   allowed: [present, absent]

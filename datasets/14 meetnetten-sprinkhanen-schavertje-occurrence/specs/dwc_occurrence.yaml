@@ -5,6 +5,9 @@
 id:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
 
+collectionCode:
+  allowed: meetnetten
+
 basisOfRecord:
   allowed: HumanObservation
 
@@ -25,15 +28,13 @@ individualCount:
       min: 1
       max: 500 # Dataset specific
 
-
-
 lifeStage: # Dataset specific
-  allowed: [adult, post-metamorph] # All values are adult
+  allowed: adult
 
 occurrenceStatus:
   allowed: [present, absent]
   
-occurrenceRemarkts:
+occurrenceRemarks:
   allowed: [target species, casual observation]
 
 eventID:
@@ -51,8 +52,15 @@ phylum: # Dataset specific
 class: # Dataset specific
   allowed: Insecta
 
+order: # Dataset specific
+  allowed: Orthoptera
+
 taxonRank: # Dataset specific
-  allowed: species
+  allowed: [species, genus]
+  if:
+    - scientificName:
+        allowed: Chorthippus spec.
+      allowed: genus
 
 vernacularName: # Dataset specific
   empty: false
