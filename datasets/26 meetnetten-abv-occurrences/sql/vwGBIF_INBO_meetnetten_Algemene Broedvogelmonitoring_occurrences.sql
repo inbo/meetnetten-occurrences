@@ -14,8 +14,8 @@ GO
 /**2021_07_08 rework query
 	occurrenceStatus, DISTINCT, collectionCode**/
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_26_algemene-broedvogelmonitoring_occurrences]
-AS
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_26_algemene-broedvogelmonitoring_occurrences]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -69,7 +69,7 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	---- OCCURRENCE ---
 		
-	, [recordedBy] = 'meetnetten'
+	, [recordedBy] = 'https::/meetnetten.be'
 	, [individualCount] = Aantal
 	, [occurrenceStatus] = case 
 							WHEN aantal >= 1 THEN 'present'
@@ -87,12 +87,13 @@ SELECT --fa.*   --unieke kolomnamen
 
 	, [kingdom] = N'Animalia'
 	, [phylum] = N'Chordata'
-	, [class] = N'AVES'
+	, [class] = N'Aves'
 	, [nomenclaturalCode] = N'ICZN'
 	, [taxonID] = SpeciesEuringCode
+	, [taxonRank] = 'species'
 	
-	, fa.ProjectKey
-
+--	, fa.ProjectKey
+--SELECT *
 FROM dbo.FactAantal fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
