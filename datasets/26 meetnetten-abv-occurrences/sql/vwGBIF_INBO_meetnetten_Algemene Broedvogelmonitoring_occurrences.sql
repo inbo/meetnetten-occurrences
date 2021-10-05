@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_occurrences]    Script Date: 6/09/2019 13:11:32 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_26_algemene-broedvogelmonitoring_occurrences]    Script Date: 5/10/2021 15:40:54 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,21 +11,15 @@ GO
 
 
 
+/**2021_07_08 rework query
+	occurrenceStatus, DISTINCT, collectionCode**/
 
-
-
-
-
-
-/* Generieke query inclusief soorten */
-
-
-ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_occurrences]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_26_algemene-broedvogelmonitoring_occurrences]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
-
+	DISTINCT
 	 [occurrenceID] = N'INBO:MEETNETTEN:AB:OCC:' + Right( N'0000' + CONVERT(nvarchar(20) ,FieldworkObservationID),7)
 
 	---RECORD ---
@@ -48,6 +42,7 @@ SELECT --fa.*   --unieke kolomnamen
 --	, [samplingProtocol] = Protocolname
 	, [lifeStage] = SpeciesLifestageName
 --	, [protocol] = ProtocolSubjectDescription
+	, [collectionCode] = 'ABV'
 	
 --	, [samplingEffort] =
 						
@@ -76,6 +71,11 @@ SELECT --fa.*   --unieke kolomnamen
 		
 	, [recordedBy] = 'meetnetten'
 	, [individualCount] = Aantal
+	, [occurrenceStatus] = case 
+							WHEN aantal >= 1 THEN 'present'
+							ELSE 'absent'
+							END
+							
 
 	
 	
@@ -89,6 +89,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [phylum] = N'Chordata'
 	, [class] = N'AVES'
 	, [nomenclaturalCode] = N'ICZN'
+	, [taxonID] = SpeciesEuringCode
 	
 	, fa.ProjectKey
 
@@ -99,12 +100,20 @@ FROM dbo.FactAantal fA
 	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
 	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
 	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
+	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
+
 
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 WHERE 1=1
 ---AND ProjectName = 'Vuursalamander'
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID =  '26'
+AND fwp.VisitStartDate > CONVERT(datetime, '2016-08-01', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2020-12-31', 120)
+
+
+
+
 
 
 

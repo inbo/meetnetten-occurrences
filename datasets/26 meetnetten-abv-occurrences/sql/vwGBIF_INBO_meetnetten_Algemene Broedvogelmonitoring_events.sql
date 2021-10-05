@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]    Script Date: 9/09/2019 13:55:57 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_26_algemene-broedvogelmonitoring_events]    Script Date: 5/10/2021 15:39:26 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -33,27 +35,27 @@ SELECT * FROM [iptdev].[vwGBIF_INBO_meetnetten_generiek_events];
    06/09/2019 Add eventDate FROM factWerkpakket
  */
 
-/**ALTER VIEW [iptdev].[vwGBIF_INBO_meetnetten_Algemene Broedvogelmonitoring_events]
-AS**/
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_26_algemene-broedvogelmonitoring_events]
+AS
 
 SELECT --fa.*   --unieke kolomnamen
 	
 	---RECORD ---
-
+	  DISTINCT
       [type] = N'Event'
    	, [language] = N'en'
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'meetnettendatasetDOI'
-	, [datasetName] = N'Meetnetten - Algemene broedvogelmonitoring, Belgium'
+	, [datasetName] = N'Meetnetten - Algemene broedvogelmonitoring, Belgium, post 2016'
 	, [institutionCode] = N'INBO'
 	
 	 ---EVENT---	
 	
 	, [eventID] = N'INBO:MEETNET:AB:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) ,(fA.FieldworkSampleID)),6)  
 	, [basisOfRecord] = N'HumanObservation'
-	, [samplingProtocol] = Protocolname
+	, [samplingProtocol] = 'https://publicaties.vlaanderen.be/view-file/29977'
 	, [samplingEffort] = '6 times 5 minutes count/UMT1km'
 --	, [lifeStage] = SpeciesLifestageName
 	, [protocol] = ProtocolSubjectDescription
@@ -72,10 +74,11 @@ SELECT --fa.*   --unieke kolomnamen
 	, [continent] = N'Europe'
 --	, [waterbody] = dL.Location
 	, [countryCode] = N'BE'
-	, [locality] = locationName
-	, [locality2] = ParentLocationName
+--	, [locality1] = locationName
+--	, [locality2] = ParentLocationName
+	, [locality] = RegionName
 	
-	, COALESCE (parentLocationName, locationName) as locality3
+	, [verbatimLocality] = COALESCE (parentLocationName, locationName)
 	
 	,[georeferenceRemarks] = 'coordinates are centroid of used grid square' 
 	
@@ -94,15 +97,17 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
 	INNER JOIN dbo.DimProtocol dProt ON dProt.ProtocolKey = fA.ProtocolKey
---	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
---	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
+	INNER JOIN dbo.DimSpeciesActivity dSA ON dSA.SpeciesActivityKey = fA.SpeciesActivityKey
+	INNER JOIN dbo.DimSpeciesLifestage dSL ON dSL.SpeciesLifestageKey = fA.SpeciesLifestageKey
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
 WHERE 1=1
---AND ProjectName = 'Vuursalamander'
---AND ProtocolName = 'vuursalamander transecten'
---AND fa.ProjectKey = '16'
+
 AND fa.ProtocolID =  '26'
+AND fwp.VisitStartDate > CONVERT(datetime, '2016-08-01', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2020-12-31', 120)
+
+
 
 
 
