@@ -6,8 +6,8 @@ id:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
 
 collectionCode:
-  allowed: meetnetten
-
+  allowed: ABV
+  
 basisOfRecord:
   allowed: HumanObservation
 
@@ -34,8 +34,6 @@ lifeStage: # Dataset specific
 occurrenceStatus:
   allowed: [present, absent]
   
-occurrenceRemarks:
-  allowed: [target species, casual observation]
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
@@ -47,16 +45,17 @@ kingdom:
   allowed: Animalia
 
 phylum: # Dataset specific
-  allowed: Arthropoda
+  allowed: Chordata
 
 class: # Dataset specific
-  allowed: Insecta
+  allowed: Aves
 
-order: # Dataset specific
-  allowed: Orthoptera
 
 taxonRank: # Dataset specific
   allowed: species
+  
+taxonID:
+    empty: false
 
 vernacularName: # Dataset specific
   empty: false
