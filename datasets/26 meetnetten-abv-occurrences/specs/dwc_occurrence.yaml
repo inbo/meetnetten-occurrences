@@ -33,7 +33,6 @@ lifeStage: # Dataset specific
 
 occurrenceStatus:
   allowed: [present, absent]
-  
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
@@ -50,12 +49,11 @@ phylum: # Dataset specific
 class: # Dataset specific
   allowed: Aves
 
-
 taxonRank: # Dataset specific
   allowed: species
   
 taxonID:
-    empty: false
+  empty: false
 
 vernacularName: # Dataset specific
   empty: false

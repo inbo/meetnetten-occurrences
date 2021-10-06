@@ -21,33 +21,25 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: "https://doi.org/****"
+  allowed: ""
 
 institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten - Algemene broedvogelmonitoring, Belgium, post 2016
-
-
+  allowed: Meetnetten - Common breeding birds in Flanders, Belgium, post 2016
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
 
-
-
 samplingProtocol: # Dataset specific
   allowed: https://publicaties.vlaanderen.be/view-file/29977
-  
-basisOfRecord:
-    allowed: HumanObservation
 
 samplingEffort:
-  empty: false
+  allowed: 6 times 5 minutes count per UTM 1km
 
 eventDate:
-  dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
-
+  dateformat: ['%Y-%m-%dT%H:%M'] # YYYY-MM-DDTHH:MM
 
 locationID:
   regex: 'INBO:MEETNET:LOCATION:\d{6}'
@@ -59,6 +51,9 @@ countryCode:
   allowed: BE
 
 locality:
+  empty: true
+
+verbatimLocality:
   empty: false
 
 decimalLatitude:
@@ -73,12 +68,6 @@ decimalLongitude:
 
 geodeticDatum:
   allowed: WGS84
-  
-locality:
-    empty: true
-   
-verbatimLocality:
-  empty: false
 
 coordinateUncertaintyInMeters: # Dataset specific
   allowed: '707'
