@@ -50,10 +50,17 @@ class: # Dataset specific
   allowed: Aves
 
 taxonRank: # Dataset specific
-  allowed: species
+  allowed: [species, subspecies]
+  if:
+    - scientificName:
+        allowed:
+          - Carduelis flammea cabaret
+          - Motacilla flava flavissima
+          - Motacilla alba yarelli
+      allowed: subspecies
   
 taxonID:
-  empty: false
+  regex: 'euring:\d{5}'
 
 vernacularName: # Dataset specific
   empty: false
