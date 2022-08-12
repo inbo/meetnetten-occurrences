@@ -33,8 +33,8 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_42_lentevuurspin_occurrences_2022]
-AS
+/**ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_42_lentevuurspin_occurrences_2022]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -90,10 +90,10 @@ SELECT --fa.*   --unieke kolomnamen
 						  when  'Chorthippus spec.' THEN  N'genus'
 						  Else  'species'
 						  END
-	
+	, [vernacularName] = 'Lentevuurspin'
 --	, fa.ProjectKey
 	, [occurrenceRemarks] = case SpeciesScientificName
-							WHEN 'Ephippiger ephippiger' THEN 'target species'
+							WHEN 'Eresus sandaliatus' THEN 'target species'
 							ELSE 'casual observation'
 							END
 							
