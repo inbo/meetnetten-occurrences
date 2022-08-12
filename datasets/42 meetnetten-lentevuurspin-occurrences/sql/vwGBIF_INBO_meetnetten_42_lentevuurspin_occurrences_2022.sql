@@ -1,13 +1,12 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_11_lentevuurspin_occurrences_2022]    Script Date: 12/08/2022 9:12:31 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_42_lentevuurspin_occurrences_2022]    Script Date: 12/08/2022 9:15:13 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 
 
@@ -34,7 +33,7 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_11_lentevuurspin_occurrences_2022]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_42_lentevuurspin_occurrences_2022]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -94,7 +93,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 --	, fa.ProjectKey
 	, [occurrenceRemarks] = case SpeciesScientificName
-							WHEN 'Eresus sandaliatus' THEN 'target species'
+							WHEN 'Ephippiger ephippiger' THEN 'target species'
 							ELSE 'casual observation'
 							END
 							
@@ -130,7 +129,6 @@ AND fA.FieldworkSampleID > 0
 --AND SpeciesName NOT IN ('Bleek blauwtje','Boswitje','Oranje steppevlinder','Phegeavlinder','Zuidelijke luzernevlinder')
 --AND speciesName like 'kommavlinder'
 --AND fA.FieldworkSampleID NOT IN ('0529736','0529738','0617922')
-
 
 
 
