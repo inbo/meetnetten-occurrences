@@ -27,7 +27,7 @@ institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten - Common breeding birds in Flanders, Belgium, post 2016
+  allowed: ABV - Common breeding birds in Flanders, Belgium (post 2016)
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
@@ -42,7 +42,7 @@ eventDate:
   dateformat: ['%Y-%m-%dT%H:%M'] # YYYY-MM-DDTHH:MM
 
 locationID:
-  regex: 'INBO:MEETNET:LOCATION:\d{6}'
+  regex: 'INBO:MEETNET:LOCATION:\d{6,7}'
 
 continent:
   allowed: Europe
@@ -50,11 +50,8 @@ continent:
 countryCode:
   allowed: BE
 
-locality:
-  empty: true
-
 verbatimLocality:
-  empty: false
+  regex: 'ABV_[DFEG][ST]\d{4}'
 
 decimalLatitude:
   numberformat: '.5'
