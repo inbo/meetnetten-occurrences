@@ -27,7 +27,7 @@ institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten.be - Site counts for Eresus sandaliatus in Flanders, Belgium
+  allowed: Meetnetten.be - Area counts for Eresus sandaliatus in Flanders, Belgium
 
 informationWithheld:
   allowed: original locations available upon request
@@ -42,7 +42,7 @@ parentEventID:
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
 samplingProtocol: # Dataset specific
-  allowed: transect
+  allowed: area count
 
 eventDate:
   dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
