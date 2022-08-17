@@ -21,13 +21,13 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: "to complete"
+  allowed: ""
 
 institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten.be - site counts for Eresus sandaliatus in Flanders, Belgium
+  allowed: Meetnetten.be - Site counts for Eresus sandaliatus in Flanders, Belgium
 
 informationWithheld:
   allowed: original locations available upon request
