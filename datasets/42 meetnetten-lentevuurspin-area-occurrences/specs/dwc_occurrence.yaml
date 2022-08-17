@@ -15,9 +15,9 @@ recordedBy:
   allowed: https://meetnetten.be
   
 collectionCode:
-    allowed: meetnetten
+  allowed: meetnetten
 
-individualCount:
+organismQuantity:
   if:
     - occurrenceStatus:
         allowed: absent
@@ -26,17 +26,19 @@ individualCount:
         allowed: present
       numberformat: x
       min: 1
-      max: 500 # Dataset specific, above 500 --> check
+      max: 500 # Dataset specific, values above 500 should be verified
 
-
-sex:
-  allowed: [male, female, unknown] # All values are unknown
+organismQuantityType:
+  allowed: number of webs
 
 lifeStage: # Dataset specific
-  allowed: [adult, unknown, juvenile] # 
+  allowed: [adult, unknown, juvenile]
 
 occurrenceStatus:
   allowed: [present, absent]
+
+occurrenceRemarks:
+  allowed: target species
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
@@ -53,6 +55,9 @@ phylum: # Dataset specific
 
 class: # Dataset specific
   allowed: Arachnida
+
+order: # Dataset specific
+  allowed: Aranea
 
 taxonRank: # Dataset specific
   allowed: species
