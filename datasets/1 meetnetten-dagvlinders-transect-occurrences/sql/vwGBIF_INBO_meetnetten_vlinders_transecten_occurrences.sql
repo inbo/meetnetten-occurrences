@@ -1,27 +1,12 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 29/10/2020 10:41:27 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_1_vlinders_transecten_occurrences]    Script Date: 16/08/2022 11:11:43 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -55,6 +40,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
+	, [collectionCode] = 'meetnetten'
 --	, [samplingProtocol] = Protocolname
 	
 	, [occurrenceStatus] = case
@@ -70,6 +56,7 @@ SELECT --fa.*   --unieke kolomnamen
 						  when SpeciesScientificName IN ('Erynnis tages') AND fa.ProjectKey = 162  then 'target species'
 						  when SpeciesScientificName IN ('Cyaniris semiargus') AND fa.ProjectKey = 167  then 'target species'
 						  when SpeciesScientificName IN ('Hesperia comma') AND fa.ProjectKey = 30  then 'target species'
+						  when SpeciesScientificName IN ('Euphydryas aurinia') AND fa.ProjectKey = 223  then 'target species'
 						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
@@ -141,9 +128,14 @@ WHERE 1=1
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID IN ('1') ---Vlinders transecten removed ,'15','28'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2018-12-31', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2021-12-31', 120)
 
 --AND SpeciesScientificName like 'Pieris spec.'
+
+
+
+
+
 
 
 
