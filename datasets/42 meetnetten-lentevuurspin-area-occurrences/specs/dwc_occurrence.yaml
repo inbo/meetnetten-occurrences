@@ -31,9 +31,6 @@ organismQuantity:
 organismQuantityType:
   allowed: number of webs
 
-lifeStage: # Dataset specific
-  allowed: [adult, unknown, juvenile]
-
 occurrenceStatus:
   allowed: [present, absent]
 
