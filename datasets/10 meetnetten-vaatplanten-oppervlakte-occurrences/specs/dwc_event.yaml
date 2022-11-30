@@ -1,0 +1,82 @@
+# Scope: dwc-event
+# Author: Peter Desmet; Dimitri Brosens
+# Syntax version: 0.1
+
+id:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+type:
+  allowed: Event
+
+language:
+  allowed: en
+
+license:
+  allowed: http://creativecommons.org/publicdomain/zero/1.0/
+
+rightsHolder:
+  allowed: INBO
+
+accessRights:
+  allowed: https://www.inbo.be/en/norms-data-use
+
+datasetID: # Dataset specific
+  allowed: "https://doi.org/10.15468/3775j6"
+
+institutionCode:
+  allowed: INBO
+
+datasetName: # Dataset specific
+  allowed: Meetnetten.be - Occupancy estimates of priority vascular plants species in Flanders, Belgium
+
+parenteEventID: 
+  regex: 'INBO:MEETNET:VISITID:\d{6}'
+
+informationWithheld:
+  allowed: original locations available upon request
+
+dataGeneralizations:
+  regex: 'coordinates are generalized from a (POLYGON|MULTIPOLYGON) to a UTM \d{1}km grid'
+
+eventID:
+  regex: 'INBO:MEETNET:EVENT:\d{6}'
+
+samplingProtocol: # Dataset specific
+  allowed: vascular plants - coverage
+
+eventDate:
+  dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
+
+eventRemarks:
+  regex: 'data collected in the .*'
+
+locationID:
+  regex: 'INBO:MEETNET:LOCATION:\d{6}'
+
+continent:
+  allowed: Europe
+
+countryCode:
+  allowed: BE
+
+locality:
+  empty: false
+
+decimalLatitude:
+  numberformat: '.5'
+  min: 50.67 # SE Flanders
+  max: 51.51 # NW Belgium
+
+decimalLongitude:
+  numberformat: '.5'
+  min: 2.53 # NW Belgium
+  max: 5.94 # SE Flanders
+
+geodeticDatum:
+  allowed: WGS84
+
+coordinateUncertaintyInMeters: # Dataset specific
+  allowed: ['3536','707']
+  
+georeferenceRemarks:
+  allowed: coordinates are centroid of used grid square

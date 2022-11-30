@@ -1,12 +1,13 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_42_lentevuurspin_events_2022]    Script Date: 12/08/2022 9:13:15 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_42_lentevuurspin_events_2022]    Script Date: 17/08/2022 15:57:14 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -31,9 +32,9 @@ SELECT --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'complete'
+	, [datasetID] = N''
 	, [institutionCode] = N'INBO'
-	, [datasetName] = N'Meetnetten.be - site counts for Eresus sandaliatus in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten.be - Area counts for Eresus sandaliatus in Flanders, Belgium'
 	
 	, [informationWithheld] = N'original locations available upon request'
 	, [dataGeneralizations] = N'coordinates are generalized from a ' + duL.GeoType + N' to a ' + dbl.BlurHokType + N' grid'
@@ -47,7 +48,7 @@ SELECT --fa.*   --unieke kolomnamen
 							WHEN 'Sprinkhanen - Wegvangst' THEN 'grasshopper, capture and count'
 							WHEN 'Sprinkhanen - Gebiedstelling' THEN 'grasshoppers site counts'
 							WHEN 'Vlinders - Transecten (algemene monitoring)' THEN 'Flemish butterfly monitoring scheme'
-							WHEN 'Lentevuurspin - Gebiedstelling' THEN 'site counts, complete census'
+							WHEN 'Lentevuurspin - Gebiedstelling' THEN 'area count'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
@@ -174,8 +175,9 @@ FROM dbo.FactAantal fA
 	
 WHERE 1=1
 
-AND fa.ProtocolID IN ('42')  ---gebiedstelling lentevuurspin
+AND fa.ProtocolID IN ('42')  ---gebiedstelling area count lentevuurspin
 AND fwp.VisitStartDate < CONVERT(datetime, '2021-12-31', 120)
+
 
 
 

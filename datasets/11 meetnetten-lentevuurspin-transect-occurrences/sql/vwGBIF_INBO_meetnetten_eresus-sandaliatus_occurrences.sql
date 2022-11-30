@@ -1,12 +1,14 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_11_lentevuurspin_occurrences_2022]    Script Date: 12/08/2022 9:12:31 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_11_lentevuurspin_occurrences_2022]    Script Date: 17/08/2022 15:55:54 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -34,8 +36,8 @@ GO
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_11_lentevuurspin_occurrences_2022]
-AS
+/***ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_11_lentevuurspin_occurrences_2022]
+AS**/
 
 SELECT --fa.*   --unieke kolomnamen
 	
@@ -66,8 +68,8 @@ SELECT --fa.*   --unieke kolomnamen
 	---- OCCURRENCE ---
 		
 	, [recordedBy] = 'https://meetnetten.be'
-	, [individualCount] = Aantal
-	, [lifeStage] = SpeciesLifestageName
+--	, [individualCount] = Aantal
+--	, [lifeStage] = SpeciesLifestageName
 	, [organismQuantity] = Aantal
 	, [organismQuantityType] = CASE 
 								WHEN ProtocolSubjectName = 'aantal webjes' THEN 'number of webs'
@@ -124,12 +126,14 @@ FROM dbo.FactAantal fA
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 WHERE 1=1
 
-AND fa.ProtocolID IN ('42') ---lentevuurspin
+AND fa.ProtocolID IN ('11') ---lentevuurspin transects
 AND fwp.VisitStartDate < CONVERT(datetime, '2021-12-31', 120)
 AND fA.FieldworkSampleID > 0
 --AND SpeciesName NOT IN ('Bleek blauwtje','Boswitje','Oranje steppevlinder','Phegeavlinder','Zuidelijke luzernevlinder')
 --AND speciesName like 'kommavlinder'
 --AND fA.FieldworkSampleID NOT IN ('0529736','0529738','0617922')
+
+
 
 
 

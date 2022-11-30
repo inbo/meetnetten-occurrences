@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_35_vaatplanten_individuen_occurrences]    Script Date: 28/08/2020 16:18:17 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_35_vaatplanten_individuen_occurrences_meas]    Script Date: 30/11/2022 11:21:36 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,10 +13,15 @@ GO
 
 
 
+
+
+
+
+
 /* Generieke query inclusief soorten */
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_35_vaatplanten_individuen_occurrences]
+ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_35_vaatplanten_individuen_occurrences_meas]
 AS
 
 SELECT --fa.*   --unieke kolomnamen
@@ -32,7 +37,7 @@ SELECT --fa.*   --unieke kolomnamen
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
 	, [datasetID] = N'meetnettendatasetDOI'
-	, [datasetName] = N'Meetnetten - vascular plants, surface in Flanders, Belgium'
+	, [datasetName] = N'Meetnetten - vascular plants, surface in Flanders, Belgium count'
 	, [institutionCode] = N'INBO'
 
 	**/
@@ -41,6 +46,7 @@ SELECT --fa.*   --unieke kolomnamen
 	
 	, [eventID ] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
 	, [basisOfRecord] = N'HumanObservation'
+	, [collectionCode] = 'meetnetten'
 --	, [samplingProtocol] = Protocolname
 	, [lifeStage] = CASE SpeciesLifestageName
 					WHEN 'exuvium' THEN 'exuviae'
@@ -63,10 +69,12 @@ SELECT --fa.*   --unieke kolomnamen
 						  when SpeciesName IN ('Welriekende nachtorchis') AND fa.ProjectKey = 140  then 'target species'
 						  when SpeciesName IN ('Duingentiaan') AND fa.ProjectKey = 56  then 'target species'
 						  when SpeciesName IN ('Harlekijn') AND fa.ProjectKey = 72  then 'target species'
+						  when SpeciesName IN ('Honingorchis') AND fa.ProjectKey = 76  then 'target species'
+						  when SpeciesName IN ('Fijn goudscherm') AND fa.ProjectKey = 60  then 'target species'
 						  Else 'casual observation'
 						  END
 --	, [protocol] = ProtocolSubjectDescription
-	
+	, fa.projectKey
 --	, [samplingEffort] =
 						
 --	,[eventDate] = SampleDate
@@ -93,7 +101,7 @@ SELECT --fa.*   --unieke kolomnamen
 	---- OCCURRENCE ---
 		
 	, [recordedBy] = 'https://meetnetten.be'
-	, [individualCount] = Aantal
+--	, [individualCount] = Aantal
 	--, [sex] = CASE Geslacht
 	--			WHEN 'U' THEN 'unknown'
 	--			WHEN 'M' THEN 'male'
@@ -104,13 +112,26 @@ SELECT --fa.*   --unieke kolomnamen
 	  , protocolName	
 	----Taxon
 
+
+	, [organismQuantityType] = CASE sm.schaal 
+								WHEN 'Floron class (count)' THEN 'Floron scale plant count'
+								ELSE sm.schaal
+								END
+	, [organismQuantity] = CASE sm.code_betekenis
+							WHEN 'afwezig' THEN 'absent'
+							ELSE code + ' (' + sm.code_betekenis + ')'
+							END
+--	, sm.code
+--  , sm.code_betekenis
+	
+
+
+
 	, [scientificName] = SpeciesScientificName
 	, [vernacularName] = SpeciesName
-	, [kingdom] = N'Animalia'
-	, [phylum] = N'Chordata'
-	, [class] = N'Amphibia'
---	, [order] = N''
-	, [nomenclaturalCode] = N'ICZN'
+	, [kingdom] = N'Plantae'
+	--	, [order] = N''
+	, [nomenclaturalCode] = N'ICBN'
 	, [taxonRank] =	 case  SpeciesScientificName
 						  when  'Pieris spec.' THEN  N'genus'
 						  Else 'species'
@@ -121,6 +142,11 @@ SELECT --fa.*   --unieke kolomnamen
 
 
 	
+    , sm.validatiestatus_observatie
+	, sm.validatie_bezoek
+	, bruikbaar
+	--4645
+--SELECT *	
 FROM dbo.FactAantal fA
 	INNER JOIN dbo.dimProject dP ON dP.ProjectKey = fA.ProjectKey
 	INNER JOIN dbo.DimLocation dL ON dL.LocationKey = fA.LocationKey
@@ -130,6 +156,55 @@ FROM dbo.FactAantal fA
 	INNER JOIN dbo.DimSpecies dSP ON dsp.SpeciesKey = fa.SpeciesKey
 	INNER JOIN dbo.DimBlur Dbl ON Dbl.ProjectKey = fa.projectKey
 	INNER JOIN (SELECT DISTINCT(FieldworkSampleID), VisitStartDate FROM dbo.FactWerkpakket ) FWp ON FWp.FieldworkSampleID = fa.FieldworkSampleID
+	INNER JOIN (SELECT *
+						FROM ( SELECT   p.[name] AS meetnet
+									, pr.id as Protocol_ID
+									, o.id AS observation_id
+									, sc.[name] as schaal
+									, scc.code AS code
+									, scc.[description] AS code_betekenis
+									, o.reference AS referentie
+									, CASE 
+										WHEN v.validation_status = -1 THEN 'afgekeurd'
+										WHEN v.validation_status = 100 THEN 'goedgekeurd'
+										WHEN v.validation_status = 10 THEN 'open'
+										ELSE NULL
+									  END AS validatie_bezoek
+									, CASE WHEN o.validation_status_id = 1 THEN 'open'
+										WHEN o.validation_status_id = 2 THEN 'in behandeling'
+										WHEN o.validation_status_id = 3 THEN 'in behandeling'
+										WHEN o.validation_status_id = 4 THEN 'goedgekeurd'
+										WHEN o.validation_status_id = 5 THEN 'afgekeurd'
+										WHEN o.validation_status_id = 6 THEN 'niet te beoordelen'
+										WHEN o.validation_status_id = 7 THEN 'gevalideerd via bezoek'
+										ELSE 'open'
+									  END AS validatiestatus_observatie
+									, REPLACE(fc.notes, CHAR(10) + CHAR(13), ' ') AS validatie_opmerkingen
+									, CASE WHEN v.validation_status = -1 THEN 0 
+										WHEN o.validation_status_id = 5 THEN 0
+										ELSE 1 
+									  END AS bruikbaar
+								FROM staging_Meetnetten.projects_project p
+									INNER JOIN staging_Meetnetten.fieldwork_visit v ON v.project_id = p.id
+									INNER JOIN staging_Meetnetten.locations_location l ON l.id = v.location_id
+									INNER JOIN staging_Meetnetten.protocols_protocol pr ON pr.id = v.protocol_id
+									INNER JOIN staging_Meetnetten.accounts_user u ON u.id = v.user_id
+									
+									INNER JOIN staging_Meetnetten.fieldwork_sample s ON s.visit_id = v.id
+									INNER JOIN staging_Meetnetten.fieldwork_observation o ON o.sample_id = s.id
+
+									LEFT JOIN staging_Meetnetten.protocols_scale sc ON sc.id = o.scale_id
+									LEFT JOIN staging_Meetnetten.protocols_scalecode scc ON scc.id = o.scale_code_id
+									LEFT JOIN staging_Meetnetten.species_species sp ON sp.id = o.species_id
+									LEFT JOIN staging_Meetnetten.fieldwork_comment fc ON fc.observation_id = o.id
+								WHERE 1 = 1
+								AND p.group_id = 5 --planten
+								)tmp 
+							WHERE tmp.bruikbaar = 1
+						) SM ON sm.observation_id = fa.FieldworkObservationID 
+							AND sm.Protocol_ID = fa.ProtocolID
+	--LIMIT 100
+
 
 	--INNER JOIN FactCovariabele FCo ON FCo.FieldworkSampleID = fA.FieldworkSampleID
 WHERE 1=1
@@ -137,23 +212,10 @@ WHERE 1=1
 --AND fa.ProjectKey = '16'
 AND fa.ProtocolID IN ('35') ---vaatplanten
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
-AND fwp.VisitStartDate < CONVERT(datetime, '2019-12-31', 120)
+AND fwp.VisitStartDate < CONVERT(datetime, '2021-12-31', 120)
+--AND ( sm.schaal IS NULL OR sm.code_betekenis IS NULL OR Aantal =0)
 
 --AND SpeciesScientificName like 'Pieris spec.'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
