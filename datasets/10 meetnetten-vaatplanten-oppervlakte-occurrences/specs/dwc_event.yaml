@@ -1,5 +1,5 @@
 # Scope: dwc-event
-# Author: Peter Desmet; Dimitri Brosens
+# Author: Dimitri Brosens
 # Syntax version: 0.1
 
 id:
@@ -21,28 +21,28 @@ accessRights:
   allowed: https://www.inbo.be/en/norms-data-use
 
 datasetID: # Dataset specific
-  allowed: "https://doi.org/10.15468/3775j6"
+  allowed: "https://doi.org/10.15468/u92anx"
 
 institutionCode:
   allowed: INBO
 
 datasetName: # Dataset specific
-  allowed: Meetnetten.be - Occupancy estimates of priority vascular plants species in Flanders, Belgium
+  allowed: Meetnetten.be - Population counts of priority vascular plants species in Flanders, Belgium
 
-parenteEventID: 
+parentEventID: 
   regex: 'INBO:MEETNET:VISITID:\d{6}'
 
 informationWithheld:
   allowed: original locations available upon request
 
 dataGeneralizations:
-  regex: 'coordinates are generalized from a (POLYGON|MULTIPOLYGON) to a UTM \d{1}km grid'
+  regex: 'coordinates are generalized from a (POLYGON|MULTIPOLYGON) to a UTM \d{1,2}km grid'
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
 
 samplingProtocol: # Dataset specific
-  allowed: vascular plants - coverage
+  allowed: vascular plants - individual count
 
 eventDate:
   dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
@@ -76,7 +76,17 @@ geodeticDatum:
   allowed: WGS84
 
 coordinateUncertaintyInMeters: # Dataset specific
-  allowed: ['3536','707']
+  if:
+    - dataGeneralizations:
+        regex: '.*UTM 1km grid'
+      allowed: '707'
+    - dataGeneralizations:
+        regex: '.*UTM 5km grid'
+      allowed: '3536'
+    - dataGeneralizations:
+        regex: '.*UTM 10km grid'
+      allowed: '7071'
+  allowed: ['707', '3536', '7071']
   
 georeferenceRemarks:
   allowed: coordinates are centroid of used grid square

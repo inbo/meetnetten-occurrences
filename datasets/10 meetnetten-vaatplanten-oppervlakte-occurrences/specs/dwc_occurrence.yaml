@@ -1,5 +1,5 @@
 # Scope: dwc-occurrence
-# Author: Peter Desmet, Dimitri Brosens
+# Author: Dimitri Brosens, Peter Desmet
 # Syntax version: 0.1
 
 id:
@@ -10,37 +10,34 @@ basisOfRecord:
 
 occurrenceID:
   regex: 'INBO:MEETNET:OCC:\d{6,7}'
-  
+
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
 
 recordedBy:
   allowed: https://meetnetten.be
-  
+
 collectionCode:
   allowed: meetnetten
 
 occurrenceStatus:
   allowed: [present, absent]
-  
+
 occurrenceRemarks:
   allowed: target species
-    
+
 recordedBy:
   allowed: https://meetnetten.be
-  
-protocolName: 
-  allowed: Vaatplanten - Oppervlakte
- 
+
 organismQuantityType:
-  allowed: Floron scale plant cover
-   
+  allowed: Floron scale plant count
+
 organismQuantity:
   empty: false
-  
+
 scientificName: # Dataset specific
   empty: false
-  
+
 vernacularName:
   empty: false
 
