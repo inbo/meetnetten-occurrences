@@ -30,7 +30,7 @@ recordedBy:
   allowed: https://meetnetten.be
 
 organismQuantityType:
-  allowed: Floron scale plant count
+  allowed: Floron scale plant cover
 
 organismQuantity:
   empty: false
