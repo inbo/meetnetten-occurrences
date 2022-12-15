@@ -1,5 +1,5 @@
 # Scope: dwc-event
-# Author: Peter Desmet; Dimitri Brosens
+# Author: Dimitri Brosens, Peter Desmet
 # Syntax version: 0.1
 
 id:
@@ -29,14 +29,14 @@ datasetName: # Dataset specific
 institutionCode:
   allowed: INBO
   
-parenteEventID: 
+parentEventID: 
    regex: 'INBO:MEETNET:VISITID:\d{6}'
 
 informationWithheld:
   allowed: original locations available upon request
 
 dataGeneralizations:
-  regex: 'coordinates are generalized from a (POLYGON|MULTIPOLYGON) to a UTM \d{1}km grid'
+  regex: 'coordinates are generalized from a (POLYGON|MULTIPOLYGON) to a UTM \d{1,2}km grid'
 
 eventID:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
@@ -79,7 +79,17 @@ geodeticDatum:
   allowed: WGS84
 
 coordinateUncertaintyInMeters: # Dataset specific
-  allowed: ['3536','707','3536']
+  if:
+    - dataGeneralizations:
+        regex: '.*UTM 1km grid'
+      allowed: '707'
+    - dataGeneralizations:
+        regex: '.*UTM 5km grid'
+      allowed: '3536'
+    - dataGeneralizations:
+        regex: '.*UTM 10km grid'
+      allowed: '7071'
+  allowed: ['707','3536', '7071']
   
 
 

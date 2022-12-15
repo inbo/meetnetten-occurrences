@@ -1,5 +1,5 @@
 # Scope: dwc-occurrence
-# Author: Peter Desmet, Dimitri Brosens
+# Author: Dimitri Brosens, Peter Desmet
 # Syntax version: 0.1
 
 id:
@@ -28,12 +28,9 @@ occurrenceRemarks:
     
 recordedBy:
   allowed: https://meetnetten.be
-  
-protocolName: 
-  allowed: Vaatplanten - Oppervlakte
  
 organismQuantityType:
-   allowed: Floron scale plant cover
+   allowed: Floron scale plant count
    
 organismQuantity:
    empty: false
