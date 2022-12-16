@@ -1,5 +1,5 @@
 # Scope: dwc-event
-# Author: Peter Desmet; Dimitri Brosens
+# Author: Dimitri Brosens, Peter Desmet
 # Syntax version: 0.1
 
 id:
@@ -76,7 +76,14 @@ geodeticDatum:
   allowed: WGS84
 
 coordinateUncertaintyInMeters: # Dataset specific
-  allowed: ['3536','707']
+  if:
+    - dataGeneralizations:
+        regex: '.*UTM 1km grid'
+      allowed: '707'
+    - dataGeneralizations:
+        regex: '.*UTM 5km grid'
+      allowed: '3536'
+  allowed: ['707', '3536']
   
 georeferenceRemarks:
   allowed: coordinates are centroid of used grid square
