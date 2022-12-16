@@ -1,7 +1,7 @@
 USE [S0008_00_Meetnetten]
 GO
 
-/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_10_vaatplanten_oppervlakte_events]    Script Date: 16/12/2022 13:41:13 ******/
+/****** Object:  View [ipt].[vwGBIF_INBO_meetnetten_35_vaatplanten_individuen_events]    Script Date: 16/12/2022 13:42:36 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,14 +18,19 @@ GO
 
 
 
--- 2021_06_16 isssue convert numeric nvarchar opgelost, kijk naar de check this
 
 
 
-ALTER VIEW [ipt].[vwGBIF_INBO_meetnetten_10_vaatplanten_oppervlakte_events]
-AS
 
-SELECT TOP 1000 --fa.*   --unieke kolomnamen 
+
+
+
+
+
+/**VIEW [ipt].[vwGBIF_INBO_meetnetten_35_vaatplanten_individuen_events]
+AS**/
+
+SELECT  --fa.*   --unieke kolomnamen 
 	
 	---RECORD ---
 	 
@@ -36,8 +41,8 @@ SELECT TOP 1000 --fa.*   --unieke kolomnamen
 	, [license] = N'http://creativecommons.org/publicdomain/zero/1.0/'
 	, [rightsHolder] = N'INBO'
 	, [accessRights] = N'https://www.inbo.be/en/norms-data-use'
-	, [datasetID] = N'https://doi.org/10.15468/3775j6'
-	, [datasetName] = N'Meetnetten.be - Occupancy estimates of priority vascular plants species in Flanders, Belgium'
+	, [datasetID] = N'https://doi.org/10.15468/u92anx'
+	, [datasetName] = N'Meetnetten.be - Population counts of priority vascular plants species in Flanders, Belgium'
 	, [institutionCode] = N'INBO'
 	, [parentEventID] = N'INBO:MEETNET:VISITID:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkVisitID),6)
 	, [informationWithheld] = N'original locations available upon request'
@@ -49,6 +54,7 @@ SELECT TOP 1000 --fa.*   --unieke kolomnamen
 							WHEN dbl.BlurHokType = 'UTM 10Km' THEN 'UTM 10km'
 							ELSE 'checkthis'
 							END )+ N' grid'
+	
 	 ---EVENT---	
 	
 	, [eventID] = N'INBO:MEETNET:EVENT:' + Right( N'000000000' + CONVERT(nvarchar(20) , fA.FieldworkSampleID),6)  
@@ -56,7 +62,7 @@ SELECT TOP 1000 --fa.*   --unieke kolomnamen
 	, [samplingProtocol] =  CASE Protocolname
 							WHEN 'Libellen - Transect' THEN 'dragonfly transects'
 							WHEN 'Amfibieën - Fuiken (v1)' THEN 'amphibia fykes'
-							WHEN 'Vaatplanten - Oppervlakte' THEN 'vascular plants - coverage'
+							WHEN 'Vaatplanten - Aantal individuen' THEN 'vascular plants - individual count'
 							ELSE ProtocolName
 							END
 --	, fa.ProtocolID
@@ -70,7 +76,7 @@ SELECT TOP 1000 --fa.*   --unieke kolomnamen
 	, [continent] = N'Europe'
 	, [countryCode] = N'BE'
 	, [locality] = locationName
-	--, [parentLocality0] = parentLocationName
+--	, [parentLocality0] = parentLocationName
 	--, [locality] = CONCAT (ParentLocationName,'_ ',locationName)
 	, [georeferenceRemarks] = 'coordinates are centroid of used grid square'
 	
@@ -92,18 +98,18 @@ SELECT TOP 1000 --fa.*   --unieke kolomnamen
 	-- USE FOR BLURRED DATA IN GBIF
 	, [decimalLatitude] =  CASE      --is blurred
 							
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN CONVERT(nvarchar(20) ,utm.Centroid_5_Lat)
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN CONVERT(nvarchar(20) ,utm.Centroid_1_Lat)
-							WHEN dbl.BlurHokType = 'UTM 5Km' THEN CONVERT(nvarchar(20) ,utm.Centroid_5_Lat)
-							WHEN dbl.BlurHokType = 'UTM 10Km' THEN CONVERT(nvarchar(20) ,utm.Centroid_10_Lat)
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN utm.Centroid_5_Lat
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN utm.Centroid_1_Lat
+							WHEN dbl.BlurHokType = 'UTM 5Km' THEN utm.Centroid_5_Lat
+							WHEN dbl.BlurHokType = 'UTM 10Km' THEN utm.Centroid_10_Lat
 							ELSE 'checkthis'
 							END
 	, [decimalLongitude] =  CASE ---is blurred
 							
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN CONVERT(nvarchar(20) , utm.Centroid_5_Long)
-							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN CONVERT(nvarchar(20) , utm.Centroid_1_Long)
-							WHEN dbl.BlurHokType = 'UTM 5Km' THEN CONVERT(nvarchar(20) , utm.Centroid_5_Long)
-							WHEN dbl.BlurHokType = 'UTM 10Km' THEN CONVERT(nvarchar(20) , utm.Centroid_10_Long)
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone = '1' THEN utm.Centroid_5_Long
+							WHEN dbl.BlurHokType = 'UTM 1Km' AND utm.IsInMilZone <> '1' THEN utm.Centroid_1_Long
+							WHEN dbl.BlurHokType = 'UTM 5Km' THEN utm.Centroid_5_Long
+							WHEN dbl.BlurHokType = 'UTM 10Km' THEN utm.Centroid_10_Long
 							ELSE 'checkthis'
 							END
 	, [coordinateUncertaintyInMeters] =  CASE      --is blurred
@@ -210,16 +216,13 @@ FROM (SELECT DISTINCT(FieldworkSampleID),FieldworkVisitID,ProjectKey, LocationKe
 WHERE 1=1
 --AND ProjectName = '***'
 --AND fa.ProjectKey = '16'
-AND fa.ProtocolID IN ('10')  ---vascular plants  
+AND fa.ProtocolID IN ('35')  ---vascular plants  
 --AND Aantal > '0'
 AND fwp.VisitStartDate > CONVERT(datetime, '2016-01-01', 120)
 AND fwp.VisitStartDate < CONVERT(datetime, '2021-12-31', 120)
---AND fA.FieldworkSampleID NOT IN ('193848','193847','193850','000973')
---AND fA.FieldworkSampleID IN ('193848','193847','193850','000973')
-AND fA.LocationKey NOT IN ('4142','3130','3035')
---AND fA.FieldworkSampleID = 003818
+
 --AND projectName = 'Argusvlinder'
---AND fa.FieldworkObservationID =  003817
+--AND fa.FieldworkObservationID =  491520
 --ORDER BY speciesName Asc
 --ORDER BY fa.FieldworkObservationID
 --AND ParentLocationName in ('Groot Schietveld 2','Klein Schietveld')
@@ -257,9 +260,6 @@ WHERE 1=1
 --- Verification by counts ---
 --  GROUP BY fa.FieldworkSampleID
 --  ORDER BY tel DESC  **/
-
-
-
 
 
 
