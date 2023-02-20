@@ -257,7 +257,7 @@ occurrence %<>% mutate(dwc_decimalLatitude = sprintf(
 ```{r}
 occurrence %<>% mutate(dwc_decimalLongitude = sprintf(
   "%.5f",
-  round(long, digits = 5)
+  round(lng, digits = 5)
 ))
 ```
 
@@ -276,7 +276,7 @@ occurrence %<>% mutate(dwc_coordinateUncertaintyInMeters = "30")
 
 
 ```{r}
-occurrence %<>% mutate(dwc_identifiedBy = identified_by)
+occurrence %<>% mutate(dwc_identifiedBy = visit_user_name)
 ```
 
 ```{r}
@@ -296,9 +296,7 @@ occurrence %<>% mutate(dwc_identifiedBy = identified_by)
 ### scientificName
 
 ```{r}
-occurrence %<>% mutate(dwc_scientificName = recode(scientificname
-                                                     ,"Distycus spec." = "Distycus"
-                                                      ))
+occurrence %<>% mutate(dwc_scientificName = scientific_name)
 
 ```
 
@@ -322,8 +320,7 @@ occurrence %<>% mutate(dwc_kingdom = "Animalia")
 ### taxonRank
 
 ```{r}
-occurrence %<>% mutate(dwc_taxonRank = case_when(dwc_scientificName == 'Distycus' ~ 'genus'
-                                                 , TRUE ~ "species"))
+occurrence %<>% mutate(dwc_taxonRank = "species")
 ```
 
 ### nomenclaturalCode
@@ -368,7 +365,7 @@ occurrence %>% head()
 Save to CSV:
 
 ```{r}
-write_csv(occurrence, here::here("darwincore", "processed", "occurrenceSKBC.csv"), na = "")
+write_csv(occurrence, here::here("datasets","meetnetten-vliegendhert_temp","data","processed","occurrence.csv"), na = "")
 ```
 
 # Checks
