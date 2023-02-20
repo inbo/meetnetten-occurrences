@@ -129,7 +129,7 @@ occurrence %<>% mutate(dwc_basisOfRecord = "HumanObservation")
 
 
 ```{r}
-occurrence %<>% mutate(dwc_occurrenceID = str_c("INBO:VG:tr", row_number()))
+occurrence %<>% mutate(dwc_occurrenceID = str_c("INBO:VG:tr:", visit_id ,":" , row_number()))
 
 
 
@@ -143,7 +143,7 @@ occurrence %<>% mutate(dwc_occurrenceID = str_c("INBO:VG:tr", row_number()))
 ### recordedBy
 
 ```{r}
-occurrence %<>% mutate(dwc_recordedBy = recorded_by)
+occurrence %<>% mutate(dwc_recordedBy = visit_user_name)
 ```
 
 ### individualCount
@@ -151,7 +151,7 @@ occurrence %<>% mutate(dwc_recordedBy = recorded_by)
 ```{r}
 #mutate(occurrence$mm)as.numeric()
   
-occurrence %<>% mutate(dwc_individualCount = '')
+occurrence %<>% mutate(dwc_individualCount = number)
 
 ```
 
@@ -164,21 +164,18 @@ occurrence %<>% mutate(dwc_individualCount = '')
 occurrence %<>% mutate(dwc_occurrenceStatus = 'present')
 ```
 
-```{r}
-occurrence %<>% mutate(dwc_occurrenceRemarks = 'bycatch')
-```
 
 
 ### eventID
 
 ```{r}
-occurrence %<>% mutate(dwc_eventID = str_replace_all(event_id, " ",""))
+occurrence %<>% mutate(dwc_eventID = str_c("INBO:VH:EV:" , visit_id))
 ```
 
 ### eventDate
 
 ```{r}
-occurrence %<>% mutate(dwc_eventDate = datum)
+occurrence %<>% mutate(dwc_eventDate = visit_start_date)
 ```
 
 
@@ -186,52 +183,33 @@ occurrence %<>% mutate(dwc_eventDate = datum)
 
 ### habitat
 
-```{r}
-occurrence %<>% mutate(dwc_habitat = recode(type
-                                            , 'Stilstaand' = 'freshwater; stagnant'))
-```
+
 
 ### samplingProtocol
 
 ```{r}
-occurrence %<>% mutate(dwc_samplingProtocol = recode(actie
-                                                     ,"Afvangst" = "catch, fike"
-                                                     ,"YPT" = "yellow pan tras"
-                                                     ,"MT" = "Malaise trap"
-                                                     ,"RsPT" = "pink pan traps"
-                                                     ,"HC" = "collected by hand"
-                                                     ,"YPT/RPT" = "yellow and red pan traps"
-                                                     ,"WPT" = "white pan traps"
-                                                     ,"BPT" = "blue pan traps"
-                                                     )) 
+occurrence %<>% mutate(dwc_samplingProtocol = visit_protocol) 
 ```
 ### sex
 
 ```{r}
-occurrence %<>% mutate(dwc_sex = 'unknown')
+occurrence %<>% mutate(dwc_sex = sex)
 ```
 
 ### lifeStage
 
 ```{r}
-occurrence %<>% mutate(dwc_lifeStage = 'unknown')
+occurrence %<>% mutate(dwc_lifeStage = life_stage)
 
-#ask Sander for info
 
 ```
 
-
-### locationID
-
-```{r}
-occurrence %<>% mutate(dwc_locationID = location_id)
-```
 
 
 ### locality
 
 ```{r}
-occurrence %<>% mutate(dwc_locality = locatie)
+occurrence %<>% mutate(dwc_locality = location)
 
 ```
 
@@ -245,9 +223,20 @@ occurrence %<>% mutate(dwc_continent = "Europe")
 ### countryCode
 
 ```{r}
-occurrence %<>% mutate(dwc_countryCode = 'BE')
+occurrence %<>% mutate(dwc_countryCode = recode (visit_location_country
+                                                 , "Belgium" = "BE"
+                                                 , "Spain" = "ES"
+                                                 , "The Netherlands" = "NL"
+                                                 , "Croatia" = "HR"
+                                                 , "Germany" = "DE"
+                                                 , "Poland" = "PL"
+                                                 , "Serbia" = "RS"
+                                                 , "Slovenia" = "SL"
+                                                 , "Switzerland" = "CH"
+                                                 , "United Kingdom" = "GB"
+                                                 , "Portugal" = "PT"
+                                                 , "Italy" = "IT" ))
 ```
-
 
 
 ### locationRemarks
