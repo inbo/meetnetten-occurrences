@@ -95,7 +95,7 @@ occurrence %<>% mutate(dwc_license = "http://creativecommons.org/publicdomain/ze
 ### rightsHolder
 
 ```{r}
-occurrence %<>% mutate(dwc_rightsHolder = "INBO")
+occurrence %<>% mutate(dwc_rightsHolder = rights_holder)
 ```
 
 ### accessRights
@@ -107,7 +107,7 @@ occurrence %<>% mutate(dwc_accessRights = "http://www.inbo.be/en/norms-for-data-
 ### datasetID
 
 ```{r}
-occurrence %<>% mutate(dwc_datasetID = "https://doi.org/10.15468/daf62d")
+occurrence %<>% mutate(dwc_datasetID = "")
 ```
 
 ### institutionCode
@@ -116,7 +116,7 @@ occurrence %<>% mutate(dwc_datasetID = "https://doi.org/10.15468/daf62d")
 ### datasetName
 
 ```{r}
-occurrence %<>% mutate(dwc_datasetName = "Invasive species - American bullfrog (Lithobates catesbeianus) in Flanders, Belgium (post 2018)")
+occurrence %<>% mutate(dwc_datasetName = "European stag beetle monitoring network: transect observations")
 ```
 
 ### basisOfRecord
@@ -129,7 +129,12 @@ occurrence %<>% mutate(dwc_basisOfRecord = "HumanObservation")
 
 
 ```{r}
-occurrence %<>% mutate(dwc_occurrenceID = occurrence_id)
+occurrence %<>% mutate(dwc_occurrenceID = str_c("INBO:VG:tr", row_number()))
+
+
+
+
+  
 ```
 
 
