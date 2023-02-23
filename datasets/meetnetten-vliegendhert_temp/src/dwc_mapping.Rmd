@@ -143,7 +143,7 @@ occurrence %<>% mutate(dwc_occurrenceID = str_c("INBO:VG:tr:", visit_id ,":" , r
 ### recordedBy
 
 ```{r}
-occurrence %<>% mutate(dwc_recordedBy = visit_user_name)
+occurrence %<>% mutate(dwc_recordedBy = hash(visit_user_name))
 ```
 
 ### individualCount
@@ -193,7 +193,7 @@ occurrence %<>% mutate(dwc_samplingProtocol = visit_protocol)
 ### sex
 
 ```{r}
-occurrence %<>% mutate(dwc_sex = sex)
+occurrence %<>% mutate(dwc_sex = tolower(sex))
 ```
 
 ### lifeStage
@@ -203,8 +203,13 @@ occurrence %<>% mutate(dwc_lifeStage = life_stage)
 
 
 ```
+### occurrenceRemarks
+
+```{r}
+occurrence %<>% mutate(dwc_occurrenceRemarks = activity)
 
 
+```
 
 ### locality
 
