@@ -382,7 +382,8 @@ occurrence %>% head()
 Save to CSV:
 
 ```{r}
-write_csv(occurrence, here::here("datasets","meetnetten-vliegendhert_temp","data","processed","occurrence.csv"), na = "")
+write_delim (occurrence, here::here("datasets","meetnetten-vliegendhert_temp","data","processed","occurrence.csv"),delim = ';', na = "")
+
 ```
 
 # Checks
