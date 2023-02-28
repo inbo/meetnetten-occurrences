@@ -32,8 +32,9 @@ library(digest)
 
 
 ```{r}
-input_data <- read_delim(here::here("datasets","meetnetten-vliegendhert_temp","data","interim","transectobservationsGBIF_refined.csv"), ",")
+input_data_dep <- read_delim(here::here("datasets","meetnetten-vliegendhert_temp","data","interim","transectobservationsGBIF_refined.csv"), ",")
 
+input_data <- read_excel (here::here("datasets","meetnetten-vliegendhert_temp","data","raw","transectobservationsGBIF.xlsx"))
 
 ```
 
@@ -97,8 +98,24 @@ occurrence %<>% mutate(dwc_license = "http://creativecommons.org/publicdomain/ze
 ### rightsHolder
 
 ```{r}
-occurrence %<>% mutate(dwc_rightsHolder = rights_holder)
+occurrence %<>% mutate(dwc_rightsHolder = recode (visit_location_country
+                                                 , "Belgium" = "INBO"
+                                                 , "Spain" = "Rey Juan Carlos University"
+                                                 , "The Netherlands" = "Naturalis Biodiversity Center"
+                                                 , "Croatia" = "University of Zagreb"
+                                                 , "Germany" = "Hirschkäferfreunde-Nature"
+                                                 , "Poland" = "University of Wroclaw"
+                                                 , "Serbia" = "Serbia"
+                                                 , "Slovenia" = "National Institute of Biology"
+                                                 , "Switzerland" = "Independent researcher"
+                                                 , "United Kingdom" = "Royal Holloway University of London"
+                                                 , "Portugal" = "CIBIO/InBIO"
+                                                 , "Italy" = "University of Florence" ))
 ```
+
+
+
+
 
 ### accessRights
 
@@ -113,6 +130,23 @@ occurrence %<>% mutate(dwc_datasetID = "")
 ```
 
 ### institutionCode
+
+
+```{r}
+occurrence %<>% mutate(dwc_institutionCode = recode (visit_location_country
+                                                 , "Belgium" = "INBO"
+                                                 , "Spain" = "Rey Juan Carlos University"
+                                                 , "The Netherlands" = "Naturalis Biodiversity Center"
+                                                 , "Croatia" = "University of Zagreb"
+                                                 , "Germany" = "Hirschkäferfreunde-Nature"
+                                                 , "Poland" = "University of Wroclaw"
+                                                 , "Serbia" = "Serbia"
+                                                 , "Slovenia" = "National Institute of Biology"
+                                                 , "Switzerland" = "Independent researcher"
+                                                 , "United Kingdom" = "Royal Holloway University of London"
+                                                 , "Portugal" = "CIBIO/InBIO"
+                                                 , "Italy" = "University of Florence" ))
+```
 
 
 ### datasetName
@@ -361,6 +395,11 @@ occurrence <- mutate_all(occurrence, as.character())
 occurrence$eventDate <- str_replace_all(occurrence$eventDate, "NA", "")
 ```
 
+```{r}
+occurrence %>% 
+  mutate(across(where(is.character), str_trim))
+```
+
 
 ```{r}
 #occurrence <-  mutate_at(c(occurrence$eventDate), ~replace_na(.,""))
@@ -382,7 +421,7 @@ occurrence %>% head()
 Save to CSV:
 
 ```{r}
-write_delim (occurrence, here::here("datasets","meetnetten-vliegendhert_temp","data","processed","occurrence.csv"),delim = ';', na = "")
+write_delim (occurrence, here::here("datasets","meetnetten-vliegendhert_temp","data","processed","occurrence.csv"),delim = ',', na = "")
 
 ```
 
