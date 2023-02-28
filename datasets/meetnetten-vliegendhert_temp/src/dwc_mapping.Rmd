@@ -69,7 +69,7 @@ input_data <- mutate_all(input_data, as.character())
 ```
 
 
-# Darwin Core mapping
+  # Darwin Core mapping
 
 Map the data to [Darwin Core Occurrence](http://rs.gbif.org/core/dwc_occurrence_2015-07-02.xml).
 
@@ -280,7 +280,7 @@ occurrence %<>% mutate(dwc_countryCode = recode (visit_location_country
                                                  , "Germany" = "DE"
                                                  , "Poland" = "PL"
                                                  , "Serbia" = "RS"
-                                                 , "Slovenia" = "SL"
+                                                 , "Slovenia" = "SI"
                                                  , "Switzerland" = "CH"
                                                  , "United Kingdom" = "GB"
                                                  , "Portugal" = "PT"
@@ -297,9 +297,11 @@ occurrence %<>% mutate(dwc_countryCode = recode (visit_location_country
 ```{r}
 occurrence %<>% mutate(dwc_decimalLatitude = sprintf(
   "%.5f",
-  round(lat, digits = 5)
+  round(lat, digits = 5) 
 ))
 ```
+
+
 
 ### decimalLongitude
 
