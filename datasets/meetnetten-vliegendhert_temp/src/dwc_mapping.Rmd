@@ -65,7 +65,16 @@ input_data %<>%
 ### fix unique ID issue
 
 ```{r}
-input_data <- mutate_all(input_data, as.character())
+input_data <- mutate_all(input_data,as.character())
+
+#input_data <- mutate(across(where(is.factor), as.character))
+
+#input_data %<>% mutate_if(is.factor, as.character)
+
+occurrence <- rapply(input_data, as.character, classes = "factor", how = "replace")
+
+
+head(occurrence)
 ```
 
 
@@ -98,7 +107,7 @@ occurrence %<>% mutate(dwc_license = "http://creativecommons.org/publicdomain/ze
 ### rightsHolder
 
 ```{r}
-occurrence %<>% mutate(dwc_rightsHolder = recode (visit_location_country
+occurrence %<>% mutate(dwc_rightsHolder = recode(visit_location_country
                                                  , "Belgium" = "INBO"
                                                  , "Spain" = "Rey Juan Carlos University"
                                                  , "The Netherlands" = "Naturalis Biodiversity Center"
@@ -110,8 +119,29 @@ occurrence %<>% mutate(dwc_rightsHolder = recode (visit_location_country
                                                  , "Switzerland" = "Independent researcher"
                                                  , "United Kingdom" = "Royal Holloway University of London"
                                                  , "Portugal" = "CIBIO/InBIO"
-                                                 , "Italy" = "University of Florence" ))
+                                                 , "Italy" = "University of Florence" )) 
+
+
 ```
+```{r}
+
+occurrence %<>% mutate(dwc_rightsHolder = recode(visit_location
+                                                 , "Belgium" = "INBO"
+                                                 , "Spain" = "Rey Juan Carlos University"
+                                                 , "The Netherlands" = "Naturalis Biodiversity Center"
+                                                 , "Croatia" = "University of Zagreb"
+                                                 , "Germany" = "Hirschkäferfreunde-Nature"
+                                                 , "Poland" = "University of Wroclaw"
+                                                 , "Serbia" = "Serbia"
+                                                 , "Slovenia" = "National Institute of Biology"
+                                                 , "Switzerland" = "Independent researcher"
+                                                 , "United Kingdom" = "Royal Holloway University of London"
+                                                 , "B FtoS" = "Centro Nazionale Carabinieri Biodiversità Bosco Fontana,Marmirolo (MN)"
+                                                 , "A FtoS" = "Centro Nazionale Carabinieri Biodiversità Bosco Fontana,Marmirolo (MN)")) 
+
+
+```
+
 
 
 
@@ -140,12 +170,12 @@ occurrence %<>% mutate(dwc_institutionCode = recode (visit_location_country
                                                  , "Croatia" = "University of Zagreb"
                                                  , "Germany" = "Hirschkäferfreunde-Nature"
                                                  , "Poland" = "University of Wroclaw"
-                                                 , "Serbia" = "Serbia"
+                                                 , "Serbia" = "ESBMN"
                                                  , "Slovenia" = "National Institute of Biology"
                                                  , "Switzerland" = "Independent researcher"
-                                                 , "United Kingdom" = "Royal Holloway University of London"
+                                                 , "United Kingdom" = "Peoples Trust for Endangered Species"
                                                  , "Portugal" = "CIBIO/InBIO"
-                                                 , "Italy" = "University of Florence" ))
+                                                 , "Italy" = "Life MIPP" ))
 ```
 
 
@@ -346,10 +376,22 @@ occurrence %<>% mutate(dwc_identifiedBy = paste(vdigest(visit_user_name, algo = 
 
 ### scientificName
 
+```{r}
+occurrence <- occurrence %>%
+  mutate(dwc_scientificName = case_when(
+    (dwc_countryCode == "GB" & scientific_name == "Lucanus spec.") ~ "Lucanus cervus"
+  ))
+```
+
+
 ### scientificName
 
 ```{r}
-occurrence %<>% mutate(dwc_scientificName = scientific_name)
+occurrence %<>% mutate(dwc_scientificName = case_when(
+                         (dwc_countryCode == "GB" & scientific_name == "Lucanus spec.") ~ "Lucanus cervus"
+                         ,scientific_name == "Lucanus spec." ~ "Lucanus"
+                         ,scientific_name == "Lucanus barbarossa" ~ "Lucanus barbarossa"
+                         ,scientific_name == "Lucanus cervus" ~ "Lucanus cervus"))
 
 ```
 
@@ -373,7 +415,11 @@ occurrence %<>% mutate(dwc_kingdom = "Animalia")
 ### taxonRank
 
 ```{r}
-occurrence %<>% mutate(dwc_taxonRank = "species")
+occurrence %<>% mutate(dwc_taxonRank = case_when(scientific_name == "Lucanus spec." ~"genus"
+                                                ,scientific_name == "Lucanus cervus" ~ "species"
+                                                ,scientific_name == "Lucanus barbarossa" ~ "species"
+                                                ,scientific_name == "Lucanus spec" ~ "genus"
+                                                  ))
 ```
 
 ### nomenclaturalCode
@@ -434,6 +480,10 @@ test <- length(unique(occurrence$eventID))
 test2 <- length(unique(occurrence$occurrenceID))
 
 n_occur <- data.frame(table(occurrence$occurrenceID))
+
+visit_location2 <- distinct(input_data, visit_location, .keep_all = TRUE)
+
+#visit_location <- mutate(visitLocation = group_by(input_data$visit_location))
 
 ```
 
