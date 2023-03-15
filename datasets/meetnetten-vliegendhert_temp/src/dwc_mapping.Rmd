@@ -135,6 +135,11 @@ occurrence <- occurrence %>%
     "United Kingdom" = "Royal Holloway University of London",
     "B FtoS" = "Centro Nazionale Carabinieri Biodiversità Bosco Fontana,Marmirolo (MN)",
     "A FtoS" = "Centro Nazionale Carabinieri Biodiversità Bosco Fontana,Marmirolo (MN)",
+    "Bosco della Capannella FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    "Conecofor FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    "Monte Castione FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    "Piana Marchesi FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    "Ponte Verde FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
     .default = dwc_rightsHolder
   ))
 ```
@@ -215,6 +220,44 @@ occurrence %<>% mutate(dwc_datasetID = "")
 
 
 ```{r}
+occurrence <- occurrence %>%
+  mutate(dwc_institutionCode = recode(visit_location_country,
+    "Belgium" = "INBO",
+    "Spain" = "Rey Juan Carlos University",
+    "The Netherlands" = "Naturalis Biodiversity Center",
+    "Croatia" = "University of Zagreb",
+    "Germany" = "Hirschkäferfreunde-Nature",
+    "Poland" = "University of Wroclaw",
+    "Serbia" = "Serbia",
+    "Slovenia" = "National Institute of Biology",
+    "Switzerland" = "Independent researcher",
+    "United Kingdom" = "Royal Holloway University of London",
+    "Portugal" = "CIBIO/InBIO",
+    "Italy" = "University of Florence"
+  )) %>%
+  mutate(dwc_institutionCode = recode(visit_location,
+    "Belgium" = "INBO",
+    "Spain" = "Rey Juan Carlos University",
+    "The Netherlands" = "Naturalis Biodiversity Center",
+    "Croatia" = "University of Zagreb",
+    "Germany" = "Hirschkäferfreunde-Nature",
+    "Poland" = "University of Wroclaw",
+    "Serbia" = "Serbia",
+    "Slovenia" = "National Institute of Biology",
+    "Switzerland" = "Independent researcher",
+    "United Kingdom" = "Royal Holloway University of London",
+    "B FtoS" = "CNCB di Bosco Fontana (Mn)",
+    "A FtoS" = "CNCB di Bosco Fontana (Mn)",
+    "Bosco della Capannella FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    "Conecofor FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    "Monte Castione FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    "Piana Marchesi FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    "Ponte Verde FtoS" = "Ente di Gestione per i Parchi e la Biodiversità Emilia Occidentale",
+    .default = dwc_rightsHolder
+  ))
+```
+
+```{r eval=FALSE, include=FALSE}
 occurrence %<>% mutate(dwc_institutionCode = recode(visit_location_country
                                                  , "Belgium" = "INBO"
                                                  , "Spain" = "Rey Juan Carlos University"
