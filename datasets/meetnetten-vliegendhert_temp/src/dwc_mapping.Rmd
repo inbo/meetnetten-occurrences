@@ -34,7 +34,7 @@ library(digest)
 ```{r}
 input_data_dep <- read_delim(here::here("datasets","meetnetten-vliegendhert_temp","data","interim","transectobservationsGBIF_refined.csv"), ",")
 
-input_data <- read_excel (here::here("datasets","meetnetten-vliegendhert_temp","data","raw","transectobservationsGBIF.xlsx"))
+input_data <- read_excel (here::here("datasets","meetnetten-vliegendhert_temp","data","raw","transectobservationsGBIF_corr.xlsx"))
 
 ```
 
@@ -332,7 +332,12 @@ occurrence %<>% mutate(dwc_individualCount = number)
 ```{r}
 occurrence %<>% mutate(dwc_occurrenceStatus = 'present')
 ```
+### associated references
 
+
+```{r}
+occurrence %<>% mutate(dwc_associatedReferences = 'https://doi.org/10.3390/insects12090813')
+```
 
 
 ### eventID
