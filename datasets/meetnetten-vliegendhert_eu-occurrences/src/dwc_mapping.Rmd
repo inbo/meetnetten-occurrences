@@ -32,9 +32,9 @@ library(digest)
 
 
 ```{r}
-input_data_dep <- read_delim(here::here("datasets","meetnetten-vliegendhert_temp","data","interim","transectobservationsGBIF_refined.csv"), ",")
+input_data_dep <- read_delim(here::here("datasets","meetnetten-vliegendhert_eu-occurrences","data","interim","transectobservationsGBIF_refined.csv"), ",")
 
-input_data <- read_excel (here::here("datasets","meetnetten-vliegendhert_temp","data","raw","transectobservationsGBIF_corr.xlsx"))
+input_data <- read_excel (here::here("datasets","meetnetten-vliegendhert_eu-occurrences","data","raw","transectobservationsGBIF_corr.xlsx"))
 
 ```
 
@@ -453,6 +453,13 @@ occurrence %<>% mutate(dwc_geodeticDatum = "WGS84")
 ```{r}
 occurrence %<>% mutate(dwc_coordinateUncertaintyInMeters = "250")
 ```
+### georeferenceRemarks
+
+```{r}
+occurrence %<>% mutate(dwc_georeferenceREmarks = "coordinates are centroid of transect")
+```
+
+
 ### Identification
 vdigest <- Vectorize(digest) 
 
@@ -569,7 +576,7 @@ occurrence %>% head()
 Save to CSV:
 
 ```{r}
-write_delim (occurrence, here::here("datasets","meetnetten-vliegendhert_temp","data","processed","occurrence.csv"),delim = ',', na = "")
+write_delim (occurrence, here::here("datasets","meetnetten-vliegendhert_eu-occurrences","data","processed","occurrence.csv"),delim = ',', na = "")
 
 ```
 
