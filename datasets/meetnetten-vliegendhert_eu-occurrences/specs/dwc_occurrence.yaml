@@ -94,13 +94,19 @@ individualCount:
         allowed: present
       numberformat: x
       min: 1
-      max: 500 # Dataset specific
+      max: 1 # Dataset specific
 
 lifeStage: # Dataset specific
   allowed: imago
+  
+sex:
+  empty: false
 
 occurrenceStatus:
   allowed: [present, absent]
+
+occurrenceRemarks
+ empty: false
   
 
 scientificName: # Dataset specific

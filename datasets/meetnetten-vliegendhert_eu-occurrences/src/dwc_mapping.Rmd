@@ -193,9 +193,10 @@ occurrence %<>% mutate(dwc_rightsHolder = recode(visit_location
 
 ```{r}
 
-occurrence %<>% mutate(dwc_collectionID = recode(visit_location
-                                           , "B FtoS" = "LIFE ESC360"
-                                           , "A FtoS" = "LIFE 17 ESC/IT/001")) 
+occurrence %<>% mutate(dwc_collectionCode = case_when
+                                      (visit_location == "B FtoS" ~ "LIFE ESC360"
+                                       ,visit_location == "A FtoS" ~ "LIFE 17 ESC/IT/001"
+                                           )) 
 
 
 ```
@@ -325,8 +326,6 @@ occurrence %<>% mutate(dwc_individualCount = number)
 ```
 
 
-
-
 ### occurrenceStatus
 
 ```{r}
@@ -362,7 +361,7 @@ occurrence %<>% mutate(dwc_eventDate = visit_start_date)
 ### samplingProtocol
 
 ```{r}
-occurrence %<>% mutate(dwc_samplingProtocol = visit_protocol) 
+occurrence %<>% mutate(dwc_samplingProtocol = tolower(visit_protocol)) 
 ```
 ### sex
 
@@ -380,7 +379,7 @@ occurrence %<>% mutate(dwc_lifeStage = life_stage)
 ### occurrenceRemarks
 
 ```{r}
-occurrence %<>% mutate(dwc_occurrenceRemarks = activity)
+occurrence %<>% mutate(dwc_occurrenceRemarks =tolower(activity))
 
 
 ```
@@ -456,9 +455,13 @@ occurrence %<>% mutate(dwc_coordinateUncertaintyInMeters = "250")
 ### georeferenceRemarks
 
 ```{r}
-occurrence %<>% mutate(dwc_georeferenceREmarks = "coordinates are centroid of transect")
+occurrence %<>% mutate(dwc_georeferenceRemarks = "coordinates are centroid of transect")
 ```
+### eventRemarks
 
+```{r}
+occurrence %<>% mutate(dwc_eventRemarks = "data collected in the ESBMN")
+```
 
 ### Identification
 vdigest <- Vectorize(digest) 
