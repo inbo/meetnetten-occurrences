@@ -5,17 +5,85 @@
 id:
   regex: 'INBO:MEETNET:EVENT:\d{6}'
 
+type:
+  allowed: Event
+
+language:
+  allowed: en
+
+license:
+  allowed: http://creativecommons.org/publicdomain/zero/1.0/
+
+rightsHolder:
+  empty: false
+
+accessRights:
+  allowed: https://www.inbo.be/en/norms-data-use
+
+datasetID: # Dataset specific
+  allowed: "https://doi.org/10.15468/ptdpyx"
+
+institutionCode:
+  empty: false
+
+datasetName: # Dataset specific
+  allowed: European stag beetle monitoring network: transect observations
+
+eventID:
+  regex: 'INBO:VH:EV:\d{3}'
+
+
+samplingProtocol: # Dataset specific
+  allowed: stag beetle transect walk
+
+eventDate:
+  dateformat: ['%Y-%m-%d'] # YYYY-MM-DD
+
+eventRemarks:
+  regex: 'data collected in the ESBMN'
+
+continent:
+  allowed: Europe
+
+countryCode:
+  empty: false
+
+locality:
+  empty: false
+
+decimalLatitude:
+  numberformat: '.5'
+  min: 35.89 # S 
+  max: 60.86 # N
+
+decimalLongitude:
+  numberformat: '.5'
+  min: -11.43 # W 
+  max: 26.53 # E
+
+geodeticDatum:
+  allowed: WGS84
+
+coordinateUncertaintyInMeters: # Dataset specific
+  allowed: '250'
+
+georeferenceRemarks:
+  allowed: coordinates are centroid of transect
+
+id:
+  regex: 'INBO:VG:tr:\d{7}'
+
 collectionCode:
-  allowed: meetnetten
+  empty: true
 
 basisOfRecord:
   allowed: HumanObservation
 
 occurrenceID:
-  regex: 'INBO:MEETNET:OCC:\d{6,7}'
+  regex: 'INBO:VG:tr:\d{7}'
 
 recordedBy:
-  allowed: https://meetnetten.be
+  empty: false
 
 individualCount:
   if:
@@ -29,16 +97,11 @@ individualCount:
       max: 500 # Dataset specific
 
 lifeStage: # Dataset specific
-  allowed: adult
+  allowed: imago
 
 occurrenceStatus:
   allowed: [present, absent]
   
-occurrenceRemarks:
-  allowed: [target species, casual observation]
-
-eventID:
-  regex: 'INBO:MEETNET:EVENT:\d{6}'
 
 scientificName: # Dataset specific
   empty: false
@@ -46,20 +109,10 @@ scientificName: # Dataset specific
 kingdom:
   allowed: Animalia
 
-phylum: # Dataset specific
-  allowed: Arthropoda
-
-class: # Dataset specific
-  allowed: Insecta
-
-order: # Dataset specific
-  allowed: Orthoptera
 
 taxonRank: # Dataset specific
-  allowed: species
+  allowed: [species, genus]
 
-vernacularName: # Dataset specific
-  empty: false
 
 nomenclaturalCode: # Dataset specific
   allowed: ICZN
